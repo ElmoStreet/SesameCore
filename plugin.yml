@@ -1,0 +1,74 @@
+name: SesameNew
+author: ElmoStreet
+main: com.sesamepvp.main.Core
+version: 1.0
+description: SesameCore
+commands:
+  clearchat:
+   description: clear the chat.
+  cc:
+   description: clear the chat.
+  mc:
+   description: mute the chat.
+  mutechat:
+   description: mute the chat.
+  mod:
+   description: moderator mode.
+  freeze:
+   description: freeze players.
+  report:
+   description: report players.
+  stats:
+   description: stats .
+  kits:
+   description: kits.
+  kitshop:
+   description: kitshop.
+  sesame:
+   description: some kit pvp information.
+  list:
+   description: get the list of the players.
+  fly:
+   description: flight.
+  vanish:
+   description: vanish.
+  v:
+   description: vanish.
+  gamemode:
+   description: gamemode.
+  gm:
+   description: gamemode.
+  setspawn:
+   description: set the spawn.
+  spawn:
+   description: teleport to the spawn.
+  feed:
+   description: feed.
+  heal:
+   description: heal.
+  ci:
+   description: clear inventory.
+  clear:
+   description: clear inventory.
+  clearinventory:
+   description: clearinventory.
+  bc:
+   description: broadcast
+  broadcast:
+   description: broadcast.
+  message:
+   description: message.
+  msg:
+   description: message
+  m:
+   description: message
+  invsee:
+   description: inventorysee.
+  inspect:
+   description: inventorysee.
+  teleport:
+   description: teleport to others.
+  tp:
+   description: teleportation.
+  setpath:
+   description: manage paths and values in config.
