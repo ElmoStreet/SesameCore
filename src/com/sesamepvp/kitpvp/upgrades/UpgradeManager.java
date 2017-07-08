@@ -11,7 +11,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.sesamepvp.kitpvp.config.Manager;
+import com.sesamepvp.kitpvp.configmanager.Manager;
 
 public class UpgradeManager {
 	static Inventory kitsGUI = Bukkit.createInventory(null, 36, "Kit Upgrades");

@@ -37,7 +37,7 @@ import com.sesamepvp.kitpvp.commands.Kits;
 import com.sesamepvp.kitpvp.commands.PathSeter;
 import com.sesamepvp.kitpvp.commands.Sesame;
 import com.sesamepvp.kitpvp.commands.Stats;
-import com.sesamepvp.kitpvp.config.Manager;
+import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.events.General;
 import com.sesamepvp.kitpvp.events.GiveRespawnItems;
 import com.sesamepvp.kitpvp.kits.defaultkits.Alchemist;

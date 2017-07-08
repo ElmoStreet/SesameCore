@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.sesamepvp.kitpvp.config.Manager;
+import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.utilites.Messages;
 
 public class KitListener implements Listener {

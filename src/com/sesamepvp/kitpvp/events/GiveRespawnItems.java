@@ -13,7 +13,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.sesamepvp.kitpvp.config.Manager;
+import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.gui.KitShopGUI;
 import com.sesamepvp.kitpvp.gui.KitsGUI;
 import com.sesamepvp.kitpvp.managers.KitListener;

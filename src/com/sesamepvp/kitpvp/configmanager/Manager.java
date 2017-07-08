@@ -1,4 +1,4 @@
-package com.sesamepvp.kitpvp.config;
+package com.sesamepvp.kitpvp.configmanager;
 
 import java.io.File;
 import java.io.IOException;
