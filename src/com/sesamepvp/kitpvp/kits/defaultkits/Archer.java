@@ -13,6 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.managers.KitListener;
 import com.sesamepvp.utilites.Messages;
+import com.sesamepvp.utilites.Methods;
 
 public class Archer implements Listener {
 
@@ -56,6 +57,7 @@ public class Archer implements Listener {
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.DAMAGE_RESISTANCE, 40000, 1));
 						p.closeInventory();
+						Methods.archer.add(p);
 					} else {
 						p.getInventory().clear();
 						KitListener.kitselected.add(p);
@@ -73,7 +75,10 @@ public class Archer implements Listener {
 								new ItemStack(Material.LEATHER_BOOTS));
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.SPEED, 40000, 1));
+						p.closeInventory();
+						Methods.archer.add(p);
 					}
+					
 				}
 			}
 		}

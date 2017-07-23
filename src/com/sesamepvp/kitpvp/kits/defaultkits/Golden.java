@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.managers.KitListener;
 import com.sesamepvp.utilites.Messages;
+import com.sesamepvp.utilites.Methods;
 
 public class Golden implements Listener {
 	Manager manager = Manager.getInstance();
@@ -49,6 +50,7 @@ public class Golden implements Listener {
 						p.getInventory().setBoots(
 								new ItemStack(Material.GOLD_LEGGINGS));
 						p.closeInventory();
+						Methods.golden.add(p);
 					} else {
 						p.getInventory().clear();
 						KitListener.kitselected.add(p);
@@ -64,6 +66,8 @@ public class Golden implements Listener {
 								new ItemStack(Material.GOLD_CHESTPLATE));
 						p.getInventory().setBoots(
 								new ItemStack(Material.GOLD_LEGGINGS));
+						p.closeInventory();
+						Methods.golden.add(p);
 					}
 				}
 			}

@@ -24,6 +24,7 @@ public class FreezeListener implements Listener {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onInteract(PlayerInteractEntityEvent e) {
 		Player p = e.getPlayer();

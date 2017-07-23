@@ -15,6 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.managers.KitListener;
 import com.sesamepvp.utilites.Messages;
+import com.sesamepvp.utilites.Methods;
 
 public class Fisherman implements Listener {
 
@@ -65,6 +66,7 @@ public class Fisherman implements Listener {
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.FAST_DIGGING, 40000, 1));
 						p.closeInventory();
+						Methods.fisherman.add(p);
 					} else {
 						p.getInventory().clear();
 						KitListener.kitselected.add(p);
@@ -89,6 +91,8 @@ public class Fisherman implements Listener {
 
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.SPEED, 40000, 0));
+						p.closeInventory();
+						Methods.fisherman.add(p);
 					}
 				}
 			}

@@ -13,6 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.managers.KitListener;
 import com.sesamepvp.utilites.Messages;
+import com.sesamepvp.utilites.Methods;
 
 public class Assassin implements Listener {
 
@@ -58,6 +59,7 @@ public class Assassin implements Listener {
 								PotionEffectType.SPEED, 40000, 3));
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.INCREASE_DAMAGE, 40000, 0));
+						Methods.assassin.add(p);
 					} else {
 						if (KitAssassinOwned == false) {
 							event.setCancelled(true);

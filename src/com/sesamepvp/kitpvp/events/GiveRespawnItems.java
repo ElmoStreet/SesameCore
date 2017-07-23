@@ -78,6 +78,7 @@ public class GiveRespawnItems implements Listener {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onInteract(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
@@ -91,6 +92,7 @@ public class GiveRespawnItems implements Listener {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onInteraction(PlayerInteractEvent e) {
 		Player p = e.getPlayer();

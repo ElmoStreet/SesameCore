@@ -13,6 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.managers.KitListener;
 import com.sesamepvp.utilites.Messages;
+import com.sesamepvp.utilites.Methods;
 
 public class Burner implements Listener {
 
@@ -59,7 +60,7 @@ public class Burner implements Listener {
 								new ItemStack(Material.IRON_BOOTS));
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.FIRE_RESISTANCE, 40000, 1));
-
+						Methods.burner.add(p);
 					} else {
 						if (KitBurnerOwned == false) {
 							event.setCancelled(true);

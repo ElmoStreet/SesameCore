@@ -3,12 +3,12 @@ package com.sesamepvp.utilites;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-import com.sesamepvp.main.Core;
+import com.sesamepvp.main.SesameCore;
 
 public class Messages {
-	static Core plugin;
+	static SesameCore plugin;
 	
-	public Messages(Core instance) {
+	public Messages(SesameCore instance) {
 		plugin = instance;
 	}
 
@@ -529,6 +529,11 @@ public class Messages {
 	
 	public static String anticheatPrefix(){
 		String s = "§c§lSesame §f§lAntiCheat §8 : §r";
+		return s;
+	}
+
+	public static String nullItem() {
+		String s = "§cThere is nothing in your hand!";
 		return s;
 	}
 	

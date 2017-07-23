@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.managers.KitListener;
 import com.sesamepvp.utilites.Messages;
+import com.sesamepvp.utilites.Methods;
 
 public class Slug implements Listener {
 
@@ -49,6 +50,7 @@ public class Slug implements Listener {
 								new ItemStack(Material.LEATHER_CHESTPLATE));
 						p.getInventory().setBoots(
 								new ItemStack(Material.DIAMOND_BOOTS));
+						Methods.slug.add(p);
 					}
 				} else {
 					e.getWhoClicked().sendMessage(Messages.noPermission());

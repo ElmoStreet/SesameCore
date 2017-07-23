@@ -8,7 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import com.sesamepvp.kitpvp.configmanager.Manager;
-import com.sesamepvp.main.Core;
+import com.sesamepvp.main.SesameCore;
 import com.sesamepvp.utilites.Messages;
 
 public class TankUpgraded implements Listener {
@@ -31,9 +31,9 @@ public class TankUpgraded implements Listener {
 					
 					p.sendMessage(Messages.kitalreadyOwned());
 				} else {
-					if (Core.econ.withdrawPlayer(p.getName(), 250)
+					if (SesameCore.econ.withdrawPlayer(p.getName(), 250)
 							.transactionSuccess()) {
-						p.playSound(p.getLocation(), Sound.ANVIL_USE, 2F, 1F);
+						p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 2F, 1F);
 						p.sendMessage(Messages.upgraded());
 						this.manager.getData().set(
 								p.getName() + ".Kits.Tank.Upgraded", true);

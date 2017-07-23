@@ -21,7 +21,7 @@ public class Manager {
 	public static Manager getInstance() {
 		return instance;
 	}
-
+//commit 2
 	public void setup(Plugin p) {
 		this.cfile = new File(p.getDataFolder(), "config.yml");
 		this.config = p.getConfig();

@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.managers.KitListener;
 import com.sesamepvp.utilites.Messages;
+import com.sesamepvp.utilites.Methods;
 
 public class Viper implements Listener {
 
@@ -50,7 +51,7 @@ public class Viper implements Listener {
 								new ItemStack(Material.DIAMOND_CHESTPLATE));
 						p.getInventory().setBoots(
 								new ItemStack(Material.IRON_BOOTS));
-
+						Methods.viper.add(p);
 					}
 				} else {
 					e.getWhoClicked().sendMessage(Messages.noPermission());

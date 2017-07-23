@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.managers.KitListener;
 import com.sesamepvp.utilites.Messages;
+import com.sesamepvp.utilites.Methods;
 
 public class Vampire implements Listener{
 	
@@ -51,6 +52,7 @@ public class Vampire implements Listener{
 								new ItemStack(Material.GOLD_CHESTPLATE));
 						p.getInventory().setBoots(
 								new ItemStack(Material.DIAMOND_BOOTS));
+						Methods.vampire.add(p);
 					}
 				} else {
 					e.getWhoClicked().sendMessage(Messages.noPermission());

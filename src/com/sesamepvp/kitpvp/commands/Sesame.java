@@ -6,7 +6,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.sesamepvp.kitpvp.configmanager.Manager;
-import com.sesamepvp.kitpvp.gui.StatsGUI;
 import com.sesamepvp.utilites.Messages;
 
 public class Sesame implements CommandExecutor {
@@ -50,25 +49,36 @@ public class Sesame implements CommandExecutor {
 		p.sendMessage("§8§m-------  §c§lPage §f§l3§8§m-------");
 	}
 
+	private void version(Player p) {
+		p.sendMessage("§4Version§8: §c1.903A.");
+		p.sendMessage("§4Author§8: §cElmoStreet | Gosus.");
+		p.sendMessage("§4Server§8: §cSesamePvP.");
+	}
+
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
 		if (cmd.getName().equalsIgnoreCase("sesame")) {
 			if (sender instanceof Player) {
 				Player p = (Player) sender;
 				if (args.length == 0) {
-					helpPage1(p);
+					version(p);
 				} else {
-					if (args[0].equalsIgnoreCase("1")) {
-						helpPage1(p);
-					}
+					if (args[0].equalsIgnoreCase("help")) {
 
-					if (args[0].equalsIgnoreCase("2")) {
-						helpPage2(p);
-					}
-					if (args[0].equalsIgnoreCase("3")) {
-						helpPage3(p);
-					}
+						if (args[1] == null || args[1].equalsIgnoreCase("")) {
+							helpPage1(p);
+						}
+						if (args[1].equalsIgnoreCase("1")) {
+							helpPage1(p);
+						}
 
+						if (args[1].equalsIgnoreCase("2")) {
+							helpPage2(p);
+						}
+						if (args[1].equalsIgnoreCase("3")) {
+							helpPage3(p);
+						}
+					}
 					if (args[0].equalsIgnoreCase("ranks")) {
 						p.sendMessage(Messages.Warrior());
 						p.sendMessage(Messages.Gladiator());
@@ -81,12 +91,10 @@ public class Sesame implements CommandExecutor {
 					} else {
 						if (args[0].equalsIgnoreCase("reload")) {
 							p.sendMessage(Messages.dataReloaded());
-							this.manager.saveData();
-							this.manager.saveConfig();
 							this.manager.reloadConfig();
 							this.manager.reloadData();
-							
-							StatsGUI.playerStats(p);
+							this.manager.saveData();
+							this.manager.saveConfig();
 						}
 					}
 				}

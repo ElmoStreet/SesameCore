@@ -13,6 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.managers.KitListener;
 import com.sesamepvp.utilites.Messages;
+import com.sesamepvp.utilites.Methods;
 
 public class Thor implements Listener {
 
@@ -54,6 +55,7 @@ public class Thor implements Listener {
 								new ItemStack(Material.IRON_BOOTS));
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.SPEED, 40000, 1));
+						Methods.thor.add(p);
 					}
 				} else {
 					e.getWhoClicked().sendMessage(Messages.noPermission());

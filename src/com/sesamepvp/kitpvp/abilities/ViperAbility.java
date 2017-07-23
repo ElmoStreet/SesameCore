@@ -1,6 +1,5 @@
 package com.sesamepvp.kitpvp.abilities;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -11,8 +10,11 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import com.sesamepvp.utilites.Methods;
+
 public class ViperAbility implements Listener {
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onEntityDamageByEntity(EntityDamageByEntityEvent e) {
 		Player t = (Player) e.getEntity();
@@ -24,12 +26,14 @@ public class ViperAbility implements Listener {
 			if(e.getDamager().getType() == EntityType.PLAYER){
 				Player p= (Player) e.getDamager();
 				if (p.getItemInHand().getType() == Material.DIAMOND_SWORD) {
-					if (p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.DARK_GREEN + "Viper")) {
+					if(Methods.viper.contains(p)){
 
 						PotionEffect potionEffect = new PotionEffect(PotionEffectType.POISON, 30, 1);
 																									
 						potionEffect.apply(t); 
 
+					}else{
+						return;
 					}
 
 				}

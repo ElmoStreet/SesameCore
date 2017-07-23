@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.managers.KitListener;
 import com.sesamepvp.utilites.Messages;
+import com.sesamepvp.utilites.Methods;
 
 public class Default implements Listener {
 	Manager manager = Manager.getInstance();
@@ -48,6 +49,7 @@ public class Default implements Listener {
 						p.getInventory().setBoots(
 								new ItemStack(Material.IRON_BOOTS));
 						p.closeInventory();
+						Methods.pvp.add(p);
 					} else {
 						p.getInventory().clear();
 						p.getActivePotionEffects().clear();
@@ -63,6 +65,8 @@ public class Default implements Listener {
 								new ItemStack(Material.IRON_CHESTPLATE));
 						p.getInventory().setBoots(
 								new ItemStack(Material.IRON_BOOTS));
+						p.closeInventory();
+						Methods.pvp.add(p);
 					}
 				}
 			}

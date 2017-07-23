@@ -15,6 +15,7 @@ public class Freeze implements CommandExecutor {
 
 	public static ArrayList<Player> frozen = new ArrayList<Player>();
 
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
 		if ((cmd.getName().equalsIgnoreCase("freeze"))) {

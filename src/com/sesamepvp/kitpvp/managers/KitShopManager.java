@@ -11,7 +11,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.gui.KitsGUI;
 import com.sesamepvp.kitpvp.upgrades.UpgradeManager;
-import com.sesamepvp.main.Core;
+import com.sesamepvp.main.SesameCore;
 import com.sesamepvp.utilites.Messages;
 
 public class KitShopManager implements Listener {
@@ -36,7 +36,7 @@ public class KitShopManager implements Listener {
 					&& event.getCurrentItem().getItemMeta().getDisplayName()
 							.equalsIgnoreCase(ChatColor.GREEN + "To Upgrades")) {
 				p.closeInventory();
-				p.playSound(p.getLocation(), Sound.NOTE_PLING, 2F, 1F);
+				p.playSound(p.getLocation(), Sound.BLOCK_NOTE_PLING, 2F, 1F);
 				UpgradeManager.upgradeGUI(p);
 			}
 
@@ -44,7 +44,7 @@ public class KitShopManager implements Listener {
 					&& event.getCurrentItem().getItemMeta().getDisplayName()
 							.equalsIgnoreCase(ChatColor.GREEN + "To Kits")) {
 				p.closeInventory();
-				p.playSound(p.getLocation(), Sound.NOTE_PLING, 2F, 1F);
+				p.playSound(p.getLocation(), Sound.BLOCK_NOTE_PLING, 2F, 1F);
 				KitsGUI.gui(p);
 
 			}
@@ -53,7 +53,7 @@ public class KitShopManager implements Listener {
 					&& event.getCurrentItem().getItemMeta().getDisplayName()
 							.equalsIgnoreCase(ChatColor.RED + "Close")) {
 				p.closeInventory();
-				p.playSound(p.getLocation(), Sound.NOTE_PLING, 2F, 1F);
+				p.playSound(p.getLocation(), Sound.BLOCK_NOTE_PLING, 2F, 1F);
 
 			}
 
@@ -71,7 +71,7 @@ public class KitShopManager implements Listener {
 				if (KitSpeedyOwned == true) {
 					p.sendMessage(Messages.kitalreadyOwned());
 				} else {
-					if (Core.econ.withdrawPlayer(p.getName(), 500)
+					if (SesameCore.econ.withdrawPlayer(p.getName(), 500)
 							.transactionSuccess()) {
 						p.sendMessage(Messages.purchasedSpeedyKit());
 						this.manager.getData().set(
@@ -90,13 +90,13 @@ public class KitShopManager implements Listener {
 				if (KitGodArcherOwned == true) {
 					p.sendMessage(Messages.kitalreadyOwned());
 				} else {
-					if (Core.econ.withdrawPlayer(p.getName(), 750)
+					if (SesameCore.econ.withdrawPlayer(p.getName(), 750)
 							.transactionSuccess()) {
 						p.sendMessage(Messages.purchasedGodArcherKit());
 						this.manager.getData().set(
 								p.getName() + ".Kits.GodArcher", true);
 						this.manager.saveData();
-						p.playSound(p.getLocation(), Sound.ANVIL_USE, 2F, 1F);
+						p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 2F, 1F);
 					} else {
 						p.sendMessage(Messages.insufficientFunds());
 						return;
@@ -110,13 +110,13 @@ public class KitShopManager implements Listener {
 				if (KitBurnerOwned == true) {
 					p.sendMessage(Messages.kitalreadyOwned());
 				} else {
-					if (Core.econ.withdrawPlayer(p.getName(), 1000)
+					if (SesameCore.econ.withdrawPlayer(p.getName(), 1000)
 							.transactionSuccess()) {
 						p.sendMessage(Messages.purchasedBurnerKit());
 						this.manager.getData().set(
 								p.getName() + ".Kits.Burner", true);
 						this.manager.saveData();
-						p.playSound(p.getLocation(), Sound.ANVIL_USE, 2F, 1F);
+						p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 2F, 1F);
 					} else {
 						p.sendMessage(Messages.insufficientFunds());
 						return;
@@ -130,7 +130,7 @@ public class KitShopManager implements Listener {
 
 					p.sendMessage(Messages.kitalreadyOwned());
 				} else {
-					if (Core.econ.withdrawPlayer(p.getName(), 800)
+					if (SesameCore.econ.withdrawPlayer(p.getName(), 800)
 							.transactionSuccess()) {
 						p.sendMessage(Messages.purchasedAssassinKit());
 						this.manager.getData().set(
@@ -150,7 +150,7 @@ public class KitShopManager implements Listener {
 
 					p.sendMessage(Messages.kitalreadyOwned());
 				} else {
-					if (Core.econ.withdrawPlayer(p.getName(), 1500)
+					if (SesameCore.econ.withdrawPlayer(p.getName(), 1500)
 							.transactionSuccess()) {
 						p.sendMessage(Messages.purchasedInsaneKit());
 						this.manager.getData().set(

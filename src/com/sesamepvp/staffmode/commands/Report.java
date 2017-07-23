@@ -10,20 +10,21 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.sesamepvp.main.Core;
+import com.sesamepvp.main.SesameCore;
 import com.sesamepvp.utilites.Messages;
 
 public class Report implements CommandExecutor {
 
-	Core plugin;
+	SesameCore plugin;
 
-	public Report(Core instance) {
+	public Report(SesameCore instance) {
 		this.plugin = instance;
 	}
 
 	private HashMap<Player, BukkitRunnable> cooldownTask = new HashMap<Player, BukkitRunnable>();
 	private HashMap<Player, Integer> cooldownTime = new HashMap<Player, Integer>();
 
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command command,
 			String label, String[] args) {
 		if (command.getName().equalsIgnoreCase("report")) {

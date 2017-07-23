@@ -16,6 +16,7 @@ import com.sesamepvp.utilites.Messages;
 
 
 public class RandomTeleport implements Listener {
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onItemInteraction(PlayerInteractEvent e) {
 		Player p = e.getPlayer();

@@ -13,6 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.managers.KitListener;
 import com.sesamepvp.utilites.Messages;
+import com.sesamepvp.utilites.Methods;
 
 public class Tank implements Listener {
 	Manager manager = Manager.getInstance();
@@ -53,6 +54,7 @@ public class Tank implements Listener {
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.SLOW, 40000, 0));
 						p.closeInventory();
+						Methods.tank.add(p);
 					} else {
 
 						p.getInventory().clear();
@@ -72,6 +74,8 @@ public class Tank implements Listener {
 								new ItemStack(Material.DIAMOND_BOOTS));
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.SLOW, 40000, 1));
+						p.closeInventory();
+						Methods.tank.add(p);
 					}
 				}
 			}

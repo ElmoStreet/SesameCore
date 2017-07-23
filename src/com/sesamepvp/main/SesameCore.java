@@ -1,5 +1,6 @@
 package com.sesamepvp.main;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 
 import net.milkbowl.vault.economy.Economy;
@@ -7,17 +8,20 @@ import net.milkbowl.vault.economy.EconomyResponse;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.Listener;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.sesamepvp.Scoreboard.SB;
 import com.sesamepvp.chatmanagement.commands.ChatMute;
 import com.sesamepvp.chatmanagement.commands.ClearChat;
 import com.sesamepvp.chatmanagement.events.ChatMuteListener;
 import com.sesamepvp.essentials.commands.Broadcast;
 import com.sesamepvp.essentials.commands.ClearInventory;
 import com.sesamepvp.essentials.commands.Feed;
+import com.sesamepvp.essentials.commands.FindUUID;
 import com.sesamepvp.essentials.commands.Fly;
 import com.sesamepvp.essentials.commands.Gamemode;
 import com.sesamepvp.essentials.commands.Heal;
@@ -26,6 +30,8 @@ import com.sesamepvp.essentials.commands.List;
 import com.sesamepvp.essentials.commands.Message;
 import com.sesamepvp.essentials.commands.Teleport;
 import com.sesamepvp.essentials.commands.Vanish;
+import com.sesamepvp.essentials.commands.Website;
+import com.sesamepvp.essentials.commands.Workbench;
 import com.sesamepvp.essentials.commands.Locations.spawn.Setspawn;
 import com.sesamepvp.essentials.commands.Locations.spawn.Spawn;
 import com.sesamepvp.essentials.events.ListListener;
@@ -60,6 +66,11 @@ import com.sesamepvp.kitpvp.managers.KitListener;
 import com.sesamepvp.kitpvp.managers.KitShopManager;
 import com.sesamepvp.kitpvp.managers.RankupSystem;
 import com.sesamepvp.kitpvp.managers.StatsManager;
+import com.sesamepvp.kitpvp.quests.Quest;
+import com.sesamepvp.kitpvp.quests.events.InventoryClickEvents;
+import com.sesamepvp.kitpvp.quests.events.TestKillEvents;
+import com.sesamepvp.kitpvp.quests.managers.QuestManager;
+import com.sesamepvp.kitpvp.quests.quests.Hunter;
 import com.sesamepvp.kitpvp.upgrades.UpgradeClickEvent;
 import com.sesamepvp.kitpvp.upgrades.kits.AlchemistUpgraded;
 import com.sesamepvp.kitpvp.upgrades.kits.ArcherUpgraded;
@@ -83,8 +94,9 @@ import com.sesamepvp.staffmode.events.RandomTeleport;
 import com.sesamepvp.staffmode.events.VanishEvent;
 import com.sesamepvp.utilites.Messages;
 
-public class Core extends JavaPlugin {
-
+public class SesameCore extends JavaPlugin implements Listener {
+	static ArrayList<String> A = new ArrayList<String>();
+	static Plugin plugin;
 	Manager manager = Manager.getInstance();
 
 	private PluginManager pm;
@@ -94,6 +106,9 @@ public class Core extends JavaPlugin {
 	public static EconomyResponse r;
 
 	public void onEnable() {
+
+		@SuppressWarnings("unused")
+		QuestManager Quests = new Hunter();
 		if (!setupEconomy()) {
 			Bukkit.getServer()
 					.getLogger()
@@ -116,10 +131,10 @@ public class Core extends JavaPlugin {
 	}
 
 	public void registerConfig() {
-		final FileConfiguration config = this.getConfig();
-		config.options().copyDefaults(true);
-		config.addDefault("Prefix", "&c&lSesame&f&lPvP &8>>&r");
+		getConfig().options().copyDefaults(true);
 		saveConfig();
+		reloadConfig();
+
 	}
 
 	public void registerEconomy() {
@@ -166,6 +181,7 @@ public class Core extends JavaPlugin {
 		getCommand("v").setExecutor(new Vanish());
 		getCommand("gm").setExecutor(new Gamemode());
 		getCommand("gamemode").setExecutor(new Gamemode());
+		getCommand("website").setExecutor(new Website());
 		getCommand("setspawn").setExecutor(new Setspawn());
 		getCommand("spawn").setExecutor(new Spawn());
 		getCommand("feed").setExecutor(new Feed());
@@ -183,10 +199,14 @@ public class Core extends JavaPlugin {
 		getCommand("teleport").setExecutor(new Teleport());
 		getCommand("tp").setExecutor(new Teleport());
 		getCommand("setpath").setExecutor(new PathSeter());
+		getCommand("uuid").setExecutor(new FindUUID());
+		getCommand("craft").setExecutor(new Workbench());
+		getCommand("quests").setExecutor(new Quest());
 	}
 
 	private void registerEvents() {
-		pm.registerEvents(new StatsManager(),this);
+		pm.registerEvents(this, this);
+		pm.registerEvents(new StatsManager(), this);
 		pm.registerEvents(new ListListener(), this);
 		pm.registerEvents(new InsaneAbility(), this);
 		pm.registerEvents(new SlugAbility(), this);
@@ -208,7 +228,7 @@ public class Core extends JavaPlugin {
 		pm.registerEvents(new KitShopManager(), this);
 		pm.registerEvents(new General(), this);
 		pm.registerEvents(new RankupSystem(), this);
-
+		pm.registerEvents(new SB(this), this);
 		// Kits
 		pm.registerEvents(new Alchemist(), this);
 		pm.registerEvents(new Archer(), this);
@@ -218,6 +238,9 @@ public class Core extends JavaPlugin {
 		pm.registerEvents(new Pyro(), this);
 		pm.registerEvents(new Tank(), this);
 
+		pm.registerEvents(new TestKillEvents(), this);
+		pm.registerEvents(new InventoryClickEvents(),this);
+		
 		pm.registerEvents(new AlchemistUpgraded(), this);
 		pm.registerEvents(new ArcherUpgraded(), this);
 		pm.registerEvents(new DefaultUpgraded(), this);

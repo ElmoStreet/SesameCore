@@ -13,6 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.managers.KitListener;
 import com.sesamepvp.utilites.Messages;
+import com.sesamepvp.utilites.Methods;
 
 public class GodArcher implements Listener {
 
@@ -59,6 +60,7 @@ public class GodArcher implements Listener {
 								PotionEffectType.SPEED, 40000, 1));
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.INCREASE_DAMAGE, 40000, 0));
+						Methods.godarcher.add(p);
 					} else {
 						if (KitGodArcherOwned == false) {
 							event.setCancelled(true);

@@ -21,6 +21,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.managers.KitListener;
+import com.sesamepvp.utilites.Methods;
 
 public class General implements Listener {
 
@@ -32,9 +33,19 @@ public class General implements Listener {
 	}
 
 	@EventHandler
+	public void onLeave1(PlayerQuitEvent e) {
+		Player p = e.getPlayer();
+		Methods.removeArrayLists(p);
+	}
+
+	@SuppressWarnings("deprecation")
+	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
 
 		Player p = e.getPlayer();
+
+		Methods.removeArrayLists(p);
+
 		Location spawnLocation = (Location) this.manager.getData().get("Spawn");
 		p.teleport(spawnLocation);
 		p.setHealth(p.getMaxHealth());
@@ -102,6 +113,7 @@ public class General implements Listener {
 		if (KitListener.kitselected.contains(p)) {
 			KitListener.kitselected.remove(p);
 		}
+		Methods.removeArrayLists(p);
 	}
 
 	@EventHandler

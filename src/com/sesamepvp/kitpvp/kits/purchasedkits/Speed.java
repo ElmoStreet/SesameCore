@@ -14,6 +14,7 @@ import org.bukkit.potion.PotionEffectType;
 import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.managers.KitListener;
 import com.sesamepvp.utilites.Messages;
+import com.sesamepvp.utilites.Methods;
 
 public class Speed implements Listener {
 
@@ -84,6 +85,7 @@ public class Speed implements Listener {
 						p.getActivePotionEffects().clear();
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.SPEED, 40000, 1));
+						Methods.speedy.add(p);
 					} else {
 						if (KitSpeedyOwned == false) {
 							event.setCancelled(true);

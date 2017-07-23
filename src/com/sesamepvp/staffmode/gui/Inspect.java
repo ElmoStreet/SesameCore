@@ -92,6 +92,7 @@ public class Inspect implements Listener {
 		ItemStack boots = ti.getBoots();
 		ItemStack chestplate = ti.getChestplate();
 		ItemStack legs = ti.getLeggings();
+		@SuppressWarnings("deprecation")
 		ItemStack ItemInHand = ti.getItemInHand();
 
 		ItemStack[] contents = ti.getContents();

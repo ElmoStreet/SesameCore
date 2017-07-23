@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import com.sesamepvp.kitpvp.managers.KitListener;
 import com.sesamepvp.utilites.Messages;
 import com.sesamepvp.utilites.Methods;
 
@@ -25,6 +26,9 @@ public class StaffMode implements CommandExecutor{
 			if (sender instanceof Player) {
 				if (p.hasPermission("sesame.staffmode")) {
 					if (staffmode.contains(p)) {
+						if(KitListener.kitselected.contains(p)){
+							KitListener.kitselected.remove(p);
+						}
 						p.getInventory().clear();
 						staffmode.remove(p);
 						Methods.fly.remove(p);

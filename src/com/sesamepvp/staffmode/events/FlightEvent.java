@@ -22,6 +22,7 @@ public class FlightEvent implements Listener {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onInteract3(PlayerInteractEvent e) {
 		Player p = e.getPlayer();

@@ -16,6 +16,7 @@ import com.sesamepvp.utilites.Messages;
 import com.sesamepvp.utilites.Methods;
 
 public class VanishEvent implements Listener {
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onVanish(PlayerInteractEvent e) {
 		Player p = e.getPlayer();

@@ -14,6 +14,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.utilites.Messages;
+import com.sesamepvp.utilites.Methods;
 
 public class KitListener implements Listener {
 	Manager manager = Manager.getInstance();
@@ -84,7 +85,7 @@ public class KitListener implements Listener {
 								new ItemStack(Material.IRON_CHESTPLATE));
 						p.getInventory().setBoots(
 								new ItemStack(Material.IRON_BOOTS));
-
+						Methods.warrior.add(p);
 					}
 				} else {
 					event.getWhoClicked().sendMessage(Messages.noPermission());
@@ -117,6 +118,7 @@ public class KitListener implements Listener {
 								new ItemStack(Material.DIAMOND_CHESTPLATE));
 						p.getInventory().setBoots(
 								new ItemStack(Material.IRON_BOOTS));
+						Methods.gladiator.add(p);
 					}
 				} else {
 					event.getWhoClicked().sendMessage(Messages.noPermission());
@@ -151,6 +153,7 @@ public class KitListener implements Listener {
 						p.getInventory().setBoots(
 								new ItemStack(Material.IRON_BOOTS));
 						// s1 kb1sword
+						Methods.guardian.add(p);
 					}
 				} else {
 					event.getWhoClicked().sendMessage(Messages.noPermission());
@@ -183,7 +186,7 @@ public class KitListener implements Listener {
 								new ItemStack(Material.DIAMOND_CHESTPLATE));
 						p.getInventory().setBoots(
 								new ItemStack(Material.DIAMOND_BOOTS));
-						// s2
+						Methods.berserk.add(p);
 					}
 				} else {
 					event.getWhoClicked().sendMessage(Messages.noPermission());
@@ -219,6 +222,7 @@ public class KitListener implements Listener {
 						p.getInventory().setBoots(
 								new ItemStack(Material.DIAMOND_BOOTS));
 						// S2
+						Methods.legend.add(p);
 					}
 				} else {
 					event.getWhoClicked().sendMessage(Messages.noPermission());
@@ -253,7 +257,7 @@ public class KitListener implements Listener {
 								new ItemStack(Material.DIAMOND_BOOTS));
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.SPEED, 40000, 1));
-						// s3
+						Methods.demigod.add(p);
 
 					}
 				} else {
@@ -289,7 +293,7 @@ public class KitListener implements Listener {
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.SPEED, 40000, 2));
 						// s3
-
+						Methods.god.add(p);
 					}
 				} else {
 					event.getWhoClicked().sendMessage(Messages.noPermission());

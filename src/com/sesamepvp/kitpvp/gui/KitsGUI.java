@@ -61,7 +61,7 @@ public class KitsGUI {
 		kit8.setDisplayName(ChatColor.DARK_RED + "Warrior Kit");
 
 		ArrayList<String> warriorlore = new ArrayList<String>();
-		warriorlore.add(ChatColor.GOLD + "Get 25 Kills to unlock this!");
+		warriorlore.add(ChatColor.GOLD + "Get 150 Kills to unlock this!");
 		kit8.setLore(warriorlore);
 		warriorKit.setItemMeta(kit8);
 
@@ -70,7 +70,7 @@ public class KitsGUI {
 		kit9.setDisplayName(ChatColor.DARK_RED + "Gladiator Kit");
 
 		ArrayList<String> gladiatorlore = new ArrayList<String>();
-		gladiatorlore.add(ChatColor.GOLD + "Get 75 Kills to unlock this!");
+		gladiatorlore.add(ChatColor.GOLD + "Get 350 Kills to unlock this!");
 		kit9.setLore(gladiatorlore);
 		gladiatorKit.setItemMeta(kit9);
 
@@ -79,7 +79,7 @@ public class KitsGUI {
 		kit10.setDisplayName(ChatColor.DARK_RED + "Guardian Kit");
 
 		ArrayList<String> guardianlore = new ArrayList<String>();
-		guardianlore.add(ChatColor.GOLD + "Get 150 Kills to unlock this!");
+		guardianlore.add(ChatColor.GOLD + "Get 750 Kills to unlock this!");
 		kit10.setLore(guardianlore);
 		guardianKit.setItemMeta(kit10);
 
@@ -88,7 +88,7 @@ public class KitsGUI {
 		kit11.setDisplayName(ChatColor.DARK_RED + "Berserk Kit");
 
 		ArrayList<String> berserklore = new ArrayList<String>();
-		berserklore.add(ChatColor.GOLD + "Get 300 Kills to unlock this!");
+		berserklore.add(ChatColor.GOLD + "Get 1250 Kills to unlock this!");
 		kit11.setLore(berserklore);
 		berserkKit.setItemMeta(kit11);
 
@@ -97,7 +97,7 @@ public class KitsGUI {
 		kit12.setDisplayName(ChatColor.DARK_RED + "Legend Kit");
 
 		ArrayList<String> legendlore = new ArrayList<String>();
-		legendlore.add(ChatColor.GOLD + "Get 450 Kills to unlock this!");
+		legendlore.add(ChatColor.GOLD + "Get 1750 Kills to unlock this!");
 		kit12.setLore(legendlore);
 		legendKit.setItemMeta(kit12);
 
@@ -106,7 +106,7 @@ public class KitsGUI {
 		kit13.setDisplayName(ChatColor.DARK_RED + "Demi God Kit");
 
 		ArrayList<String> demigodlore = new ArrayList<String>();
-		demigodlore.add(ChatColor.GOLD + "Get 1000 Kills to unlock this!");
+		demigodlore.add(ChatColor.GOLD + "Get 2250 Kills to unlock this!");
 		kit13.setLore(demigodlore);
 		demigod.setItemMeta(kit13);
 
@@ -115,7 +115,7 @@ public class KitsGUI {
 		kit14.setDisplayName(ChatColor.DARK_RED + "GOD Kit");
 
 		List<String> godlore = new ArrayList<String>();
-		godlore.add(ChatColor.GOLD + "Get 1500 Kills to unlock this!");
+		godlore.add(ChatColor.GOLD + "Get 3500 Kills to unlock this!");
 		kit14.setLore(godlore);
 		god.setItemMeta(kit14);
 
@@ -292,7 +292,7 @@ public class KitsGUI {
 		kitsGUI.setItem(26, panel);
 		kitsGUI.setItem(35, panel);
 		
-		p.playSound(p.getLocation(), Sound.NOTE_PLING, 2F, 1F);
+		p.playSound(p.getLocation(), Sound.BLOCK_NOTE_PLING, 2F, 1F);
 		p.openInventory(kitsGUI);
 	}
 }

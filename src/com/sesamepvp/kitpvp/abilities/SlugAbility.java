@@ -1,6 +1,5 @@
 package com.sesamepvp.kitpvp.abilities;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -11,8 +10,10 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class SlugAbility implements Listener {
+import com.sesamepvp.utilites.Methods;
 
+public class SlugAbility implements Listener {
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onEntityDamageByEntity(EntityDamageByEntityEvent e) {
 		Player t = (Player) e.getEntity();
@@ -24,15 +25,16 @@ public class SlugAbility implements Listener {
 			if (e.getDamager().getType() == EntityType.PLAYER) {
 				Player p = (Player) e.getDamager();
 				if (p.getItemInHand().getType() == Material.DIAMOND_SWORD) {
-					if (p.getItemInHand().getItemMeta().getDisplayName()
-							.equalsIgnoreCase(ChatColor.DARK_GRAY + "Slug")) {
+					if (Methods.slug.contains(p)) {
 
-						PotionEffect potionEffect = new PotionEffect(PotionEffectType.SLOW, 30, 3);
+						PotionEffect potionEffect = new PotionEffect(
+								PotionEffectType.SLOW, 30, 3);
 						potionEffect.apply(t);
 
-						PotionEffect potionEffect2 = new PotionEffect(PotionEffectType.SPEED, 30, 0);
+						PotionEffect potionEffect2 = new PotionEffect(
+								PotionEffectType.SPEED, 30, 0);
 						potionEffect2.apply(p);
-						
+
 					}
 				}
 			}

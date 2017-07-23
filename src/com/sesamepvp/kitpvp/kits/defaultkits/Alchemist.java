@@ -12,6 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.managers.KitListener;
 import com.sesamepvp.utilites.Messages;
+import com.sesamepvp.utilites.Methods;
 
 public class Alchemist implements Listener {
 
@@ -46,6 +47,7 @@ public class Alchemist implements Listener {
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.INVISIBILITY, 40000, 2));
 						p.closeInventory();
+						Methods.alchemist.add(p);
 					} else {
 						p.getInventory().clear();
 						KitListener.kitselected.add(p);
@@ -56,6 +58,8 @@ public class Alchemist implements Listener {
 
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.INVISIBILITY, 40000, 2));
+						p.closeInventory();
+						Methods.alchemist.add(p);
 					}
 				}
 			}

@@ -23,43 +23,51 @@ public class PathSeter implements CommandExecutor {
 						p.sendMessage(ChatColor.RED
 								+ "/setpath <type> <path> <value>");
 					} else {
-						if(args.length == 1){
+						if (args.length == 1) {
 							p.sendMessage(ChatColor.RED
 									+ "/setpath <type> <path> <value>");
-						}else{
-							if(args.length == 2){
+						} else {
+							if (args.length == 2) {
 								p.sendMessage(ChatColor.RED
 										+ "/setpath <type> <path> <value>");
-							}else{
-								if(args.length == 3){
-									if(args[0].equalsIgnoreCase("int")){
+							} else {
+								if (args.length == 3) {
+									if (args[0].equalsIgnoreCase("int")) {
 										String path = args[1];
 										String value = args[2];
-										manager.getData().set(path, Integer.parseInt(value));
-										p.sendMessage(ChatColor.GREEN+"Set " + path + " to " + value);
+										manager.getData().set(path,
+												Integer.parseInt(value));
+										p.sendMessage(ChatColor.GREEN + "Set "
+												+ path + " to " + value);
 										manager.saveData();
 										manager.saveConfig();
 										manager.reloadData();
 										manager.reloadConfig();
-								
-									}else{
-										if(args[0].equalsIgnoreCase("string")){
+
+									} else {
+										if (args[0].equalsIgnoreCase("string")) {
 											String path = args[1];
 											String value = args[2];
 											manager.getData().set(path, value);
-											p.sendMessage(ChatColor.GREEN+"Set " + path + " to " + value);
+											p.sendMessage(ChatColor.GREEN
+													+ "Set " + path + " to "
+													+ value);
 											manager.saveData();
 											manager.saveConfig();
 											manager.reloadData();
 											manager.reloadConfig();
-									
-										}else{
-											if(args[0].equalsIgnoreCase("boolean")){
+
+										} else {
+											if (args[0]
+													.equalsIgnoreCase("boolean")) {
 												String path = args[1];
 												String value = args[2];
-												
-												manager.getData().set(path, Boolean.parseBoolean(value));
-												p.sendMessage(ChatColor.GREEN+"Set " + path + " to " + value);
+												manager.getData()
+														.set(path,
+																Boolean.parseBoolean(value));
+												p.sendMessage(ChatColor.GREEN
+														+ "Set " + path
+														+ " to " + value);
 												manager.saveData();
 												manager.saveConfig();
 												manager.reloadData();

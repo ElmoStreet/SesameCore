@@ -12,6 +12,7 @@ import com.sesamepvp.utilites.Messages;
 
 public class Spawn implements CommandExecutor{
 Manager manager = Manager.getInstance();
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
 		if(cmd.getName().equalsIgnoreCase("spawn")){

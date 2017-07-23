@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import com.sesamepvp.utilites.Messages;
 
 public class Message implements CommandExecutor {
+	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command command,
 			String label, String[] args) {
 		if (command.getName().equalsIgnoreCase("message")

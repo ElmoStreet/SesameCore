@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.managers.KitListener;
 import com.sesamepvp.utilites.Messages;
+import com.sesamepvp.utilites.Methods;
 
 public class Pyro implements Listener {
 
@@ -51,6 +52,7 @@ public class Pyro implements Listener {
 						p.getInventory().setBoots(
 								new ItemStack(Material.CHAINMAIL_BOOTS));
 						p.closeInventory();
+						Methods.pyro.add(p);
 					} else {
 						p.getInventory().clear();
 						KitListener.kitselected.add(p);
@@ -67,6 +69,8 @@ public class Pyro implements Listener {
 								new ItemStack(Material.IRON_CHESTPLATE));
 						p.getInventory().setBoots(
 								new ItemStack(Material.CHAINMAIL_BOOTS));
+						p.closeInventory();
+						Methods.pyro.add(p);
 					}
 				}
 			}

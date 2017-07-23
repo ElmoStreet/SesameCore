@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.main.SesameCore;
 import com.sesamepvp.utilites.Messages;
 import com.sesamepvp.utilites.Methods;
 
@@ -53,6 +54,7 @@ public class RankupSystem implements Listener {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onDeath2(PlayerDeathEvent e) {
 		Player p = e.getEntity();
@@ -62,8 +64,10 @@ public class RankupSystem implements Listener {
 			int killCounter = this.manager.getData().getInt(
 					k.getName() + ".Kills");
 
+			
+			
 			// WARRIOR 5
-			if (killCounter == 24) {
+			if (killCounter == 150) {
 				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(),
 						"pex user " + k.getName() + " add kits.warrior");
 				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(),
@@ -75,7 +79,7 @@ public class RankupSystem implements Listener {
 			}
 
 			// Gladiator 15
-			if (killCounter == 74) {
+			if (killCounter == 350) {
 				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(),
 						"pex user " + k.getName() + " suffix &f[&1Gladiator&f]");
 
@@ -88,7 +92,7 @@ public class RankupSystem implements Listener {
 				this.manager.saveData();
 			}
 			// Guardian 30
-			if (killCounter == 149) {
+			if (killCounter == 750) {
 				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(),
 						"pex user " + k.getName() + " suffix &f[&6Guardian&f]");
 
@@ -100,7 +104,7 @@ public class RankupSystem implements Listener {
 				this.manager.saveData();
 			}
 			// Berserk 60
-			if (this.manager.getData().getInt(k.getName() + ".Kills") == 299) {
+			if (this.manager.getData().getInt(k.getName() + ".Kills") == 1249) {
 				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(),
 						"pex user " + k.getName() + " suffix &f[&aBerserk&f]");
 
@@ -114,7 +118,7 @@ public class RankupSystem implements Listener {
 			}
 
 			// Legend 100
-			if (this.manager.getData().getInt(k.getName() + ".Kills") == 449) {
+			if (this.manager.getData().getInt(k.getName() + ".Kills") == 1749) {
 				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(),
 						"pex user " + k.getName() + " suffix &f[&3Legend&f]");
 
@@ -126,7 +130,7 @@ public class RankupSystem implements Listener {
 				this.manager.saveData();
 			}
 			// DEMI GOD 250
-			if (this.manager.getData().getInt(k.getName() + ".Kills") == 999) {
+			if (this.manager.getData().getInt(k.getName() + ".Kills") == 2249) {
 				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(),
 						"pex user " + k.getName() + " suffix &f[&cDemi-God&f]");
 
@@ -138,7 +142,7 @@ public class RankupSystem implements Listener {
 			}
 
 			// God 500
-			if (this.manager.getData().getInt(k.getName() + ".Kills") == 1499) {
+			if (this.manager.getData().getInt(k.getName() + ".Kills") == 3499) {
 				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(),
 						"pex user " + k.getName() + " suffix &f[&4God&f]");
 
@@ -147,6 +151,13 @@ public class RankupSystem implements Listener {
 				Bukkit.broadcastMessage(Messages.prefix(ChatColor.GREEN+""+k.getName()+"has reached the God Rank!"));
 				this.manager.getData().set(k.getName() + ".Rank", "God");
 				this.manager.saveData();
+				
+				this.manager.getData().set(k.getName() + ".Quests.Justice", true);
+				p.getKiller().sendMessage(Messages.prefix(Methods
+						.format("&aQUESTS: &dYou completed the &5Justice &dQuest!")));
+				this.manager.saveData();
+				SesameCore.econ.depositPlayer(k.getName(), 2500);
+				
 			}
 		}
 	}
