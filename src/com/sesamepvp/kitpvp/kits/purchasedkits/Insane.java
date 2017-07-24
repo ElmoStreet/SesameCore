@@ -36,7 +36,7 @@ public class Insane implements Listener {
 
 				} else {
 					boolean InsaneKitOwned = this.manager.getData().getBoolean(
-							p.getName() + ".Kits.Insane");
+							p.getUniqueId() + ".Kits.Insane");
 					if (InsaneKitOwned == true) {
 						p.getActivePotionEffects().clear();
 						p.getInventory().clear();

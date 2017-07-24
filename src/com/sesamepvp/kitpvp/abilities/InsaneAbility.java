@@ -12,7 +12,7 @@ import com.sesamepvp.utilites.Methods;
 
 public class InsaneAbility implements Listener {
 
-	@SuppressWarnings("deprecation")
+	
 	@EventHandler
 	public void onDeath(PlayerDeathEvent e) {
 		Player p = e.getEntity();

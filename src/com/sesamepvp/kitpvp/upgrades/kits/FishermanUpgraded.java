@@ -28,14 +28,14 @@ public class FishermanUpgraded implements Listener {
 
 			if (e.getCurrentItem().getType() == Material.FISHING_ROD) {
 				boolean FishermanKitUpgraded = this.manager.getData()
-						.getBoolean(p.getName() + ".Kits.Fisherman.Upgraded");
+						.getBoolean(p.getUniqueId() + ".Kits.Fisherman.Upgraded");
 				if (FishermanKitUpgraded == true) {
 
 					p.sendMessage(Messages.kitalreadyOwned());
 				} else {
 					if (SesameCore.econ.withdrawPlayer(p.getName(), 250)
 							.transactionSuccess()) {
-						p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 2F, 1F);
+						p.playSound(p.getLocation(), Sound.ANVIL_USE, 2F, 1F);
 						p.sendMessage(Messages.upgraded());
 						this.manager.getData().set(
 								p.getName() + ".Kits.Fisherman.Upgraded", true);

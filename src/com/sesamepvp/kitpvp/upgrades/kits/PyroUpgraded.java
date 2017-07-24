@@ -28,7 +28,7 @@ public class PyroUpgraded implements Listener {
 
 			if (e.getCurrentItem().getType() == Material.FIREBALL) {
 				boolean PyroKitUpgraded = this.manager.getData().getBoolean(
-						p.getName() + ".Kits.Pyro.Upgraded");
+						p.getUniqueId() + ".Kits.Pyro.Upgraded");
 				if (PyroKitUpgraded == true) {
 
 					p.sendMessage(Messages.kitalreadyOwned());
@@ -36,9 +36,9 @@ public class PyroUpgraded implements Listener {
 					if (SesameCore.econ.withdrawPlayer(p.getName(), 250)
 							.transactionSuccess()) {
 						p.sendMessage(Messages.upgraded());
-						p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 2F, 1F);
+						p.playSound(p.getLocation(), Sound.ANVIL_USE, 2F, 1F);
 						this.manager.getData().set(
-								p.getName() + ".Kits.Pyro.Upgraded", true);
+								p.getUniqueId() + ".Kits.Pyro.Upgraded", true);
 						this.manager.saveData();
 					} else {
 						p.sendMessage(Messages.insufficientFunds());

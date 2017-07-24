@@ -35,7 +35,7 @@ public class Pyro implements Listener {
 					return;
 				} else {
 					if (manager.getData().getBoolean(
-							p.getName() + ".Kits.Pyro.Upgraded") == true) {
+							p.getUniqueId() + ".Kits.Pyro.Upgraded") == true) {
 						p.getInventory().clear();
 						KitListener.kitselected.add(p);
 						p.closeInventory();

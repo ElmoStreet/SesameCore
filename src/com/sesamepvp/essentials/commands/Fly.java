@@ -30,7 +30,7 @@ public class Fly implements CommandExecutor {
 							}
 						}
 					} else if (args.length == 1) {
-						@SuppressWarnings("deprecation")
+
 						Player target = Bukkit.getServer().getPlayer(args[0]);
 						if (target == null) {
 							p.sendMessage(Messages.playerNull());

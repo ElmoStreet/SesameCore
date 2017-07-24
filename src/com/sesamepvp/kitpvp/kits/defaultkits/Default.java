@@ -33,7 +33,7 @@ public class Default implements Listener {
 					return;
 				} else {
 					if (manager.getData().getBoolean(
-							p.getName() + ".Kits.Default.Upgraded") == true) {
+							p.getUniqueId() + ".Kits.Default.Upgraded") == true) {
 						p.getInventory().clear();
 						p.getActivePotionEffects().clear();
 						KitListener.kitselected.add(p);

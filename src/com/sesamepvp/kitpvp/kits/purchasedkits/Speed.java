@@ -55,7 +55,7 @@ public class Speed implements Listener {
 
 				} else {
 					boolean KitSpeedyOwned = this.manager.getData().getBoolean(
-							p.getName() + ".Kits.Speedy");
+							p.getUniqueId() + ".Kits.Speedy");
 					if (KitSpeedyOwned == true) {
 						p.getInventory().clear();
 						p.getActivePotionEffects().clear();

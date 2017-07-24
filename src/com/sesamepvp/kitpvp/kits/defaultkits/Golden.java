@@ -34,7 +34,7 @@ public class Golden implements Listener {
 					return;
 				} else {
 					if (manager.getData().getBoolean(
-							p.getName() + ".Kits.Golden.Upgraded") == true) {
+							p.getUniqueId() + ".Kits.Golden.Upgraded") == true) {
 						p.getInventory().clear();
 						KitListener.kitselected.add(p);
 						p.closeInventory();

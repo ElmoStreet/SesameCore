@@ -14,6 +14,7 @@ import com.sesamepvp.utilites.Messages;
 public class DefaultUpgraded implements Listener {
 	Manager manager = Manager.getInstance();
 
+	
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onInventoryClickEvent(InventoryClickEvent e) {
@@ -26,7 +27,7 @@ public class DefaultUpgraded implements Listener {
 			}
 			if (e.getCurrentItem().getType() == Material.LEATHER_CHESTPLATE) {
 				boolean DefaultKitUpgraded = this.manager.getData().getBoolean(
-						p.getName() + ".Kits.Default.Upgraded");
+						p.getUniqueId()+ ".Kits.Default.Upgraded");
 				if (DefaultKitUpgraded == true) {
 
 					p.sendMessage(Messages.kitalreadyOwned());
@@ -35,9 +36,9 @@ public class DefaultUpgraded implements Listener {
 							.transactionSuccess()) {
 						p.sendMessage(Messages.upgraded());
 						this.manager.getData().set(
-								p.getName() + ".Kits.Default.Upgraded", true);
+								p.getUniqueId() + ".Kits.Default.Upgraded", true);
 						this.manager.saveData();
-						p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 2F, 1F);
+						p.playSound(p.getLocation(), Sound.ANVIL_USE, 2F, 1F);
 					} else {
 						p.sendMessage(Messages.insufficientFunds());
 						return;

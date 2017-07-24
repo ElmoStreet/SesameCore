@@ -26,17 +26,17 @@ public class TankUpgraded implements Listener {
 			}
 			if (e.getCurrentItem().getType() == Material.DIAMOND_CHESTPLATE) {
 				boolean TankKitUpgraded = this.manager.getData().getBoolean(
-						p.getName() + ".Kits.Tank.Upgraded");
+						p.getUniqueId() + ".Kits.Tank.Upgraded");
 				if (TankKitUpgraded == true) {
 					
 					p.sendMessage(Messages.kitalreadyOwned());
 				} else {
 					if (SesameCore.econ.withdrawPlayer(p.getName(), 250)
 							.transactionSuccess()) {
-						p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 2F, 1F);
+						p.playSound(p.getLocation(), Sound.ANVIL_USE, 2F, 1F);
 						p.sendMessage(Messages.upgraded());
 						this.manager.getData().set(
-								p.getName() + ".Kits.Tank.Upgraded", true);
+								p.getUniqueId() + ".Kits.Tank.Upgraded", true);
 						this.manager.saveData();
 					} else {
 						p.sendMessage(Messages.insufficientFunds());

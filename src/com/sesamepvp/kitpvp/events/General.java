@@ -21,6 +21,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.managers.KitListener;
+import com.sesamepvp.utilites.Messages;
 import com.sesamepvp.utilites.Methods;
 
 public class General implements Listener {
@@ -38,16 +39,24 @@ public class General implements Listener {
 		Methods.removeArrayLists(p);
 	}
 
-	@SuppressWarnings("deprecation")
+	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
 
 		Player p = e.getPlayer();
 
 		Methods.removeArrayLists(p);
-
+		
+		this.manager.getData().set(p.getUniqueId()+".Username", p.getName());
+		this.manager.saveData();
 		Location spawnLocation = (Location) this.manager.getData().get("Spawn");
-		p.teleport(spawnLocation);
+		if (spawnLocation == null) {
+			p.sendMessage(Messages.prefix(Methods
+					.format("&cWARNING: Spawn location is not defined, contact an administrator.")));
+			return;
+		} else {
+			p.teleport(spawnLocation);
+		}
 		p.setHealth(p.getMaxHealth());
 		p.getInventory().clear();
 		p.getActivePotionEffects().clear();

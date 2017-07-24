@@ -34,15 +34,18 @@ public class RankupSystem implements Listener {
 			KitListener.kitselected.remove(p);
 		}
 
+		if(k == null){
+			this.manager.getData().set(p.getUniqueId() + ".Deaths",
+					this.manager.getData().getInt(p.getUniqueId() + ".Deaths") + 1);
+			this.manager.saveData();
+		}
+		
 		if (e.getEntity() instanceof Player && k instanceof Player) {
 			if (KitListener.kitselected.contains(p)) {
 				KitListener.kitselected.remove(p);
 			}
-			this.manager.getData().set(k.getName() + ".Kills",
-					this.manager.getData().getInt(k.getName() + ".Kills") + 1);
-			this.manager.saveData();
-			this.manager.getData().set(p.getName() + ".Deaths",
-					this.manager.getData().getInt(p.getName() + ".Deaths") + 1);
+			this.manager.getData().set(k.getUniqueId() + ".Kills",
+					this.manager.getData().getInt(k.getUniqueId() + ".Kills") + 1);
 			this.manager.saveData();
 			if (k.getName() == p.getName() || p.getName() == k.getName()) {
 				return;
@@ -54,6 +57,7 @@ public class RankupSystem implements Listener {
 		}
 	}
 
+	
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onDeath2(PlayerDeathEvent e) {
@@ -62,7 +66,7 @@ public class RankupSystem implements Listener {
 
 		if (k instanceof Player && p instanceof Player) {
 			int killCounter = this.manager.getData().getInt(
-					k.getName() + ".Kills");
+					k.getUniqueId() + ".Kills");
 
 			
 			
@@ -74,7 +78,7 @@ public class RankupSystem implements Listener {
 						"pex user " + k.getName() + " suffix &f[&bWarrior&f]");
 				Bukkit.broadcastMessage(Messages.prefix(ChatColor.GREEN + ""
 						+ k.getName() + "has reached the Warrior Rank!"));
-				this.manager.getData().set(k.getName() + ".Rank", "Warrior");
+				this.manager.getData().set(k.getUniqueId() + ".Rank", "Warrior");
 				this.manager.saveData();
 			}
 
@@ -88,7 +92,7 @@ public class RankupSystem implements Listener {
 
 				Bukkit.broadcastMessage(Messages.prefix(ChatColor.GREEN + ""
 						+ k.getName() + "has reached the Gladiator Rank!"));
-				this.manager.getData().set(k.getName() + ".Rank", "Gladiator");
+				this.manager.getData().set(k.getUniqueId() + ".Rank", "Gladiator");
 				this.manager.saveData();
 			}
 			// Guardian 30
@@ -100,11 +104,11 @@ public class RankupSystem implements Listener {
 						"pex user " + k.getName() + " add kits.guardian");
 				Bukkit.broadcastMessage(Messages.prefix(ChatColor.GREEN + ""
 						+ k.getName() + "has reached the Guardian Rank!"));
-				this.manager.getData().set(k.getName() + ".Rank", "Guardian");
+				this.manager.getData().set(k.getUniqueId() + ".Rank", "Guardian");
 				this.manager.saveData();
 			}
 			// Berserk 60
-			if (this.manager.getData().getInt(k.getName() + ".Kills") == 1249) {
+			if (this.manager.getData().getInt(k.getUniqueId() + ".Kills") == 1249) {
 				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(),
 						"pex user " + k.getName() + " suffix &f[&aBerserk&f]");
 
@@ -113,12 +117,12 @@ public class RankupSystem implements Listener {
 
 				Bukkit.broadcastMessage(Messages.prefix(ChatColor.GREEN + ""
 						+ k.getName() + "has reached the Berserk Rank!"));
-				this.manager.getData().set(k.getName() + ".Rank", "Berserk");
+				this.manager.getData().set(k.getUniqueId() + ".Rank", "Berserk");
 				this.manager.saveData();
 			}
 
 			// Legend 100
-			if (this.manager.getData().getInt(k.getName() + ".Kills") == 1749) {
+			if (this.manager.getData().getInt(k.getUniqueId() + ".Kills") == 1749) {
 				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(),
 						"pex user " + k.getName() + " suffix &f[&3Legend&f]");
 
@@ -126,33 +130,33 @@ public class RankupSystem implements Listener {
 						"pex user " + k.getName() + " add kits.legend");
 				Bukkit.broadcastMessage(Messages.prefix(ChatColor.GREEN + ""
 						+ k.getName() + "has reached the Legend Rank!"));
-				this.manager.getData().set(k.getName() + ".Rank", "Legend");
+				this.manager.getData().set(k.getUniqueId() + ".Rank", "Legend");
 				this.manager.saveData();
 			}
 			// DEMI GOD 250
-			if (this.manager.getData().getInt(k.getName() + ".Kills") == 2249) {
+			if (this.manager.getData().getInt(k.getUniqueId() + ".Kills") == 2249) {
 				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(),
 						"pex user " + k.getName() + " suffix &f[&cDemi-God&f]");
 
 				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(),
 						"pex user " + k.getName() + " add kits.demigod");
 				Bukkit.broadcastMessage(Messages.prefix(ChatColor.GREEN+""+k.getName()+"has reached the Demi God Rank!"));
-				this.manager.getData().set(k.getName() + ".Rank", "DemiGod");
+				this.manager.getData().set(k.getUniqueId() + ".Rank", "DemiGod");
 				this.manager.saveData();
 			}
 
 			// God 500
-			if (this.manager.getData().getInt(k.getName() + ".Kills") == 3499) {
+			if (this.manager.getData().getInt(k.getUniqueId() + ".Kills") == 3499) {
 				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(),
 						"pex user " + k.getName() + " suffix &f[&4God&f]");
 
 				Bukkit.dispatchCommand(Bukkit.getServer().getConsoleSender(),
 						"pex user " + k.getName() + " add kits.god");
 				Bukkit.broadcastMessage(Messages.prefix(ChatColor.GREEN+""+k.getName()+"has reached the God Rank!"));
-				this.manager.getData().set(k.getName() + ".Rank", "God");
+				this.manager.getData().set(k.getUniqueId() + ".Rank", "God");
 				this.manager.saveData();
 				
-				this.manager.getData().set(k.getName() + ".Quests.Justice", true);
+				this.manager.getData().set(k.getUniqueId() + ".Quests.Justice", true);
 				p.getKiller().sendMessage(Messages.prefix(Methods
 						.format("&aQUESTS: &dYou completed the &5Justice &dQuest!")));
 				this.manager.saveData();

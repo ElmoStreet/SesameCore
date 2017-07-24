@@ -19,15 +19,15 @@ public class KitShopGUI {
 	public static void openKitshop(Player p) {
 		final Inventory kitshop = Bukkit.createInventory(null, 36, "KitShop");
 		boolean KitSpeedyOwned = manager.getData().getBoolean(
-				p.getName() + ".Kits.Speedy");
+				p.getUniqueId() + ".Kits.Speedy");
 		boolean KitBurnerOwned = manager.getData().getBoolean(
-				p.getName() + ".Kits.Burner");
+				p.getUniqueId() + ".Kits.Burner");
 		boolean KitAssassinOwned = manager.getData().getBoolean(
-				p.getName() + ".Kits.Assasin");
+				p.getUniqueId() + ".Kits.Assasin");
 		boolean KitGodArcherOwned = manager.getData().getBoolean(
-				p.getName() + ".Kits.GodArcher");
+				p.getUniqueId() + ".Kits.GodArcher");
 		boolean KitInsaneOwned = manager.getData().getBoolean(
-				p.getName() + ".Kits.Insane");
+				p.getUniqueId() + ".Kits.Insane");
 		if (KitSpeedyOwned == true) {
 			ItemStack name = new ItemStack(Material.STAINED_GLASS_PANE, 1,
 					(short) 5);

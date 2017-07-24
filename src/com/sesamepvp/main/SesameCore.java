@@ -181,7 +181,6 @@ public class SesameCore extends JavaPlugin implements Listener {
 		getCommand("v").setExecutor(new Vanish());
 		getCommand("gm").setExecutor(new Gamemode());
 		getCommand("gamemode").setExecutor(new Gamemode());
-		getCommand("website").setExecutor(new Website());
 		getCommand("setspawn").setExecutor(new Setspawn());
 		getCommand("spawn").setExecutor(new Spawn());
 		getCommand("feed").setExecutor(new Feed());
@@ -200,6 +199,7 @@ public class SesameCore extends JavaPlugin implements Listener {
 		getCommand("tp").setExecutor(new Teleport());
 		getCommand("setpath").setExecutor(new PathSeter());
 		getCommand("uuid").setExecutor(new FindUUID());
+		getCommand("website").setExecutor(new Website());
 		getCommand("craft").setExecutor(new Workbench());
 		getCommand("quests").setExecutor(new Quest());
 	}

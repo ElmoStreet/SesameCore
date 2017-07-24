@@ -32,14 +32,14 @@ public class StatsManager implements Listener {
 							.getDisplayName()
 							.equalsIgnoreCase(ChatColor.RED + "Close")) {
 				p.closeInventory();
-				p.playSound(p.getLocation(), Sound.BLOCK_NOTE_PLING, 2F, 1F);
+				p.playSound(p.getLocation(), Sound.NOTE_PLING, 2F, 1F);
 
 			}else{
 				if (e.getCurrentItem().getType() == Material.WOOL
 						&& e.getCurrentItem().getItemMeta().getDisplayName()
 								.equalsIgnoreCase(ChatColor.GREEN + "To Kits")) {
 					p.closeInventory();
-					p.playSound(p.getLocation(), Sound.BLOCK_NOTE_PLING, 2F, 1F);
+					p.playSound(p.getLocation(), Sound.NOTE_PLING, 2F, 1F);
 					KitsGUI.gui(p);
 
 				}

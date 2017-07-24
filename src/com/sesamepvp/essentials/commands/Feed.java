@@ -10,7 +10,6 @@ import com.sesamepvp.utilites.Messages;
 
 public class Feed implements CommandExecutor{
 
-	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
 		if(cmd.getName().equalsIgnoreCase("feed")){

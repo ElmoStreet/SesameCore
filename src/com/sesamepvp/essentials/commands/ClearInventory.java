@@ -11,7 +11,6 @@ import com.sesamepvp.utilites.Methods;
 
 public class ClearInventory implements CommandExecutor{
 
-	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
 		if(cmd.getName().equalsIgnoreCase("ci") || cmd.getName().equalsIgnoreCase("clear") || cmd.getName().equalsIgnoreCase("clearinventory")){

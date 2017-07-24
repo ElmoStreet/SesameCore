@@ -11,7 +11,6 @@ import com.sesamepvp.utilites.Messages;
 
 public class Invsee implements CommandExecutor{
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {

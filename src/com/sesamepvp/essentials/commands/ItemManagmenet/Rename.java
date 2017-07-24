@@ -9,8 +9,6 @@ import com.sesamepvp.utilites.Messages;
 import com.sesamepvp.utilites.Methods;
 
 public class Rename implements CommandExecutor{
-
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {

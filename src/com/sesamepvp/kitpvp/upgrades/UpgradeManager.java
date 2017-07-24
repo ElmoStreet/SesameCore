@@ -20,19 +20,19 @@ public class UpgradeManager {
 		
 		Manager manager = Manager.getInstance();
 		boolean KitDefaultUpgraded = manager.getData().getBoolean(
-				p.getName() + ".Kits.Default.Upgraded");
+				p.getUniqueId() + ".Kits.Default.Upgraded");
 		boolean TankKitUpgraded = manager.getData().getBoolean(
-				p.getName() + ".Kits.Tank.Upgraded");
+				p.getUniqueId()+ ".Kits.Tank.Upgraded");
 		boolean ArcherKitUpgraded = manager.getData().getBoolean(
-				p.getName() + ".Kits.Archer.Upgraded");
+				p.getUniqueId() + ".Kits.Archer.Upgraded");
 		boolean PyroKitUpgraded = manager.getData().getBoolean(
-				p.getName() + ".Kits.Pyro.Upgraded");
+				p.getUniqueId() + ".Kits.Pyro.Upgraded");
 		boolean GoldenKitUpgraded = manager.getData().getBoolean(
-				p.getName() + ".Kits.Golden.Upgraded");
+				p.getUniqueId() + ".Kits.Golden.Upgraded");
 		boolean AlchemistKitUpgraded = manager.getData().getBoolean(
-				p.getName() + ".Kits.Alchemist.Upgraded");
+				p.getUniqueId() + ".Kits.Alchemist.Upgraded");
 		boolean FishermanKitUpgraded = manager.getData().getBoolean(
-				p.getName() + ".Kits.Fisherman.Upgraded");
+				p.getUniqueId()+ ".Kits.Fisherman.Upgraded");
 		
 		if (KitDefaultUpgraded == true) {
 			ItemStack defaultkitupgrade = new ItemStack(

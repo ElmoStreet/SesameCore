@@ -27,7 +27,7 @@ public class GoldenUpgraded implements Listener {
 
 			if (e.getCurrentItem().getType() == Material.GOLDEN_APPLE) {
 				boolean GoldenKitUpgraded = this.manager.getData().getBoolean(
-						p.getName() + ".Kits.Golden.Upgraded");
+						p.getUniqueId() + ".Kits.Golden.Upgraded");
 				if (GoldenKitUpgraded == true) {
 
 					p.sendMessage(Messages.kitalreadyOwned());
@@ -36,8 +36,8 @@ public class GoldenUpgraded implements Listener {
 							.transactionSuccess()) {
 						p.sendMessage(Messages.upgraded());
 						this.manager.getData().set(
-								p.getName() + ".Kits.Golden.Upgraded", true);
-						p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 2F, 1F);
+								p.getUniqueId()+ ".Kits.Golden.Upgraded", true);
+						p.playSound(p.getLocation(), Sound.ANVIL_USE, 2F, 1F);
 						this.manager.saveData();
 					} else {
 						p.sendMessage(Messages.insufficientFunds());

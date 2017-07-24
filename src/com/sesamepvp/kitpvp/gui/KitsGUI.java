@@ -292,7 +292,7 @@ public class KitsGUI {
 		kitsGUI.setItem(26, panel);
 		kitsGUI.setItem(35, panel);
 		
-		p.playSound(p.getLocation(), Sound.BLOCK_NOTE_PLING, 2F, 1F);
+		p.playSound(p.getLocation(), Sound.NOTE_PLING, 2F, 1F);
 		p.openInventory(kitsGUI);
 	}
 }

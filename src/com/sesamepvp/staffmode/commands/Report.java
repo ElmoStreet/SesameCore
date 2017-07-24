@@ -24,7 +24,7 @@ public class Report implements CommandExecutor {
 	private HashMap<Player, BukkitRunnable> cooldownTask = new HashMap<Player, BukkitRunnable>();
 	private HashMap<Player, Integer> cooldownTime = new HashMap<Player, Integer>();
 
-	@SuppressWarnings("deprecation")
+	
 	public boolean onCommand(CommandSender sender, Command command,
 			String label, String[] args) {
 		if (command.getName().equalsIgnoreCase("report")) {

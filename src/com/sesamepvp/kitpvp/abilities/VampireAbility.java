@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import com.sesamepvp.utilites.Methods;
 
 public class VampireAbility implements Listener {
-	@SuppressWarnings("deprecation")
+	
 	@EventHandler
 	public void onEntityDamageByEntity(EntityDamageByEntityEvent e) {
 		Player t = (Player) e.getEntity();

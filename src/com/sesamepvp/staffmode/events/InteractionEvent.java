@@ -15,7 +15,7 @@ import com.sesamepvp.staffmode.gui.Inspect;
 
 public class InteractionEvent implements Listener {
 
-	@SuppressWarnings("deprecation")
+	
 	@EventHandler
 	public void onInteractOnPlayer(PlayerInteractEntityEvent e) {
 		Player p = e.getPlayer();
@@ -35,7 +35,7 @@ public class InteractionEvent implements Listener {
 
 	}
 
-	@SuppressWarnings("deprecation")
+	
 	@EventHandler
 	public void onInteract(PlayerInteractEntityEvent e) {
 		Player p = e.getPlayer();

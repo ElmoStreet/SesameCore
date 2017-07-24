@@ -19,7 +19,7 @@ public class TestKillEvents implements Listener {
 		if (manager.getData().getInt(p.getKiller().getName() + ".Kills") == 50) {
 			p.getKiller().sendMessage(Messages.prefix(Methods
 					.format("&aQUESTS: &cYou completed the &cHunter &cQuest!")));
-			manager.getData().set(p.getKiller().getName() + ".Quests.Hunter", true);
+			manager.getData().set(p.getKiller().getUniqueId() + ".Quests.Hunter", true);
 			manager.saveConfig();
 			manager.saveData();
 			SesameCore.econ.depositPlayer(p.getKiller(), 500);
@@ -28,7 +28,7 @@ public class TestKillEvents implements Listener {
 		if (manager.getData().getInt(p.getKiller().getName() + ".Kills") == 500) {
 			p.getKiller().sendMessage(Messages.prefix(Methods
 					.format("&aQUESTS: &cYou completed the &4Bloodthirsty &cQuest!")));
-			manager.getData().set(p.getKiller().getName() + ".Quests.Bloodthirsty", true);
+			manager.getData().set(p.getKiller().getUniqueId()+ ".Quests.Bloodthirsty", true);
 			manager.saveConfig();
 			manager.saveData();
 			SesameCore.econ.depositPlayer(p.getKiller(), 1500);
@@ -37,7 +37,7 @@ public class TestKillEvents implements Listener {
 		if (manager.getData().getInt(p.getKiller().getName() + ".Kills") == 1000) {
 			p.getKiller().sendMessage(Messages.prefix(Methods
 					.format("&aQUESTS: &cYou completed the &5Professional &cQuest!")));
-			manager.getData().set(p.getKiller().getName() + ".Quests.Professional", true);
+			manager.getData().set(p.getKiller().getUniqueId() + ".Quests.Professional", true);
 			manager.saveConfig();
 			manager.saveData();
 			SesameCore.econ.depositPlayer(p.getKiller(), 2500);

@@ -38,7 +38,7 @@ public class Assassin implements Listener {
 
 				} else {
 					boolean KitAssassinOwned = this.manager.getData()
-							.getBoolean(p.getName() + ".Kits.Assasin");
+							.getBoolean(p.getUniqueId() + ".Kits.Assasin");
 					if (KitAssassinOwned == true) {
 						p.getActivePotionEffects().clear();
 						p.getInventory().clear();

@@ -37,7 +37,7 @@ public class Archer implements Listener {
 					return;
 				} else {
 					if (manager.getData().getBoolean(
-							p.getName() + ".Kits.Archer.Upgraded") == true) {
+							p.getUniqueId() + ".Kits.Archer.Upgraded") == true) {
 						p.getInventory().clear();
 						KitListener.kitselected.add(p);
 						p.closeInventory();

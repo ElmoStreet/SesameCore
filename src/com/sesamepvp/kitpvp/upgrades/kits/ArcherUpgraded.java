@@ -28,7 +28,7 @@ public class ArcherUpgraded implements Listener {
 
 			if (e.getCurrentItem().getType() == Material.BOW) {
 				boolean ArcherKitUpgrade = this.manager.getData().getBoolean(
-						p.getName() + ".Kits.Archer.Upgraded");
+						p.getUniqueId()+ ".Kits.Archer.Upgraded");
 				if (ArcherKitUpgrade == true) {
 
 					p.sendMessage(Messages.kitalreadyOwned());
@@ -36,9 +36,9 @@ public class ArcherUpgraded implements Listener {
 					if (SesameCore.econ.withdrawPlayer(p.getName(), 250)
 							.transactionSuccess()) {
 						p.sendMessage(Messages.upgraded());
-						p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 2F, 1F);
+						p.playSound(p.getLocation(), Sound.ANVIL_USE, 2F, 1F);
 						this.manager.getData().set(
-								p.getName() + ".Kits.Archer.Upgraded", true);
+								p.getUniqueId() + ".Kits.Archer.Upgraded", true);
 						this.manager.saveData();
 					} else {
 						p.sendMessage(Messages.insufficientFunds());

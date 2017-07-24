@@ -16,9 +16,9 @@ public class StatsGUI {
 
 	public static void playerStats(Player p) {
 
-		int playerkills = manager.getData().getInt(p.getName() + ".Kills");
-		int playerdeaths = manager.getData().getInt(p.getName() + ".Deaths");
-		String playerrank = manager.getData().getString(p.getName() + ".Rank");
+		int playerkills = manager.getData().getInt(p.getUniqueId() + ".Kills");
+		int playerdeaths = manager.getData().getInt(p.getUniqueId() + ".Deaths");
+		String playerrank = manager.getData().getString(p.getUniqueId() + ".Rank");
 
 		if (playerrank == null) {
 			ItemStack rank = new ItemStack(Material.NAME_TAG, 1);
@@ -89,9 +89,9 @@ public class StatsGUI {
 
 	public static void targetStats(Player p, Player t) {
 
-		int playerkills = manager.getData().getInt(t.getName() + ".Kills");
-		int playerdeaths = manager.getData().getInt(t.getName() + ".Deaths");
-		String playerrank = manager.getData().getString(t.getName() + ".Rank");
+		int playerkills = manager.getData().getInt(t.getUniqueId() + ".Kills");
+		int playerdeaths = manager.getData().getInt(t.getUniqueId() + ".Deaths");
+		String playerrank = manager.getData().getString(t.getUniqueId() + ".Rank");
 
 		if (playerrank == null) {
 			ItemStack rank = new ItemStack(Material.NAME_TAG, 1);

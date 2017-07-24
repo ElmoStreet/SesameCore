@@ -35,7 +35,7 @@ public class Tank implements Listener {
 					return;
 				} else {
 					if (manager.getData().getBoolean(
-							p.getName() + ".Kits.Tank.Upgraded") == true) {
+							p.getUniqueId() + ".Kits.Tank.Upgraded") == true) {
 						p.getInventory().clear();
 						KitListener.kitselected.add(p);
 						p.closeInventory();

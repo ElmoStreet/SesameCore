@@ -14,7 +14,7 @@ import com.sesamepvp.utilites.Methods;
 
 public class ViperAbility implements Listener {
 
-	@SuppressWarnings("deprecation")
+	
 	@EventHandler
 	public void onEntityDamageByEntity(EntityDamageByEntityEvent e) {
 		Player t = (Player) e.getEntity();

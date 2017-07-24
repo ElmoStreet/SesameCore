@@ -38,7 +38,7 @@ public class Burner implements Listener {
 
 				} else {
 					boolean KitBurnerOwned = this.manager.getData().getBoolean(
-							p.getName() + ".Kits.Burner");
+							p.getUniqueId() + ".Kits.Burner");
 					if (KitBurnerOwned == true) {
 						p.getActivePotionEffects().clear();
 						p.getInventory().clear();

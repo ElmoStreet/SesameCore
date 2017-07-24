@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 import com.sesamepvp.utilites.Methods;
 
 public class SlugAbility implements Listener {
-	@SuppressWarnings("deprecation")
+	
 	@EventHandler
 	public void onEntityDamageByEntity(EntityDamageByEntityEvent e) {
 		Player t = (Player) e.getEntity();

@@ -49,12 +49,12 @@ public class SB implements Listener {
 
 			Score score6 = objective.getScore(Methods.format("&4&lRank:"));
 			score6.setScore(6);
-			if (manager1.getData().getString(player.getName() + ".Rank") == null) {
+			if (manager1.getData().getString(player.getUniqueId() + ".Rank") == null) {
 				Score score5 = objective.getScore(Methods.format(" &cNone"));
 				score5.setScore(5);
 			} else {
 				Score score5 = objective
-						.getScore(Methods.format(" &c" + manager1.getData().getString(player.getName() + ".Rank")));
+						.getScore(Methods.format(" &c" + manager1.getData().getString(player.getUniqueId() + ".Rank")));
 				score5.setScore(5);
 			}
 			Score score4 = objective.getScore("");
@@ -64,11 +64,11 @@ public class SB implements Listener {
 			score3.setScore(3);
 
 			Score score2 = objective.getScore(
-					Methods.format(" &cKills:&r&4 " + manager1.getData().getInt(player.getName() + ".Kills")));
+					Methods.format(" &cKills:&r&4 " + manager1.getData().getInt(player.getUniqueId() + ".Kills")));
 			score2.setScore(2);
 
 			Score score1 = objective.getScore(
-					Methods.format(" &cDeaths: &r&4" + manager1.getData().getInt(player.getName() + ".Deaths")));
+					Methods.format(" &cDeaths: &r&4" + manager1.getData().getInt(player.getUniqueId() + ".Deaths")));
 			score1.setScore(1);
 
 			Score score0 = objective.getScore(Methods.format("&8&l&m--------I--------"));
@@ -134,7 +134,7 @@ public class SB implements Listener {
 				score5.setScore(5);
 			} else {
 				Score score5 = objective
-						.getScore(Methods.format(" &c" + manager1.getData().getString(player.getName() + ".Rank")));
+						.getScore(Methods.format(" &c" + manager1.getData().getString(player.getUniqueId() + ".Rank")));
 				score5.setScore(5);
 			}
 			Score score4 = objective.getScore("");
@@ -144,11 +144,11 @@ public class SB implements Listener {
 			score3.setScore(3);
 
 			Score score2 = objective.getScore(
-					Methods.format(" &cKills:&r&4 " + manager1.getData().getInt(player.getName() + ".Kills")));
+					Methods.format(" &cKills:&r&4 " + manager1.getData().getInt(player.getUniqueId() + ".Kills")));
 			score2.setScore(2);
 
 			Score score1 = objective.getScore(
-					Methods.format(" &cDeaths: &r&4" + manager1.getData().getInt(player.getName() + ".Deaths")));
+					Methods.format(" &cDeaths: &r&4" + manager1.getData().getInt(player.getUniqueId() + ".Deaths")));
 			score1.setScore(1);
 
 			Score score0 = objective.getScore(Methods.format("&8&l&m--------I--------"));

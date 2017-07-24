@@ -36,7 +36,7 @@ public class Alchemist implements Listener {
 					return;
 				} else {
 					if (manager.getData().getBoolean(
-							p.getName() + ".Kits.Alchemist.Upgraded") == true) {
+							p.getUniqueId() + ".Kits.Alchemist.Upgraded") == true) {
 						p.getInventory().clear();
 						KitListener.kitselected.add(p);
 						p.closeInventory();

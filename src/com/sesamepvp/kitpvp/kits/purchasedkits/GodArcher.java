@@ -38,7 +38,7 @@ public class GodArcher implements Listener {
 
 				} else {
 					boolean KitGodArcherOwned = this.manager.getData()
-							.getBoolean(p.getName() + ".Kits.GodArcher");
+							.getBoolean(p.getUniqueId() + ".Kits.GodArcher");
 					if (KitGodArcherOwned == true) {
 						p.getActivePotionEffects().clear();
 						p.getInventory().clear();

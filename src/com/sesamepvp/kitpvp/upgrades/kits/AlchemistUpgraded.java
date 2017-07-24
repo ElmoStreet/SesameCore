@@ -28,7 +28,7 @@ public class AlchemistUpgraded implements Listener {
 			e.setCancelled(true);
 			if (e.getCurrentItem().getType() == Material.GLASS_BOTTLE) {
 				boolean AlchemistUpgradeOwned = this.manager.getData().getBoolean(
-						p.getName() + ".Kits.Alchemist.Upgraded");
+						p.getUniqueId() + ".Kits.Alchemist.Upgraded");
 				if (AlchemistUpgradeOwned == true) {
 					p.sendMessage(Messages.kitalreadyOwned());
 				} else {
@@ -36,9 +36,9 @@ public class AlchemistUpgraded implements Listener {
 							.transactionSuccess()) {
 						p.sendMessage(Messages.upgraded());
 						this.manager.getData().set(
-								p.getName() + ".Kits.Alchemist.Upgraded", true);
+								p.getUniqueId() + ".Kits.Alchemist.Upgraded", true);
 						this.manager.saveData();
-						p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 2F, 1F);
+						p.playSound(p.getLocation(), Sound.ANVIL_USE, 2F, 1F);
 					} else {
 						p.sendMessage(Messages.insufficientFunds());
 						return;

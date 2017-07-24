@@ -25,7 +25,7 @@ public class UpgradeClickEvent implements Listener {
 			if (e.getCurrentItem().getType() == Material.WOOL
 					&& e.getCurrentItem().getItemMeta().getDisplayName()
 							.equalsIgnoreCase(ChatColor.GREEN + "Upgrades")) {
-				p.playSound(p.getLocation(), Sound.BLOCK_NOTE_PLING, 2F, 1F);
+				p.playSound(p.getLocation(), Sound.NOTE_PLING, 2F, 1F);
 				p.closeInventory();
 				UpgradeManager.upgradeGUI(p);
 			} else {
@@ -33,7 +33,7 @@ public class UpgradeClickEvent implements Listener {
 						&& e.getCurrentItem().getItemMeta().getDisplayName()
 								.equalsIgnoreCase(ChatColor.GREEN + "Kit Shop")) {
 					p.closeInventory();
-					p.playSound(p.getLocation(), Sound.BLOCK_NOTE_PLING, 2F, 1F);
+					p.playSound(p.getLocation(), Sound.NOTE_PLING, 2F, 1F);
 					KitShopGUI.openKitshop(p);
 
 				} else {
@@ -42,7 +42,7 @@ public class UpgradeClickEvent implements Listener {
 									.getDisplayName()
 									.equalsIgnoreCase(ChatColor.RED + "Close")) {
 						p.closeInventory();
-						p.playSound(p.getLocation(), Sound.BLOCK_NOTE_PLING, 2F, 1F);
+						p.playSound(p.getLocation(), Sound.NOTE_PLING, 2F, 1F);
 
 					}
 
@@ -57,14 +57,14 @@ public class UpgradeClickEvent implements Listener {
 								.equalsIgnoreCase(
 										ChatColor.GREEN + "To Kit Shop")) {
 					p.closeInventory();
-					p.playSound(p.getLocation(), Sound.BLOCK_NOTE_PLING, 2F, 1F);
+					p.playSound(p.getLocation(), Sound.NOTE_PLING, 2F, 1F);
 					KitShopGUI.openKitshop(p);
 				}
 				if (e.getCurrentItem().getType() == Material.WOOL
 						&& e.getCurrentItem().getItemMeta().getDisplayName()
 								.equalsIgnoreCase(ChatColor.GREEN + "To Kits")) {
 					p.closeInventory();
-					p.playSound(p.getLocation(), Sound.BLOCK_NOTE_PLING, 2F, 1F);
+					p.playSound(p.getLocation(), Sound.NOTE_PLING, 2F, 1F);
 					KitsGUI.gui(p);
 
 				} else {
@@ -77,7 +77,7 @@ public class UpgradeClickEvent implements Listener {
 										.equalsIgnoreCase(
 												ChatColor.RED + "Close")) {
 							p.closeInventory();
-							p.playSound(p.getLocation(), Sound.BLOCK_NOTE_PLING, 2F,
+							p.playSound(p.getLocation(), Sound.NOTE_PLING, 2F,
 									1F);
 
 						}

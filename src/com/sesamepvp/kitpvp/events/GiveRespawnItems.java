@@ -1,7 +1,6 @@
 package com.sesamepvp.kitpvp.events;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,9 +26,6 @@ public class GiveRespawnItems implements Listener {
 	public void onJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
 		e.setJoinMessage(Messages.joinMessage(p));
-		Location spawnLocation = (Location) this.manager.getData().get("Spawn");
-		p.teleport(spawnLocation);
-
 		p.getInventory().clear();
 		p.getActivePotionEffects().clear();
 
@@ -78,7 +74,7 @@ public class GiveRespawnItems implements Listener {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
+	
 	@EventHandler
 	public void onInteract(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
@@ -92,7 +88,7 @@ public class GiveRespawnItems implements Listener {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
+	
 	@EventHandler
 	public void onInteraction(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
