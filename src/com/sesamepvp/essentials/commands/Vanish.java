@@ -6,8 +6,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.sesamepvp.staffmode.StaffmodeManager;
 import com.sesamepvp.utilites.Messages;
-import com.sesamepvp.utilites.Methods;
 
 public class Vanish implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
@@ -17,14 +17,14 @@ public class Vanish implements CommandExecutor {
 			if (sender instanceof Player) {
 				if (p.hasPermission("core.vanish") || p.isOp()) {
 					if (args.length == 0) {
-						if (Methods.vanish.contains(p)) {
-							Methods.vanish.remove(p);
-							Methods.Vanish(p);
+						if (StaffmodeManager.vanish.contains(p)) {
+							StaffmodeManager.vanish.remove(p);
+							StaffmodeManager.Vanish(p);
 							p.sendMessage(Messages.vanishDisabled());
 						} else {
-							if (!(Methods.vanish.contains(p))) {
-								Methods.vanish.add(p);
-								Methods.Vanish(p);
+							if (!(StaffmodeManager.vanish.contains(p))) {
+								StaffmodeManager.vanish.add(p);
+								StaffmodeManager.Vanish(p);
 								p.sendMessage(Messages.vanishEnabled());
 							}
 						}
@@ -33,16 +33,16 @@ public class Vanish implements CommandExecutor {
 						if (target == null) {
 							p.sendMessage(Messages.playerNull());
 						} else {
-							if (Methods.vanish.contains(target)) {
-								Methods.vanish.remove(target);
-								Methods.Vanish(target);
+							if (StaffmodeManager.vanish.contains(target)) {
+								StaffmodeManager.vanish.remove(target);
+								StaffmodeManager.Vanish(target);
 								p.sendMessage(Messages
 										.targetVanishDisabled(target));
 								target.sendMessage(Messages.vanishDisabled());
 							} else {
-								if (!(Methods.vanish.contains(target))) {
-									Methods.vanish.add(target);
-									Methods.Vanish(target);
+								if (!(StaffmodeManager.vanish.contains(target))) {
+									StaffmodeManager.vanish.add(target);
+									StaffmodeManager.Vanish(target);
 									p.sendMessage(Messages
 											.targetVanishEnabled(target));
 									target.sendMessage(Messages.vanishEnabled());

@@ -9,14 +9,14 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 import com.sesamepvp.kitpvp.managers.KitListener;
+import com.sesamepvp.staffmode.StaffmodeManager;
 import com.sesamepvp.utilites.Messages;
-import com.sesamepvp.utilites.Methods;
 
 public class Alchemist implements Listener {
 
-	Manager manager = Manager.getInstance();
+	KitpvpFile manager = KitpvpFile.getInstance();
 
 	@EventHandler
 	public void onInventoryClickEvent(InventoryClickEvent e) {
@@ -47,7 +47,7 @@ public class Alchemist implements Listener {
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.INVISIBILITY, 40000, 2));
 						p.closeInventory();
-						Methods.alchemist.add(p);
+						StaffmodeManager.alchemist.add(p);
 					} else {
 						p.getInventory().clear();
 						KitListener.kitselected.add(p);
@@ -59,7 +59,7 @@ public class Alchemist implements Listener {
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.INVISIBILITY, 40000, 2));
 						p.closeInventory();
-						Methods.alchemist.add(p);
+						StaffmodeManager.alchemist.add(p);
 					}
 				}
 			}

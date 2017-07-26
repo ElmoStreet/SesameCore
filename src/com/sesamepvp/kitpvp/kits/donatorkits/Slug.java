@@ -8,14 +8,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 import com.sesamepvp.kitpvp.managers.KitListener;
+import com.sesamepvp.staffmode.StaffmodeManager;
 import com.sesamepvp.utilites.Messages;
-import com.sesamepvp.utilites.Methods;
 
 public class Slug implements Listener {
 
-	Manager manager = Manager.getInstance();
+	KitpvpFile manager = KitpvpFile.getInstance();
 
 	@EventHandler
 	public void onInventoryClickEvent(InventoryClickEvent e) {
@@ -50,7 +50,7 @@ public class Slug implements Listener {
 								new ItemStack(Material.LEATHER_CHESTPLATE));
 						p.getInventory().setBoots(
 								new ItemStack(Material.DIAMOND_BOOTS));
-						Methods.slug.add(p);
+						StaffmodeManager.slug.add(p);
 					}
 				} else {
 					e.getWhoClicked().sendMessage(Messages.noPermission());

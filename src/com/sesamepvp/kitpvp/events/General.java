@@ -19,14 +19,15 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 import com.sesamepvp.kitpvp.managers.KitListener;
+import com.sesamepvp.staffmode.StaffmodeManager;
 import com.sesamepvp.utilites.Messages;
 import com.sesamepvp.utilites.Methods;
 
 public class General implements Listener {
 
-	Manager manager = Manager.getInstance();
+	KitpvpFile manager = KitpvpFile.getInstance();
 
 	@EventHandler
 	public void onMove(PlayerMoveEvent e) {
@@ -36,7 +37,7 @@ public class General implements Listener {
 	@EventHandler
 	public void onLeave1(PlayerQuitEvent e) {
 		Player p = e.getPlayer();
-		Methods.removeArrayLists(p);
+		StaffmodeManager.removeArrayLists(p);
 	}
 
 	
@@ -45,7 +46,7 @@ public class General implements Listener {
 
 		Player p = e.getPlayer();
 
-		Methods.removeArrayLists(p);
+		StaffmodeManager.removeArrayLists(p);
 		
 		this.manager.getData().set(p.getUniqueId()+".Username", p.getName());
 		this.manager.saveData();
@@ -122,7 +123,7 @@ public class General implements Listener {
 		if (KitListener.kitselected.contains(p)) {
 			KitListener.kitselected.remove(p);
 		}
-		Methods.removeArrayLists(p);
+		StaffmodeManager.removeArrayLists(p);
 	}
 
 	@EventHandler

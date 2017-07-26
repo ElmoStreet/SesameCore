@@ -3,68 +3,56 @@ package com.sesamepvp.utilites;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-import com.sesamepvp.main.SesameCore;
+import com.sesamepvp.files.MessageFile;
+import com.sesamepvp.staffmode.StaffmodeManager;
 
 public class Messages {
-	static SesameCore plugin;
-	
-	public Messages(SesameCore instance) {
-		plugin = instance;
-	}
-
+	static MessageFile msgconfig = MessageFile.getInstance();
 	public static String prefix(String txt) {
-		String prefix = "§c§lSesame§f§lPvP §8>> §r";
-		return prefix + txt;
-
+		String prefix = StaffmodeManager.format(msgconfig.getData().getString("prefix"));
+		return prefix + "" + txt;
 	}
 
 	public static String noPermission() {
-		String noPermission = "§cYou do not have permission for this.";
+		//String noPermission = "§cYou do not have permission for this.";
+		String noPermission = StaffmodeManager.format(msgconfig.getData().getString("nopermission"));
 		return prefix(noPermission);
 	}
-
+	
 	public static String notPlayer() {
-		String notPlayer = "§cYou must be a player to execute this command.";
+		//String notPlayer = "§cYou must be a player to execute this command.";
+		String notPlayer = StaffmodeManager.format(msgconfig.getData().getString("notPlayer"));
 		return prefix(notPlayer);
 	}
 
 	public static String modDisabled() {
-		String modDisabled = "§cYou have left §4Staff §cmode.";
+		//String modDisabled = "§cYou have left §4Staff §cmode.";
+		String modDisabled = StaffmodeManager.format(msgconfig.getData().getString("staffmode.disabled"));
 		return prefix(modDisabled);
 	}
 
 	public static String modEnabled() {
-		String modEnabled = "§aYou have entered §2Staff §amode.";
+		String modEnabled = StaffmodeManager.format(msgconfig.getData().getString("staffmode.enabled"));
 		return prefix(modEnabled);
 	}
 
 	public static String mustleaveMod() {
-		String mustleaveMod = "§cYou must leave §4Staff §cmode to do this.";
+		String mustleaveMod = StaffmodeManager.format(msgconfig.getData().getString("staffmode.mustleavemod"));
 		return prefix(mustleaveMod);
 	}
 
-	public static String staffJoin(Player p) {
-		String staffJoin = "§aStaff Member §3" + p.getName() + " §has joined.";
-		return prefix(staffJoin);
-	}
-
-	public static String staffQuit(Player p) {
-		String staffQuit = "§cStaff Member §4" + p.getName() + " §has left.";
-		return prefix(staffQuit);
-	}
-
 	public static String noitemDrop() {
-		String noitemDrop = "§cYou are not allowed to drop this item in §4Staff §cmode.";
+		String noitemDrop = StaffmodeManager.format(msgconfig.getData().getString("staffmode.noitemdrop"));
 		return prefix(noitemDrop);
 	}
 
 	public static String noBlockPlace() {
-		String noBlockPlace = "§cYou are not allowed to place this block in §4Staff §cmode.";
+		String noBlockPlace = StaffmodeManager.format(msgconfig.getData().getString("staffmode.noblockplace"));
 		return prefix(noBlockPlace);
 	}
 
 	public static String noDamage() {
-		String noDamage = "§cYou are not allowed to attack in §4Staff §cmode.";
+		String noDamage = StaffmodeManager.format(msgconfig.getData().getString("staffmode.nodamage"));
 		return prefix(noDamage);
 	}
 
@@ -74,7 +62,7 @@ public class Messages {
 	}
 
 	public static String playerNull() {
-		String playerNull = "§cThat player is either offline or doesn't exist.";
+		String playerNull = StaffmodeManager.format(msgconfig.getData().getString("playernull"));
 		return prefix(playerNull);
 	}
 
@@ -101,32 +89,32 @@ public class Messages {
 	}
 
 	public static String playerFrozen() {
-		String playerFrozen = "§cYou have been frozen. Please coordinate with the staff member.";
+		String playerFrozen = StaffmodeManager.format(msgconfig.getData().getString("staffmode.frozen"));
 		return prefix(playerFrozen);
 	}
 
 	public static String talkDenied() {
-		String talkDenied = "§cYou can't talk, chat is currently muted.";
+		String talkDenied = StaffmodeManager.format(msgconfig.getData().getString("chat.talkdenied"));
 		return prefix(talkDenied);
 	}
 
 	public static String chatMuted() {
-		String chatMuted = " §4| §cChat is now muted §4| ";
+		String chatMuted = StaffmodeManager.format(msgconfig.getData().getString("chat.muted"));
 		return prefix(chatMuted);
 	}
 
 	public static String chatUnmuted() {
-		String chatunMuted = " §2| §aChat is now unmuted §2| ";
+		String chatunMuted = StaffmodeManager.format(msgconfig.getData().getString("chat.unmuted"));
 		return prefix(chatunMuted);
 	}
 
 	public static String chatClear() {
-		String chatClear = "§aThe chat has been §2Cleared §a.";
+		String chatClear = StaffmodeManager.format(msgconfig.getData().getString("chat.clear"));
 		return prefix(chatClear);
 	}
 
 	public static String notenoughPlayers() {
-		String notenoughPlayers = "§cThere are not enough §4players §conline.";
+		String notenoughPlayers = StaffmodeManager.format(msgconfig.getData().getString("staffmode.notenoughplayers"));
 		return prefix(notenoughPlayers);
 	}
 
@@ -137,22 +125,22 @@ public class Messages {
 	}
 
 	public static String flightEnabled() {
-		String flightEnabled = "§aFlight has been §2Enabled§a.";
+		String flightEnabled = StaffmodeManager.format(msgconfig.getData().getString("staffmode.flight.enabled"));
 		return prefix(flightEnabled);
 	}
 
 	public static String flightDisabled() {
-		String flightDisabled = "§cFlight has been §4Disabled§c.";
+		String flightDisabled = StaffmodeManager.format(msgconfig.getData().getString("staffmode.flight.disabled"));
 		return prefix(flightDisabled);
 	}
 
 	public static String vanishEnabled() {
-		String vanishEnabled = "§aVanish has been §2Enabled§a.";
+		String vanishEnabled = StaffmodeManager.format(msgconfig.getData().getString("staffmode.vanish.enabled"));
 		return prefix(vanishEnabled);
 	}
 
 	public static String vanishDisabled() {
-		String vanishDisabled = "§cVanish has been §4Disabled§c.";
+		String vanishDisabled = StaffmodeManager.format(msgconfig.getData().getString("staffmode.flight.disabled"));
 		return prefix(vanishDisabled);
 	}
 
@@ -168,37 +156,37 @@ public class Messages {
 	}
 
 	public static String purchasedSpeedyKit() {
-		String purchasedSpeedyKit = "§cYou have purchased the §aSpeedy§c kit.";
+		String purchasedSpeedyKit = StaffmodeManager.format(msgconfig.getData().getString("kitpvp.purchasedkit.speedy"));
 		return prefix(purchasedSpeedyKit);
 	}
 
 	public static String purchasedInsaneKit() {
-		String purchasedInsaneKit = "§cYou have purchased the §aInsane§c kit.";
+		String purchasedInsaneKit = StaffmodeManager.format(msgconfig.getData().getString("kitpvp.purchasedkit.insane"));
 		return prefix(purchasedInsaneKit);
 	}
 
 	public static String purchasedAssassinKit() {
-		String purchasedAssassinKit = "§cYou have purchased the §aAssassin§c kit.";
+		String purchasedAssassinKit = StaffmodeManager.format(msgconfig.getData().getString("kitpvp.purchasedkit.assassin"));
 		return prefix(purchasedAssassinKit);
 	}
 
 	public static String purchasedGodArcherKit() {
-		String purchasedGodArcherKit = "§cYou have purchased the §aGod Archer§c kit.";
+		String purchasedGodArcherKit = StaffmodeManager.format(msgconfig.getData().getString("kitpvp.purchasedkit.godarcher"));
 		return prefix(purchasedGodArcherKit);
 	}
 
 	public static String purchasedBurnerKit() {
-		String purchasedBurnerKit = "§cYou have purchased the §aBurner§c kit.";
+		String purchasedBurnerKit = StaffmodeManager.format(msgconfig.getData().getString("kitpvp.purchasedkit.burner"));
 		return prefix(purchasedBurnerKit);
 	}
 
 	public static String kitalreadyOwned() {
-		String kitalreadyOwned = "§cYou already own that kit.";
+		String kitalreadyOwned = StaffmodeManager.format(msgconfig.getData().getString("kitpvp.kits.alreadyowned"));
 		return prefix(kitalreadyOwned);
 	}
 
 	public static String insufficientFunds() {
-		String insufficientFunds = "§cYou do not have enough funds for this.";
+		String insufficientFunds = StaffmodeManager.format(msgconfig.getData().getString("eco.insufficientfunds"));
 		return prefix(insufficientFunds);
 	}
 
@@ -228,62 +216,57 @@ public class Messages {
 	}
 
 	public static String openKitShop() {
-		String openKitShop = "§aOpening the kit shop!";
+		String openKitShop = StaffmodeManager.format(msgconfig.getData().getString("kitpvp.gui.openingkitshop"));
 		return prefix(openKitShop);
 	}
 
 	public static String ranks() {
-		String ranks = "§aRanks:";
+		String ranks = StaffmodeManager.format(msgconfig.getData().getString("kitpvp.ranks.rank"));
 		return prefix(ranks);
 	}
 
 	public static String Warrior() {
-		String warrior = "§aWarrior: 150 kills.";
+		String warrior = StaffmodeManager.format(msgconfig.getData().getString("kitpvp.ranks.warrior"));
 		return prefix(warrior);
 	}
 
 	public static String Gladiator() {
-		String Gladiator = "§aGladiator: 350 kills.";
+		String Gladiator = StaffmodeManager.format(msgconfig.getData().getString("kitpvp.ranks.gladiator"));
 		return prefix(Gladiator);
 	}
 
 	public static String Guardian() {
-		String Guardian = "§aGuardian: 750 kills.";
+		String Guardian = StaffmodeManager.format(msgconfig.getData().getString("kitpvp.ranks.guardian"));
 		return prefix(Guardian);
 	}
 
 	public static String Berserk() {
-		String Berserk = "§aBerserk: 1250 kills.";
+		String Berserk = StaffmodeManager.format(msgconfig.getData().getString("kitpvp.ranks.berserk"));
 		return prefix(Berserk);
 	}
 
 	public static String Legend() {
-		String Legend = "§aLegend: 1750 kills.";
+		String Legend = StaffmodeManager.format(msgconfig.getData().getString("kitpvp.ranks.legend"));
 		return prefix(Legend);
 	}
 
 	public static String DemiGod() {
-		String DemiGod = "§aDemi God: 2250 kills.";
+		String DemiGod = StaffmodeManager.format(msgconfig.getData().getString("kitpvp.ranks.demigod"));
 		return prefix(DemiGod);
 	}
 
 	public static String God() {
-		String God = "§aGod: 3500 kills.";
+		String God = StaffmodeManager.format(msgconfig.getData().getString("kitpvp.ranks.god"));
 		return prefix(God);
 	}
 
-	public static String kitpvpUsage() {
-		String kitpvpUsage = "§cUsage: /kitpvp <reload,setspawn,ranks>";
-		return prefix(kitpvpUsage);
-	}
-
 	public static String dataReloaded() {
-		String datareloaded = "§aData.yml has been reloaded";
+		String datareloaded = "§aCore has been reloaded";
 		return prefix(datareloaded);
 	}
 
 	public static String spawnSet() {
-		String spawnset = "§aSpawn has been set";
+		String spawnset = StaffmodeManager.format(msgconfig.getData().getString("spawn.set"));
 		return prefix(spawnset);
 	}
 
@@ -301,7 +284,7 @@ public class Messages {
 
 	public static String reachedgladiatorrank(Player k) {
 		String reachedgladiatorrank = "§c" + k.getName()
-				+ " &ahas reached the §1Warrior §arank!";
+				+ " &ahas reached the §1Gladiator §arank!";
 		return prefix(reachedgladiatorrank);
 	}
 
@@ -347,12 +330,12 @@ public class Messages {
 	}
 
 	public static String kitSelected() {
-		String kitselected = "§cKit already selected.";
+		String kitselected = StaffmodeManager.format(msgconfig.getData().getString("kitpvp.kits.alreadyselected"));
 		return prefix(kitselected);
 	}
 
 	public static String kitnotOwned() {
-		String kitnotowned = "§cYou do not own this kit.";
+		String kitnotowned = StaffmodeManager.format(msgconfig.getData().getString("kitpvp.kits.notowned"));
 		return prefix(kitnotowned);
 	}
 
@@ -360,16 +343,6 @@ public class Messages {
 		String quitmessage = "§8[§c-§8] §2" + p.getName()
 				+ "§c has left the server.";
 		return prefix(quitmessage);
-	}
-
-	public static String onEnable() {
-		String onEnable = "§aSesame Core has been enabled!";
-		return prefix(onEnable);
-	}
-
-	public static String onDisable() {
-		String onDisable = "§cSesame Core has been disabled!";
-		return prefix(onDisable);
 	}
 
 	public static String targetFlightEnabled(Player target) {
@@ -393,22 +366,22 @@ public class Messages {
 	}
 
 	public static String gamemodeCreative() {
-		String gamemodeCreative = "§aGamemode set to §2Creative";
+		String gamemodeCreative = StaffmodeManager.format(msgconfig.getData().getString("gamemode.creative"));
 		return prefix(gamemodeCreative);
 	}
 	
 	public static String gamemodeSurvival() {
-		String gamemodeSurvival = "§aGamemode set to §2Survival";
+		String gamemodeSurvival = StaffmodeManager.format(msgconfig.getData().getString("gamemode.survival"));
 		return prefix(gamemodeSurvival);
 	}
 	
 	public static String gamemodeAdventure() {
-		String gamemodeAdventure = "§aGamemode set to §2Adventure";
+		String gamemodeAdventure = StaffmodeManager.format(msgconfig.getData().getString("gamemode.adventure"));
 		return prefix(gamemodeAdventure);
 	}
 	
 	public static String gamemodeSpectator() {
-		String gamemodeSpectator = "§aGamemode set to §2Spectator";
+		String gamemodeSpectator = StaffmodeManager.format(msgconfig.getData().getString("gamemode.spectator"));
 		return prefix(gamemodeSpectator);
 	}
 
@@ -418,12 +391,12 @@ public class Messages {
 	}
 
 	public static String teleportedtoSpawn() {
-		String teleportedtospawn = "§aYou have teleported to Spawn.";
+		String teleportedtospawn = StaffmodeManager.format(msgconfig.getData().getString("spawn.teleportedto"));
 		return prefix(teleportedtospawn);
 	}
 
 	public static String spawnUsage() {
-		String spawnUage = "§cUsage: /spawn   or  /spawn <player>";
+		String spawnUage = "§cUsage: /spawn or /spawn <player>";
 		return prefix(spawnUage);
 	}
 
@@ -433,7 +406,7 @@ public class Messages {
 	}
 
 	public static String feed() {
-		String s = "§aYou have been fed.";
+		String s = StaffmodeManager.format(msgconfig.getData().getString("health.feed"));
 		return prefix(s);
 	}
 	
@@ -448,7 +421,7 @@ public class Messages {
 	}
 	
 	public static String healed() {
-		String s = "§aYou have been healed.";
+		String s = StaffmodeManager.format(msgconfig.getData().getString("health.healed"));
 		return prefix(s);
 	}
 
@@ -463,7 +436,7 @@ public class Messages {
 	}
 
 	public static String clearedInventory() {
-		String s = "§aYou have cleared you're inventory.";
+		String s = StaffmodeManager.format(msgconfig.getData().getString("inventory.clear"));
 		return prefix(s);
 	}
 
@@ -474,16 +447,6 @@ public class Messages {
 
 	public static String clearinventoryUsage() {
 		String s = "§cUsage: /ci  or /ci <player>";
-		return prefix(s);
-	}
-
-	public static String setwarpUsage() {
-		String s = "§cUsage: /setwarp <warpname>";
-		return prefix(s);
-	}
-
-	public static String warpUsage() {
-		String s = "§cUsage: /warp <warpname>";
 		return prefix(s);
 	}
 
@@ -513,12 +476,12 @@ public class Messages {
 	}
 
 	public static String closedInventory() {
-		String s = "§cClosed Upgrades Menu.";
+		String s = StaffmodeManager.format(msgconfig.getData().getString("kitpvp.gui.closedinventory"));
 		return prefix(s);
 	}
 
 	public static String upgraded() {
-		String s = "§aYou have successfully upgraded a kit!";
+		String s = StaffmodeManager.format(msgconfig.getData().getString("kitpvp.kits.upgraded"));
 		return prefix(s);
 	}
 
@@ -526,18 +489,8 @@ public class Messages {
 		String s = "§aYou have reset §2" + t.getName()+"'s §astats.";
 		return prefix(s);
 	}
-	
-	public static String anticheatPrefix(){
-		String s = "§c§lSesame §f§lAntiCheat §8 : §r";
-		return s;
-	}
-
 	public static String nullItem() {
 		String s = "§cThere is nothing in your hand!";
 		return s;
 	}
-	
-	
-	
-	
 }

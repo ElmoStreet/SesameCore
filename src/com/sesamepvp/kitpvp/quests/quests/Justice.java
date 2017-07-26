@@ -9,13 +9,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.sesamepvp.kitpvp.quests.managers.QuestManager;
-import com.sesamepvp.utilites.Methods;
+import com.sesamepvp.staffmode.StaffmodeManager;
 
 public class Justice implements QuestManager {
 
 	@Override
 	public String getName() {
-		return Methods.format("Justice");
+		return StaffmodeManager.format("Justice");
 	}
 
 	@Override
@@ -26,12 +26,12 @@ public class Justice implements QuestManager {
 
 	@Override
 	public String getDisplayName() {
-		return Methods.format("&1Justice");
+		return StaffmodeManager.format("&1Justice");
 	}
 
 	@Override
 	public String getLore() {
-		return Methods.format("&bUnlock God kit and all the kits below it!");
+		return StaffmodeManager.format("&bUnlock God kit and all the kits below it!");
 	}
 	
 
@@ -56,7 +56,7 @@ public class Justice implements QuestManager {
 	
 	@Override
 	public String getReward(){
-		return Methods.format("&aReward: &2$&a2500");
+		return StaffmodeManager.format("&aReward: &2$&a2500");
 	}
 
 }

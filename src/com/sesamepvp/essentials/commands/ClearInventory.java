@@ -6,8 +6,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.sesamepvp.staffmode.StaffmodeManager;
 import com.sesamepvp.utilites.Messages;
-import com.sesamepvp.utilites.Methods;
 
 public class ClearInventory implements CommandExecutor{
 
@@ -20,7 +20,7 @@ public class ClearInventory implements CommandExecutor{
 					if(args.length == 0){
 						p.sendMessage(Messages.clearedInventory());
 						p.getInventory().clear();
-						Methods.clearArmor(p);
+						StaffmodeManager.clearArmor(p);
 					}else{
 						if(args.length == 1){
 							Player t = Bukkit.getServer().getPlayer(args[0]);
@@ -28,7 +28,7 @@ public class ClearInventory implements CommandExecutor{
 								p.sendMessage(Messages.playerNull());
 							}else{
 								t.getInventory().clear();
-								Methods.clearArmor(t);
+								StaffmodeManager.clearArmor(t);
 								t.sendMessage(Messages.clearedInventory());
 								p.sendMessage(Messages.playerClearedInventory(t));
 							}

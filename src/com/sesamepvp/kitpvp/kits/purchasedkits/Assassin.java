@@ -10,14 +10,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 import com.sesamepvp.kitpvp.managers.KitListener;
+import com.sesamepvp.staffmode.StaffmodeManager;
 import com.sesamepvp.utilites.Messages;
-import com.sesamepvp.utilites.Methods;
 
 public class Assassin implements Listener {
 
-	Manager manager = Manager.getInstance();
+	KitpvpFile manager = KitpvpFile.getInstance();
 
 	@EventHandler
 	public void InventoryClickEvent(InventoryClickEvent event) {
@@ -59,7 +59,7 @@ public class Assassin implements Listener {
 								PotionEffectType.SPEED, 40000, 3));
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.INCREASE_DAMAGE, 40000, 0));
-						Methods.assassin.add(p);
+						StaffmodeManager.assassin.add(p);
 					} else {
 						if (KitAssassinOwned == false) {
 							event.setCancelled(true);

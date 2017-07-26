@@ -11,12 +11,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 import com.sesamepvp.kitpvp.gui.KitsGUI;
-import com.sesamepvp.utilites.Methods;
+import com.sesamepvp.staffmode.StaffmodeManager;
 
 public class StatsManager implements Listener {
-	Manager manager = Manager.getInstance();
+	KitpvpFile manager = KitpvpFile.getInstance();
 	private ArrayList<Player> chattester = new ArrayList<Player>();
 
 	@EventHandler
@@ -53,7 +53,7 @@ public class StatsManager implements Listener {
 		String msg = e.getMessage();
 
 		if (chattester.contains(p)) {
-			Methods.cmd("setpath int " + p.getName() + ".Kills"
+			StaffmodeManager.cmd("setpath int " + p.getName() + ".Kills"
 					+ Integer.parseInt(msg));
 			manager.saveData();
 			manager.reloadData();

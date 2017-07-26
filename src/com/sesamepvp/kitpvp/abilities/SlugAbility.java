@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.sesamepvp.utilites.Methods;
+import com.sesamepvp.staffmode.StaffmodeManager;
 
 public class SlugAbility implements Listener {
 	
@@ -25,7 +25,7 @@ public class SlugAbility implements Listener {
 			if (e.getDamager().getType() == EntityType.PLAYER) {
 				Player p = (Player) e.getDamager();
 				if (p.getItemInHand().getType() == Material.DIAMOND_SWORD) {
-					if (Methods.slug.contains(p)) {
+					if (StaffmodeManager.slug.contains(p)) {
 
 						PotionEffect potionEffect = new PotionEffect(
 								PotionEffectType.SLOW, 30, 3);

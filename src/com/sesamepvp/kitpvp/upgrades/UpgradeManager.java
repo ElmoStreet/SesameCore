@@ -11,14 +11,14 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 
 public class UpgradeManager {
 	static Inventory kitsGUI = Bukkit.createInventory(null, 36, "Kit Upgrades");
 
 	public static void upgradeGUI(Player p) {
 		
-		Manager manager = Manager.getInstance();
+		KitpvpFile manager = KitpvpFile.getInstance();
 		boolean KitDefaultUpgraded = manager.getData().getBoolean(
 				p.getUniqueId() + ".Kits.Default.Upgraded");
 		boolean TankKitUpgraded = manager.getData().getBoolean(

@@ -5,11 +5,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 import com.sesamepvp.utilites.Messages;
 
 public class Sesame implements CommandExecutor {
-	Manager manager = Manager.getInstance();
+	KitpvpFile manager = KitpvpFile.getInstance();
 
 	private void helpPage1(Player p) {
 		p.sendMessage("§8§m-------  §c§lSesame §f§lHelp§8§m-------");

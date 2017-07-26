@@ -8,14 +8,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 import com.sesamepvp.kitpvp.managers.KitListener;
+import com.sesamepvp.staffmode.StaffmodeManager;
 import com.sesamepvp.utilites.Messages;
-import com.sesamepvp.utilites.Methods;
 
 public class Pyro implements Listener {
 
-	Manager manager = Manager.getInstance();
+	KitpvpFile manager = KitpvpFile.getInstance();
 
 	@EventHandler
 	public void onInventoryClickEvent(InventoryClickEvent e) {
@@ -52,7 +52,7 @@ public class Pyro implements Listener {
 						p.getInventory().setBoots(
 								new ItemStack(Material.CHAINMAIL_BOOTS));
 						p.closeInventory();
-						Methods.pyro.add(p);
+						StaffmodeManager.pyro.add(p);
 					} else {
 						p.getInventory().clear();
 						KitListener.kitselected.add(p);
@@ -70,7 +70,7 @@ public class Pyro implements Listener {
 						p.getInventory().setBoots(
 								new ItemStack(Material.CHAINMAIL_BOOTS));
 						p.closeInventory();
-						Methods.pyro.add(p);
+						StaffmodeManager.pyro.add(p);
 					}
 				}
 			}

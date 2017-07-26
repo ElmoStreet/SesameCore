@@ -10,13 +10,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 import com.sesamepvp.kitpvp.managers.KitListener;
+import com.sesamepvp.staffmode.StaffmodeManager;
 import com.sesamepvp.utilites.Messages;
-import com.sesamepvp.utilites.Methods;
 
 public class Tank implements Listener {
-	Manager manager = Manager.getInstance();
+	KitpvpFile manager = KitpvpFile.getInstance();
 
 	@EventHandler
 	public void onInventoryClickEvent(InventoryClickEvent e) {
@@ -54,7 +54,7 @@ public class Tank implements Listener {
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.SLOW, 40000, 0));
 						p.closeInventory();
-						Methods.tank.add(p);
+						StaffmodeManager.tank.add(p);
 					} else {
 
 						p.getInventory().clear();
@@ -75,7 +75,7 @@ public class Tank implements Listener {
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.SLOW, 40000, 1));
 						p.closeInventory();
-						Methods.tank.add(p);
+						StaffmodeManager.tank.add(p);
 					}
 				}
 			}

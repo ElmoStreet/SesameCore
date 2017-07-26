@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.sesamepvp.utilites.Methods;
+import com.sesamepvp.staffmode.StaffmodeManager;
 
 public class ViperAbility implements Listener {
 
@@ -26,7 +26,7 @@ public class ViperAbility implements Listener {
 			if(e.getDamager().getType() == EntityType.PLAYER){
 				Player p= (Player) e.getDamager();
 				if (p.getItemInHand().getType() == Material.DIAMOND_SWORD) {
-					if(Methods.viper.contains(p)){
+					if(StaffmodeManager.viper.contains(p)){
 
 						PotionEffect potionEffect = new PotionEffect(PotionEffectType.POISON, 30, 1);
 																									

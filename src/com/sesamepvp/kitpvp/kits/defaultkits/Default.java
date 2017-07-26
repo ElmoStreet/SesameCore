@@ -8,13 +8,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 import com.sesamepvp.kitpvp.managers.KitListener;
+import com.sesamepvp.staffmode.StaffmodeManager;
 import com.sesamepvp.utilites.Messages;
-import com.sesamepvp.utilites.Methods;
 
 public class Default implements Listener {
-	Manager manager = Manager.getInstance();
+	KitpvpFile manager = KitpvpFile.getInstance();
 
 	@EventHandler
 	public void onInventoryClickEvent(InventoryClickEvent e) {
@@ -49,7 +49,7 @@ public class Default implements Listener {
 						p.getInventory().setBoots(
 								new ItemStack(Material.IRON_BOOTS));
 						p.closeInventory();
-						Methods.pvp.add(p);
+						StaffmodeManager.pvp.add(p);
 					} else {
 						p.getInventory().clear();
 						p.getActivePotionEffects().clear();
@@ -66,7 +66,7 @@ public class Default implements Listener {
 						p.getInventory().setBoots(
 								new ItemStack(Material.IRON_BOOTS));
 						p.closeInventory();
-						Methods.pvp.add(p);
+						StaffmodeManager.pvp.add(p);
 					}
 				}
 			}

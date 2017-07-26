@@ -12,7 +12,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 import com.sesamepvp.kitpvp.gui.KitShopGUI;
 import com.sesamepvp.kitpvp.gui.KitsGUI;
 import com.sesamepvp.kitpvp.managers.KitListener;
@@ -20,7 +20,7 @@ import com.sesamepvp.utilites.Messages;
 
 public class GiveRespawnItems implements Listener {
 
-	Manager manager = Manager.getInstance();
+	KitpvpFile manager = KitpvpFile.getInstance();
 
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {

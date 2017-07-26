@@ -11,14 +11,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 import com.sesamepvp.kitpvp.managers.KitListener;
+import com.sesamepvp.staffmode.StaffmodeManager;
 import com.sesamepvp.utilites.Messages;
-import com.sesamepvp.utilites.Methods;
 
 public class Speed implements Listener {
 
-	Manager manager = Manager.getInstance();
+	KitpvpFile manager = KitpvpFile.getInstance();
 	@EventHandler
 	public void InventoryClickEvent(InventoryClickEvent event) {
 		Player p = (Player) event.getWhoClicked();
@@ -85,7 +85,7 @@ public class Speed implements Listener {
 						p.getActivePotionEffects().clear();
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.SPEED, 40000, 1));
-						Methods.speedy.add(p);
+						StaffmodeManager.speedy.add(p);
 					} else {
 						if (KitSpeedyOwned == false) {
 							event.setCancelled(true);

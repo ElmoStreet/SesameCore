@@ -9,13 +9,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.sesamepvp.kitpvp.quests.managers.QuestManager;
-import com.sesamepvp.utilites.Methods;
+import com.sesamepvp.staffmode.StaffmodeManager;
 
 public class Bloodthirsty implements QuestManager{
 
 	@Override
 	public String getName() {
-		return Methods.format("Bloodthirsty");
+		return StaffmodeManager.format("Bloodthirsty");
 	}
 
 	@Override
@@ -26,12 +26,12 @@ public class Bloodthirsty implements QuestManager{
 
 	@Override
 	public String getDisplayName() {
-		return Methods.format("&4Bloodthirsty");
+		return StaffmodeManager.format("&4Bloodthirsty");
 	}
 
 	@Override
 	public String getLore() {
-		return Methods.format("&cKill 500 players");
+		return StaffmodeManager.format("&cKill 500 players");
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class Bloodthirsty implements QuestManager{
 	
 	@Override
 	public String getReward(){
-		return Methods.format("&aReward: &2$&a1500");
+		return StaffmodeManager.format("&aReward: &2$&a1500");
 	}
 
 }

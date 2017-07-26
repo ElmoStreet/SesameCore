@@ -6,12 +6,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 import com.sesamepvp.kitpvp.gui.KitsGUI;
 import com.sesamepvp.utilites.Messages;
 
 public class Kits implements CommandExecutor, Listener {
-	Manager manager = Manager.getInstance();
+	KitpvpFile manager = KitpvpFile.getInstance();
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {

@@ -12,14 +12,15 @@ import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 import com.sesamepvp.kitpvp.managers.KitListener;
 import com.sesamepvp.main.SesameCore;
+import com.sesamepvp.staffmode.StaffmodeManager;
 import com.sesamepvp.staffmode.commands.StaffMode;
-import com.sesamepvp.utilites.Methods;
+import com.sesamepvp.utilites.Messages;
 
 public class SB implements Listener {
-	Manager manager = Manager.getInstance();
+	KitpvpFile manager = KitpvpFile.getInstance();
 	SesameCore plugin;
 
 	public SB(SesameCore instance) {
@@ -28,130 +29,130 @@ public class SB implements Listener {
 
 	public void updateScoreboard(Player player) {
 		if (KitListener.kitselected.contains(player)) {
-			Manager manager1 = Manager.getInstance();
+			KitpvpFile manager1 = KitpvpFile.getInstance();
 			ScoreboardManager manager = Bukkit.getScoreboardManager();
 			final Scoreboard board = manager.getNewScoreboard();
 			final Objective objective = board.registerNewObjective("test", "dummy");
 
 			objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-			objective.setDisplayName(Methods.format("&c&lSesame&f&lPvP"));
+			objective.setDisplayName(Messages.prefix(""));
 
-			Score score = objective.getScore(Methods.format("&8&l&m------------------"));
+			Score score = objective.getScore(StaffmodeManager.format("&8&l&m------------------"));
 			score.setScore(10);
 
-			Score score9 = objective.getScore(Methods.format("&4&lKit:"));
+			Score score9 = objective.getScore(StaffmodeManager.format("&4&lKit:"));
 			score9.setScore(9);
 
-			Methods.testkits(player, objective);
+			StaffmodeManager.testkits(player, objective);
 
 			Score score7 = objective.getScore(" ");
 			score7.setScore(7);
 
-			Score score6 = objective.getScore(Methods.format("&4&lRank:"));
+			Score score6 = objective.getScore(StaffmodeManager.format("&4&lRank:"));
 			score6.setScore(6);
 			if (manager1.getData().getString(player.getUniqueId() + ".Rank") == null) {
-				Score score5 = objective.getScore(Methods.format(" &cNone"));
+				Score score5 = objective.getScore(StaffmodeManager.format(" &cNone"));
 				score5.setScore(5);
 			} else {
 				Score score5 = objective
-						.getScore(Methods.format(" &c" + manager1.getData().getString(player.getUniqueId() + ".Rank")));
+						.getScore(StaffmodeManager.format(" &c" + manager1.getData().getString(player.getUniqueId() + ".Rank")));
 				score5.setScore(5);
 			}
 			Score score4 = objective.getScore("");
 			score4.setScore(4);
 
-			Score score3 = objective.getScore(Methods.format("&4&lStats:"));
+			Score score3 = objective.getScore(StaffmodeManager.format("&4&lStats:"));
 			score3.setScore(3);
 
 			Score score2 = objective.getScore(
-					Methods.format(" &cKills:&r&4 " + manager1.getData().getInt(player.getUniqueId() + ".Kills")));
+					StaffmodeManager.format(" &cKills:&r&4 " + manager1.getData().getInt(player.getUniqueId() + ".Kills")));
 			score2.setScore(2);
 
 			Score score1 = objective.getScore(
-					Methods.format(" &cDeaths: &r&4" + manager1.getData().getInt(player.getUniqueId() + ".Deaths")));
+					StaffmodeManager.format(" &cDeaths: &r&4" + manager1.getData().getInt(player.getUniqueId() + ".Deaths")));
 			score1.setScore(1);
 
-			Score score0 = objective.getScore(Methods.format("&8&l&m--------I--------"));
+			Score score0 = objective.getScore(StaffmodeManager.format("&8&l&m--------I--------"));
 			score0.setScore(0);
 
 			player.setScoreboard(board);
 		} else if (StaffMode.staffmode.contains(player)) {
 			@SuppressWarnings("unused")
-			Manager manager1 = Manager.getInstance();
+			KitpvpFile manager1 = KitpvpFile.getInstance();
 			ScoreboardManager manager = Bukkit.getScoreboardManager();
 			final Scoreboard board = manager.getNewScoreboard();
 			final Objective objective = board.registerNewObjective("test", "dummy");
 
 			objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-			objective.setDisplayName(Methods.format("&c&lSesame&f&lPvP"));
+			objective.setDisplayName(Messages.prefix(""));
 
-			Score score = objective.getScore(Methods.format("&8&l&m------------------"));
+			Score score = objective.getScore(StaffmodeManager.format("&8&l&m------------------"));
 			score.setScore(7);
-			Score score6 = objective.getScore(Methods.format("&4&lStaff Mode: "));
+			Score score6 = objective.getScore(StaffmodeManager.format("&4&lStaff Mode: "));
 			score6.setScore(6);
 
-			if (Methods.vanish.contains(player)) {
-				Score score4 = objective.getScore(Methods.format(" &cVanish: &aEnabled"));
+			if (StaffmodeManager.vanish.contains(player)) {
+				Score score4 = objective.getScore(StaffmodeManager.format(" &cVanish: &aEnabled"));
 				score4.setScore(5);
 			} else {
-				Score score4 = objective.getScore(Methods.format(" &cVanish: &cDisabled"));
+				Score score4 = objective.getScore(StaffmodeManager.format(" &cVanish: &cDisabled"));
 				score4.setScore(5);
 			}
 
-			if (Methods.fly.contains(player)) {
-				Score score3 = objective.getScore(Methods.format(" &cFlight: &aEnabled"));
+			if (StaffmodeManager.fly.contains(player)) {
+				Score score3 = objective.getScore(StaffmodeManager.format(" &cFlight: &aEnabled"));
 				score3.setScore(4);
 			} else {
-				Score score3 = objective.getScore(Methods.format(" &cFlight: &cDisabled"));
+				Score score3 = objective.getScore(StaffmodeManager.format(" &cFlight: &cDisabled"));
 				score3.setScore(4);
 			}
-			Score score2 = objective.getScore(Methods.format(" &cGamemode: &a" + player.getGameMode()));
+			Score score2 = objective.getScore(StaffmodeManager.format(" &cGamemode: &a" + player.getGameMode()));
 			score2.setScore(3);
 
-			Score score0 = objective.getScore(Methods.format("&8&l&m--------I--------"));
+			Score score0 = objective.getScore(StaffmodeManager.format("&8&l&m--------I--------"));
 			score0.setScore(0);
 
 			player.setScoreboard(board);
 		} else {
-			Manager manager1 = Manager.getInstance();
+			KitpvpFile manager1 = KitpvpFile.getInstance();
 			ScoreboardManager manager = Bukkit.getScoreboardManager();
 			final Scoreboard board = manager.getNewScoreboard();
 			final Objective objective = board.registerNewObjective("test", "dummy");
 
 			objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-			objective.setDisplayName(Methods.format("&c&lSesame&f&lPvP"));
+			objective.setDisplayName(Messages.prefix(""));
 
-			Score score = objective.getScore(Methods.format("&8&l&m------------------"));
+			Score score = objective.getScore(StaffmodeManager.format("&8&l&m------------------"));
 			score.setScore(10);
 
 			Score score7 = objective.getScore("");
 			score7.setScore(7);
 
-			Score score6 = objective.getScore(Methods.format("&4&lRank:"));
+			Score score6 = objective.getScore(StaffmodeManager.format("&4&lRank:"));
 			score6.setScore(6);
 			if (manager1.getData().getString(player.getName() + ".Rank") == null) {
-				Score score5 = objective.getScore(Methods.format(" &cNone"));
+				Score score5 = objective.getScore(StaffmodeManager.format(" &cNone"));
 				score5.setScore(5);
 			} else {
 				Score score5 = objective
-						.getScore(Methods.format(" &c" + manager1.getData().getString(player.getUniqueId() + ".Rank")));
+						.getScore(StaffmodeManager.format(" &c" + manager1.getData().getString(player.getUniqueId() + ".Rank")));
 				score5.setScore(5);
 			}
 			Score score4 = objective.getScore("");
 			score4.setScore(4);
 
-			Score score3 = objective.getScore(Methods.format("&4&lStats:"));
+			Score score3 = objective.getScore(StaffmodeManager.format("&4&lStats:"));
 			score3.setScore(3);
 
 			Score score2 = objective.getScore(
-					Methods.format(" &cKills:&r&4 " + manager1.getData().getInt(player.getUniqueId() + ".Kills")));
+					StaffmodeManager.format(" &cKills:&r&4 " + manager1.getData().getInt(player.getUniqueId() + ".Kills")));
 			score2.setScore(2);
 
 			Score score1 = objective.getScore(
-					Methods.format(" &cDeaths: &r&4" + manager1.getData().getInt(player.getUniqueId() + ".Deaths")));
+					StaffmodeManager.format(" &cDeaths: &r&4" + manager1.getData().getInt(player.getUniqueId() + ".Deaths")));
 			score1.setScore(1);
 
-			Score score0 = objective.getScore(Methods.format("&8&l&m--------I--------"));
+			Score score0 = objective.getScore(StaffmodeManager.format("&8&l&m--------I--------"));
 			score0.setScore(0);
 
 			player.setScoreboard(board);

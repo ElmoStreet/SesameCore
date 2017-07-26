@@ -9,12 +9,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.sesamepvp.kitpvp.quests.managers.QuestManager;
-import com.sesamepvp.utilites.Methods;
+import com.sesamepvp.staffmode.StaffmodeManager;
 
 public class Hunter implements QuestManager{
 	
 	public String getName() {
-		return Methods.format("Hunter");
+		return StaffmodeManager.format("Hunter");
 	}
 
 	public ItemStack getItem() {
@@ -23,11 +23,11 @@ public class Hunter implements QuestManager{
 	}
 
 	public String getDisplayName() {
-		return Methods.format("&cHunter");
+		return StaffmodeManager.format("&cHunter");
 	}
 	
 	public String getLore(){
-		return Methods.format("&cReach 50 Kills!");
+		return StaffmodeManager.format("&cReach 50 Kills!");
 	}
 
 	
@@ -51,6 +51,6 @@ public class Hunter implements QuestManager{
 	
 	@Override
 	public String getReward(){
-		return Methods.format("&aReward: &2$&a500");
+		return StaffmodeManager.format("&aReward: &2$&a500");
 	}
 }

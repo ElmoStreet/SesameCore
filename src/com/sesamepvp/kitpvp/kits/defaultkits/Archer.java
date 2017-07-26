@@ -10,14 +10,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 import com.sesamepvp.kitpvp.managers.KitListener;
+import com.sesamepvp.staffmode.StaffmodeManager;
 import com.sesamepvp.utilites.Messages;
-import com.sesamepvp.utilites.Methods;
 
 public class Archer implements Listener {
 
-	Manager manager = Manager.getInstance();
+	KitpvpFile manager = KitpvpFile.getInstance();
 
 	@EventHandler
 	public void onInventoryClickEvent(InventoryClickEvent e) {
@@ -57,7 +57,7 @@ public class Archer implements Listener {
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.DAMAGE_RESISTANCE, 40000, 1));
 						p.closeInventory();
-						Methods.archer.add(p);
+						StaffmodeManager.archer.add(p);
 					} else {
 						p.getInventory().clear();
 						KitListener.kitselected.add(p);
@@ -76,7 +76,7 @@ public class Archer implements Listener {
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.SPEED, 40000, 1));
 						p.closeInventory();
-						Methods.archer.add(p);
+						StaffmodeManager.archer.add(p);
 					}
 					
 				}

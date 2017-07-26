@@ -8,7 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 import com.sesamepvp.kitpvp.gui.KitsGUI;
 import com.sesamepvp.kitpvp.upgrades.UpgradeManager;
 import com.sesamepvp.main.SesameCore;
@@ -16,7 +16,7 @@ import com.sesamepvp.utilites.Messages;
 
 public class KitShopManager implements Listener {
 
-	Manager manager = Manager.getInstance();
+	KitpvpFile manager = KitpvpFile.getInstance();
 
 	@SuppressWarnings("deprecation")
 	@EventHandler

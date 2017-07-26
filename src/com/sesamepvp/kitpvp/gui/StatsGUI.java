@@ -8,10 +8,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 
 public class StatsGUI {
-	public static Manager manager = Manager.getInstance();
+	public static KitpvpFile manager = KitpvpFile.getInstance();
 	final static Inventory stats = Bukkit.createInventory(null, 27, "Stats");
 
 	public static void playerStats(Player p) {

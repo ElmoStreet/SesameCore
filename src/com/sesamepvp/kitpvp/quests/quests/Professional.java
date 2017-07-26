@@ -9,13 +9,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.sesamepvp.kitpvp.quests.managers.QuestManager;
-import com.sesamepvp.utilites.Methods;
+import com.sesamepvp.staffmode.StaffmodeManager;
 
 public class Professional implements QuestManager {
 
 	@Override
 	public String getName() {
-		return Methods.format("Professional");
+		return StaffmodeManager.format("Professional");
 	}
 
 	@Override
@@ -26,12 +26,12 @@ public class Professional implements QuestManager {
 
 	@Override
 	public String getDisplayName() {
-		return Methods.format("&5Professional");
+		return StaffmodeManager.format("&5Professional");
 	}
 
 	@Override
 	public String getLore() {
-		return Methods.format("&dKills 1000 players in total!");
+		return StaffmodeManager.format("&dKills 1000 players in total!");
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class Professional implements QuestManager {
 
 	@Override
 	public String getReward() {
-		return Methods.format("&aReward: &2$&a7500");
+		return StaffmodeManager.format("&aReward: &2$&a7500");
 	}
 
 }

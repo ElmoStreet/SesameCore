@@ -9,14 +9,15 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 import com.sesamepvp.main.SesameCore;
+import com.sesamepvp.staffmode.StaffmodeManager;
 import com.sesamepvp.utilites.Messages;
 import com.sesamepvp.utilites.Methods;
 
 public class RankupSystem implements Listener {
 
-	Manager manager = Manager.getInstance();
+	KitpvpFile manager = KitpvpFile.getInstance();
 
 	@EventHandler
 	public void death(PlayerDeathEvent e) {
@@ -50,7 +51,7 @@ public class RankupSystem implements Listener {
 			if (k.getName() == p.getName() || p.getName() == k.getName()) {
 				return;
 			} else {
-				Methods.cmd("eco give " + k.getName() + " 10");
+				StaffmodeManager.cmd("eco give " + k.getName() + " 10");
 			}
 		} else {
 			return;

@@ -8,7 +8,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.sesamepvp.utilites.Methods;
+import com.sesamepvp.staffmode.StaffmodeManager;
 
 public class InsaneAbility implements Listener {
 
@@ -19,7 +19,7 @@ public class InsaneAbility implements Listener {
 		Player k = p.getKiller();
 
 		if (k.getItemInHand().getType() == Material.DIAMOND_SWORD) {
-			if (Methods.insane.contains(k)) {
+			if (StaffmodeManager.insane.contains(k)) {
 				PotionEffect potionEffect = new PotionEffect(
 						PotionEffectType.SPEED, 200, 1);
 				PotionEffect potionEffect2 = new PotionEffect(

@@ -10,11 +10,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 
+import com.sesamepvp.files.StaffmodeFile;
 import com.sesamepvp.staffmode.commands.StaffMode;
 import com.sesamepvp.staffmode.gui.Inspect;
 
 public class InteractionEvent implements Listener {
-
+	StaffmodeFile sfm = StaffmodeFile.getInstance();
 	
 	@EventHandler
 	public void onInteractOnPlayer(PlayerInteractEntityEvent e) {
@@ -22,7 +23,7 @@ public class InteractionEvent implements Listener {
 		Entity t = e.getRightClicked();
 
 		if (t instanceof Player) {
-			if (p.getItemInHand().getType() == Material.ICE
+			if (p.getItemInHand().getType() == Material.getMaterial(sfm.getData().getString("Freeze.material"))
 					&& StaffMode.staffmode.contains(p)) {
 				Bukkit.dispatchCommand(
 						(CommandSender) e.getRightClicked(),
@@ -46,7 +47,7 @@ public class InteractionEvent implements Listener {
 			return;
 		} else {
 
-			if (p.getItemInHand().getType() == Material.BOOK
+			if (p.getItemInHand().getType() == Material.getMaterial(sfm.getData().getString("Inspect.material"))
 					&& StaffMode.staffmode.contains(p)) {
 				Inspect.InpsectGUI(p, t);
 			}

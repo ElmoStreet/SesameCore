@@ -11,7 +11,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 import com.sesamepvp.kitpvp.quests.quests.Bloodthirsty;
 import com.sesamepvp.kitpvp.quests.quests.Hunter;
 import com.sesamepvp.kitpvp.quests.quests.Justice;
@@ -19,7 +19,7 @@ import com.sesamepvp.kitpvp.quests.quests.Professional;
 import com.sesamepvp.kitpvp.quests.quests.Scavenger;
 
 public class QuestGUI {
-	static Manager manager = Manager.getInstance();
+	static KitpvpFile manager = KitpvpFile.getInstance();
 	static Hunter Hunter = new Hunter();
 	static Bloodthirsty Bloodthirsty = new Bloodthirsty();
 	static Scavenger Scavenger = new Scavenger();

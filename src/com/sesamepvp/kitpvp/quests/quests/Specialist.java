@@ -9,13 +9,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.sesamepvp.kitpvp.quests.managers.QuestManager;
-import com.sesamepvp.utilites.Methods;
+import com.sesamepvp.staffmode.StaffmodeManager;
 
 public class Specialist implements QuestManager{
 
 	@Override
 	public String getName() {
-		return Methods.format("Specialist");
+		return StaffmodeManager.format("Specialist");
 	}
 
 	@Override
@@ -26,12 +26,12 @@ public class Specialist implements QuestManager{
 
 	@Override
 	public String getDisplayName() {
-		return Methods.format("&8Specialist");
+		return StaffmodeManager.format("&8Specialist");
 	}
 
 	@Override
 	public String getLore() {
-		return Methods.format("&7You must purchase all kitshop kits for this quest!");
+		return StaffmodeManager.format("&7You must purchase all kitshop kits for this quest!");
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class Specialist implements QuestManager{
 
 	@Override
 	public String getReward() {
-		return Methods.format("&aReward: &2$&a1500");
+		return StaffmodeManager.format("&aReward: &2$&a1500");
 	}
 
 }

@@ -6,8 +6,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import com.sesamepvp.chatmanagement.commands.ChatMute;
+import com.sesamepvp.staffmode.StaffmodeManager;
 import com.sesamepvp.utilites.Messages;
-import com.sesamepvp.utilites.Methods;
 
 public class ChatMuteListener implements Listener{
 	
@@ -22,6 +22,6 @@ public class ChatMuteListener implements Listener{
 				p.sendMessage(Messages.talkDenied());
 			}
 		}		
-		e.setFormat(p.getDisplayName()+ "§8 : §r" + Methods.format(e.getMessage()));
+		e.setFormat(p.getDisplayName()+ "§8 : §r" + StaffmodeManager.format(e.getMessage()));
 	}
 }

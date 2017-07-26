@@ -10,14 +10,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 import com.sesamepvp.kitpvp.managers.KitListener;
+import com.sesamepvp.staffmode.StaffmodeManager;
 import com.sesamepvp.utilites.Messages;
-import com.sesamepvp.utilites.Methods;
 
 public class Burner implements Listener {
 
-	Manager manager = Manager.getInstance();
+	KitpvpFile manager = KitpvpFile.getInstance();
 
 	@EventHandler
 	public void InventoryClickEvent(InventoryClickEvent event) {
@@ -60,7 +60,7 @@ public class Burner implements Listener {
 								new ItemStack(Material.IRON_BOOTS));
 						p.addPotionEffect(new PotionEffect(
 								PotionEffectType.FIRE_RESISTANCE, 40000, 1));
-						Methods.burner.add(p);
+						StaffmodeManager.burner.add(p);
 					} else {
 						if (KitBurnerOwned == false) {
 							event.setCancelled(true);

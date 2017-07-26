@@ -9,13 +9,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.sesamepvp.kitpvp.quests.managers.QuestManager;
-import com.sesamepvp.utilites.Methods;
+import com.sesamepvp.staffmode.StaffmodeManager;
 
 public class Scavenger implements QuestManager{
 
 	@Override
 	public String getName() {
-		return Methods.format("Scavenger");
+		return StaffmodeManager.format("Scavenger");
 	}
 
 	@Override
@@ -26,12 +26,12 @@ public class Scavenger implements QuestManager{
 
 	@Override
 	public String getDisplayName() {
-		return Methods.format("&2Scavenger");
+		return StaffmodeManager.format("&2Scavenger");
 	}
 
 	@Override
 	public String getLore() {
-		return Methods.format("&aUnlock all non-donator kits!");
+		return StaffmodeManager.format("&aUnlock all non-donator kits!");
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class Scavenger implements QuestManager{
 	
 	@Override
 	public String  getReward(){
-		return Methods.format("&aReward: &2$&a2500");
+		return StaffmodeManager.format("&aReward: &2$&a2500");
 	}
 
 }

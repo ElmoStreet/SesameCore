@@ -1,15 +1,9 @@
 package com.sesamepvp.main;
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 
-import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.economy.EconomyResponse;
-
 import org.bukkit.Bukkit;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -35,6 +29,10 @@ import com.sesamepvp.essentials.commands.Workbench;
 import com.sesamepvp.essentials.commands.Locations.spawn.Setspawn;
 import com.sesamepvp.essentials.commands.Locations.spawn.Spawn;
 import com.sesamepvp.essentials.events.ListListener;
+import com.sesamepvp.files.KitpvpFile;
+import com.sesamepvp.files.MessageFile;
+import com.sesamepvp.files.ReportsFile;
+import com.sesamepvp.files.StaffmodeFile;
 import com.sesamepvp.kitpvp.abilities.InsaneAbility;
 import com.sesamepvp.kitpvp.abilities.SlugAbility;
 import com.sesamepvp.kitpvp.abilities.VampireAbility;
@@ -43,7 +41,6 @@ import com.sesamepvp.kitpvp.commands.Kits;
 import com.sesamepvp.kitpvp.commands.PathSeter;
 import com.sesamepvp.kitpvp.commands.Sesame;
 import com.sesamepvp.kitpvp.commands.Stats;
-import com.sesamepvp.kitpvp.configmanager.Manager;
 import com.sesamepvp.kitpvp.events.General;
 import com.sesamepvp.kitpvp.events.GiveRespawnItems;
 import com.sesamepvp.kitpvp.kits.defaultkits.Alchemist;
@@ -79,9 +76,12 @@ import com.sesamepvp.kitpvp.upgrades.kits.FishermanUpgraded;
 import com.sesamepvp.kitpvp.upgrades.kits.GoldenUpgraded;
 import com.sesamepvp.kitpvp.upgrades.kits.PyroUpgraded;
 import com.sesamepvp.kitpvp.upgrades.kits.TankUpgraded;
+import com.sesamepvp.staffmode.StaffmodeManager;
 import com.sesamepvp.staffmode.commands.Freeze;
-import com.sesamepvp.staffmode.commands.Report;
 import com.sesamepvp.staffmode.commands.StaffMode;
+import com.sesamepvp.staffmode.commands.report.Report;
+import com.sesamepvp.staffmode.commands.report.manager.ClickEventManager;
+import com.sesamepvp.staffmode.commands.report.manager.ReportManager;
 import com.sesamepvp.staffmode.events.BlockPlace;
 import com.sesamepvp.staffmode.events.DamageCancel;
 import com.sesamepvp.staffmode.events.FlightEvent;
@@ -92,59 +92,55 @@ import com.sesamepvp.staffmode.events.ItemDrop;
 import com.sesamepvp.staffmode.events.LoggedWhilstFrozen;
 import com.sesamepvp.staffmode.events.RandomTeleport;
 import com.sesamepvp.staffmode.events.VanishEvent;
-import com.sesamepvp.utilites.Messages;
+
+import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.economy.EconomyResponse;
 
 public class SesameCore extends JavaPlugin implements Listener {
-	static ArrayList<String> A = new ArrayList<String>();
-	static Plugin plugin;
-	Manager manager = Manager.getInstance();
-
+	KitpvpFile manager = KitpvpFile.getInstance();
+	MessageFile messageconfig = MessageFile.getInstance();
+	StaffmodeFile staffmodeconfig = StaffmodeFile.getInstance();
+	ReportsFile reportsfile = ReportsFile.getInstance();
 	private PluginManager pm;
-	private ConsoleCommandSender cs;
 
 	public static Economy econ = null;
 	public static EconomyResponse r;
 
 	public void onEnable() {
-
+		registerConfig();
 		@SuppressWarnings("unused")
 		QuestManager Quests = new Hunter();
 		if (!setupEconomy()) {
-			Bukkit.getServer()
-					.getLogger()
-					.log(Level.SEVERE,
-							String.format(
-									"[%s] - Disabled due to no Vault dependency found!",
-									getDescription().getName()));
+			Bukkit.getServer().getLogger().log(Level.SEVERE,
+					String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
 			getServer().getPluginManager().disablePlugin(this);
 			return;
 		}
 		pm = Bukkit.getServer().getPluginManager();
-		cs = Bukkit.getServer().getConsoleSender();
-		cs.sendMessage(Messages.onEnable());
+	
 		registerEvents();
 		registerCommands();
-		registerConfig();
+		reportsfile.setup(this);
 		manager.setup(this);
+		messageconfig.setup(this);
+		staffmodeconfig.setup(this);
 		registerEconomy();
 		setupEconomy();
+		setupMessages();
+		ReportManager.clearAllReports();
 	}
 
 	public void registerConfig() {
 		getConfig().options().copyDefaults(true);
-		saveConfig();
 		reloadConfig();
+		saveConfig();
 
 	}
 
 	public void registerEconomy() {
 		if (!setupEconomy()) {
-			Bukkit.getServer()
-					.getLogger()
-					.log(Level.SEVERE,
-							String.format(
-									"[%s] - Disabled due to no Vault dependency found!",
-									getDescription().getName()));
+			Bukkit.getServer().getLogger().log(Level.SEVERE,
+					String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
 			getServer().getPluginManager().disablePlugin(this);
 			return;
 		}
@@ -154,8 +150,7 @@ public class SesameCore extends JavaPlugin implements Listener {
 		if (getServer().getPluginManager().getPlugin("Vault") == null) {
 			return false;
 		}
-		RegisteredServiceProvider<Economy> rsp = getServer()
-				.getServicesManager().getRegistration(Economy.class);
+		RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
 		if (rsp == null) {
 			return false;
 		}
@@ -171,11 +166,12 @@ public class SesameCore extends JavaPlugin implements Listener {
 		getCommand("mod").setExecutor(new StaffMode());
 		getCommand("freeze").setExecutor(new Freeze());
 		getCommand("report").setExecutor(new Report(this));
+		getCommand("reports").setExecutor(new Report(this));
 		getCommand("stats").setExecutor(new Stats());
 		getCommand("list").setExecutor(new List());
 		getCommand("kits").setExecutor(new Kits());
 		getCommand("kitshop").setExecutor(new KitShop());
-		getCommand("sesame").setExecutor(new Sesame());
+		getCommand("sesame") .setExecutor(new Sesame());
 		getCommand("fly").setExecutor(new Fly());
 		getCommand("vanish").setExecutor(new Vanish());
 		getCommand("v").setExecutor(new Vanish());
@@ -188,8 +184,8 @@ public class SesameCore extends JavaPlugin implements Listener {
 		getCommand("ci").setExecutor(new ClearInventory());
 		getCommand("clearinventory").setExecutor(new ClearInventory());
 		getCommand("clear").setExecutor(new ClearInventory());
-		getCommand("bc").setExecutor(new Broadcast());
-		getCommand("broadcast").setExecutor(new Broadcast());
+		getCommand("bc").setExecutor(new Broadcast(this));
+		getCommand("broadcast").setExecutor(new Broadcast(this));
 		getCommand("msg").setExecutor(new Message());
 		getCommand("m").setExecutor(new Message());
 		getCommand("message").setExecutor(new Message());
@@ -205,6 +201,7 @@ public class SesameCore extends JavaPlugin implements Listener {
 	}
 
 	private void registerEvents() {
+		pm.registerEvents(new ClickEventManager(), this);
 		pm.registerEvents(this, this);
 		pm.registerEvents(new StatsManager(), this);
 		pm.registerEvents(new ListListener(), this);
@@ -239,8 +236,8 @@ public class SesameCore extends JavaPlugin implements Listener {
 		pm.registerEvents(new Tank(), this);
 
 		pm.registerEvents(new TestKillEvents(), this);
-		pm.registerEvents(new InventoryClickEvents(),this);
-		
+		pm.registerEvents(new InventoryClickEvents(), this);
+
 		pm.registerEvents(new AlchemistUpgraded(), this);
 		pm.registerEvents(new ArcherUpgraded(), this);
 		pm.registerEvents(new DefaultUpgraded(), this);
@@ -264,6 +261,69 @@ public class SesameCore extends JavaPlugin implements Listener {
 	}
 
 	public void onDisable() {
-		cs.sendMessage(Messages.onDisable());
+	}
+
+	public void setupMessages() {
+		if(messageconfig.getData().getString("prefix") == null || messageconfig.getData().getString("prefix") == ""){
+		messageconfig.getData().set("prefix", StaffmodeManager.config("§c§lSesame§f§lPvP §8>> "));
+		messageconfig.getData().set("nopermission", StaffmodeManager.config("§cNo permission to execcute this command!"));
+		messageconfig.getData().set("notplayer", StaffmodeManager.config("§cYou must be a player to execute this command!"));
+		messageconfig.getData().set("staffmode.disabled", StaffmodeManager.config("§cYou have §4left §cmod mode."));
+		messageconfig.getData().set("staffmode.enabled", StaffmodeManager.config("§aYou have §2entered §amod mode."));
+		messageconfig.getData().set("staffmode.mustleavemod", StaffmodeManager.config("§cYou must leave §4Staff §cmode to do this."));
+		messageconfig.getData().set("staffmode.noitemdrop", StaffmodeManager.config("§cYou must leave §4Staff §cmode drop items."));
+		messageconfig.getData().set("staffmode.noblockplace", StaffmodeManager.config("§cYou must leave §4Staff §cmode to place blocks."));
+		messageconfig.getData().set("staffmode.nodamage", StaffmodeManager.config("§cYou must leave &4Staff &cmode to attack players."));
+		messageconfig.getData().set("playernull", StaffmodeManager.config("&cThat player does not exist, or is not online."));
+		messageconfig.getData().set("staffmode.frozen", StaffmodeManager.config("&cYou have been &4frozen, please coordinate with a staff member."));
+		messageconfig.getData().set("chat.talkdenied", StaffmodeManager.config("&cYou can't talk, chat is currently muted!"));
+		messageconfig.getData().set("chat.muted", StaffmodeManager.config("&cChat has been &4muted!"));
+		messageconfig.getData().set("chat.unmuted", StaffmodeManager.config("&aChat has been &2unmuted!"));
+		messageconfig.getData().set("chat.clear", StaffmodeManager.config("§aThe chat has been &2cleared."));
+		messageconfig.getData().set("staffmode.notenoughplayers", StaffmodeManager.config("&cThere are not enough players online!"));
+		messageconfig.getData().set("staffmode.flight.enabled", StaffmodeManager.config("&aFlight has been &2Enabled."));
+		messageconfig.getData().set("staffmode.flight.disabled", StaffmodeManager.config("&cFlight has been &4Disabled."));
+		messageconfig.getData().set("staffmode.vanish.enabled", StaffmodeManager.config("&aVanish has been &2Enabled"));
+		messageconfig.getData().set("staffmode.vanish.disabled", StaffmodeManager.config("&cVanish has been &4Disabled."));
+		
+		messageconfig.getData().set("kitpvp.purchasedkit.speedy", StaffmodeManager.config("&aYou have purchased the &2Speedy&a kit."));
+		messageconfig.getData().set("kitpvp.purchasedkit.insane", StaffmodeManager.config("&aYou have purchased the &2Insane&a kit."));
+		messageconfig.getData().set("kitpvp.purchasedkit.assassin", StaffmodeManager.config("&aYou have purchased the &2Assassin&a kit."));
+		messageconfig.getData().set("kitpvp.purchasedkit.godarcher", StaffmodeManager.config("&aYou have purchased the &2Godarcher&a kit."));
+		messageconfig.getData().set("kitpvp.purchasedkit.burner", StaffmodeManager.config("&aYou have purchased the &2Burner&a kit."));
+		messageconfig.getData().set("kitpvp.kits.alreadyowned", StaffmodeManager.config("&cYou already own that kit."));
+		messageconfig.getData().set("kitpvp.kits.upgraded", StaffmodeManager.config("&aYou have successfully upgraded a kit."));
+		messageconfig.getData().set("kitpvp.kits.alreadyselected", StaffmodeManager.config("&cYou already have a kit selected."));
+		messageconfig.getData().set("kitpvp.kits.notowned", StaffmodeManager.config("&cYou do not own this kit."));
+		messageconfig.getData().set("kitpvp.gui.openingkitshop", StaffmodeManager.config("&aOpening the Kit shop."));
+		messageconfig.getData().set("kitpvp.gui.closedinventory", StaffmodeManager.config("&cClosed inventory."));
+		messageconfig.getData().set("eco.insufficientfunds", StaffmodeManager.config("&cYou have insufficient funds."));
+		messageconfig.getData().set("kitpvp.ranks.rank", StaffmodeManager.config("&aRanks:"));
+		messageconfig.getData().set("kitpvp.ranks.warrior", StaffmodeManager.config("&aWarrior: 150 kills."));
+		messageconfig.getData().set("kitpvp.ranks.gladiator", StaffmodeManager.config("&aGladiator: 350 kills."));
+		messageconfig.getData().set("kitpvp.ranks.guardian", StaffmodeManager.config("&aGuardian: 750 kills."));
+		messageconfig.getData().set("kitpvp.ranks.berserk", StaffmodeManager.config("&aBerserk: 1250 kills."));
+		messageconfig.getData().set("kitpvp.ranks.legend", StaffmodeManager.config("&aLegend: 1750 kills."));
+		messageconfig.getData().set("kitpvp.ranks.demigod", StaffmodeManager.config("&aDemi God: 2250 kills."));
+		messageconfig.getData().set("kitpvp.ranks.god", StaffmodeManager.config("&aGod: 3500 kills."));
+		
+		messageconfig.getData().set("spawn.set", StaffmodeManager.config("&aSpawn has been set."));
+		messageconfig.getData().set("spawn.teleportedto", StaffmodeManager.config("&aYou have been teleported to spawn."));
+		
+		messageconfig.getData().set("gamemode.creative", StaffmodeManager.config("&aGamemode has been set to &2Creative"));
+		messageconfig.getData().set("gamemode.survival", StaffmodeManager.config("&aGamemode has been set to &2Survival"));
+		messageconfig.getData().set("gamemode.adventure", StaffmodeManager.config("&aGamemode has been set to &2Adventure"));
+		messageconfig.getData().set("gamemode.spectator", StaffmodeManager.config("&aGamemode has been set to &2Spectator"));
+		
+		messageconfig.getData().set("health.feed", StaffmodeManager.config("&aYou have been fed."));
+		messageconfig.getData().set("health.healed", StaffmodeManager.config("&aYou have been healed."));
+		
+		messageconfig.getData().set("inventory.clear", StaffmodeManager.config("&aYou have cleared you're inventory."));
+		
+		
+		messageconfig.saveData();
+		}else{
+			return;
+		}
 	}
 }

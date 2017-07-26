@@ -5,13 +5,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 import com.sesamepvp.main.SesameCore;
 import com.sesamepvp.utilites.Messages;
 import com.sesamepvp.utilites.Methods;
 
 public class TestKillEvents implements Listener {
-	Manager manager = Manager.getInstance();
+	KitpvpFile manager = KitpvpFile.getInstance();
 
 	@EventHandler
 	public void onDeathEvent(PlayerDeathEvent e) {

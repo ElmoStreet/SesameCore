@@ -8,7 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-import com.sesamepvp.utilites.Methods;
+import com.sesamepvp.staffmode.StaffmodeManager;
 
 public class VampireAbility implements Listener {
 	
@@ -23,7 +23,7 @@ public class VampireAbility implements Listener {
 			if (e.getDamager().getType() == EntityType.PLAYER) {
 				Player p = (Player) e.getDamager();
 				if (p.getItemInHand().getType() == Material.DIAMOND_SWORD) {
-					if (Methods.vampire.contains(p)) {
+					if (StaffmodeManager.vampire.contains(p)) {
 
 						if (p.getHealth() <= 20) {
 							p.setHealth(p.getHealth() + 2);

@@ -8,36 +8,37 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
+import com.sesamepvp.files.StaffmodeFile;
+import com.sesamepvp.staffmode.StaffmodeManager;
 import com.sesamepvp.staffmode.commands.StaffMode;
 import com.sesamepvp.utilites.Messages;
-import com.sesamepvp.utilites.Methods;
 
 public class FlightEvent implements Listener {
+	StaffmodeFile sfm = StaffmodeFile.getInstance();
 
 	@EventHandler
-	public void onMove(PlayerMoveEvent e){
-		if(StaffMode.staffmode.contains(e.getPlayer())){
+	public void onMove(PlayerMoveEvent e) {
+		if (StaffMode.staffmode.contains(e.getPlayer())) {
 			e.getPlayer().setHealth(20);
 			e.getPlayer().setFoodLevel(20);
 		}
 	}
-	
-	
+
 	@EventHandler
 	public void onInteract3(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
-		if ((p.getItemInHand().getType() == Material.GHAST_TEAR)
+		if ((p.getItemInHand().getType() == Material.getMaterial(sfm.getData().getString("Flight.material")))
 				&& (StaffMode.staffmode.contains(p))
 				&& ((e.getAction() == Action.RIGHT_CLICK_AIR) || (e.getAction() == Action.RIGHT_CLICK_BLOCK))) {
 
-			if (Methods.fly.contains(p)) {
+			if (StaffmodeManager.fly.contains(p)) {
 				p.setAllowFlight(false);
-				Methods.fly.remove(p);
+				StaffmodeManager.fly.remove(p);
 				p.sendMessage(Messages.flightDisabled());
 			} else {
-				if (!(Methods.fly.contains(p))) {
+				if (!(StaffmodeManager.fly.contains(p))) {
 					p.setAllowFlight(true);
-					Methods.fly.add(p);
+					StaffmodeManager.fly.add(p);
 					p.sendMessage(Messages.flightEnabled());
 				}
 			}

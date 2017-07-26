@@ -11,10 +11,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.sesamepvp.kitpvp.configmanager.Manager;
+import com.sesamepvp.files.KitpvpFile;
 
 public class KitShopGUI {
-	public static Manager manager = Manager.getInstance();
+	public static KitpvpFile manager = KitpvpFile.getInstance();
 
 	public static void openKitshop(Player p) {
 		final Inventory kitshop = Bukkit.createInventory(null, 36, "KitShop");

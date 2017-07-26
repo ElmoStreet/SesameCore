@@ -6,14 +6,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
+import com.sesamepvp.files.StaffmodeFile;
 import com.sesamepvp.staffmode.commands.Freeze;
 import com.sesamepvp.staffmode.commands.StaffMode;
 
 public class FreezeListener implements Listener {
-
+	StaffmodeFile sfm = StaffmodeFile.getInstance();
 	@EventHandler
 	public void onMove(PlayerMoveEvent e) {
 		Player p = e.getPlayer();
@@ -23,20 +23,7 @@ public class FreezeListener implements Listener {
 			return;
 		}
 	}
-
 	
-	@EventHandler
-	public void onInteract(PlayerInteractEntityEvent e) {
-		Player p = e.getPlayer();
-		Player targetPlayer = (Player) e.getRightClicked();
-		if (!(targetPlayer instanceof Player)) {
-			e.setCancelled(true);
-		}
-		if ((p.getItemInHand().getType() == Material.ICE)
-				&& StaffMode.staffmode.contains(p)) {
-			Bukkit.dispatchCommand(p, "freeze " + targetPlayer.getName());
-		}
-	}
 
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent e) {
@@ -50,7 +37,7 @@ public class FreezeListener implements Listener {
 			e.setCancelled(true);
 		}
 
-		if (e.getCurrentItem().getType() == Material.ICE
+		if (e.getCurrentItem().getType() == Material.getMaterial(sfm.getData().getString("Freeze.material"))
 				&& StaffMode.staffmode.contains(player)) {
 			e.setCancelled(true);
 			Bukkit.dispatchCommand(player, "freeze "
