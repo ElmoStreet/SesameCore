@@ -1,9 +1,25 @@
 name: SesameNew
 author: ElmoStreet
-main: com.sesamepvp.main.Core
+main: com.sesamepvp.main.SesameCore
 version: 1.0
 description: SesameCore
 commands:
+  reports:
+   description: report gui
+  stats:
+   description: stats
+  sesame:
+   description: sesame
+  quests:
+   description: quests
+  uuid:
+   description: uuid
+  setspawn:
+   description: setspawn
+  website:
+   description: website
+  craft:
+   description: craft
   clearchat:
    description: clear the chat.
   cc:
@@ -72,3 +88,17 @@ commands:
    description: teleportation.
   setpath:
    description: manage paths and values in config.
+  mute:
+   description: mute players.
+  unmute:
+   description: unmute players.
+  ban:
+   description: ban players.
+  tempban:
+   description: tempban others.
+  unban:
+   description: unban players.
+  kick:
+   description: kick players
+  punish:
+   description: punish gui

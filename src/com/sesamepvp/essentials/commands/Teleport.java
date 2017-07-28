@@ -23,6 +23,7 @@ public class Teleport implements CommandExecutor{
 							Player t =  Bukkit.getServer().getPlayer(args[0]);
 							if(t == null){
 								p.sendMessage(Messages.notPlayer());
+								return false;
 							}else{
 								p.teleport(t);
 								p.sendMessage(Messages.teleportedtoPlayer(t));

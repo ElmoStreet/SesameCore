@@ -13,19 +13,31 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
 import com.sesamepvp.files.KitpvpFile;
+import com.sesamepvp.files.MessageFile;
+import com.sesamepvp.files.ReportsFile;
+import com.sesamepvp.files.StaffmodeFile;
 import com.sesamepvp.kitpvp.managers.KitListener;
 import com.sesamepvp.main.SesameCore;
 import com.sesamepvp.staffmode.StaffmodeManager;
 import com.sesamepvp.staffmode.commands.StaffMode;
 import com.sesamepvp.utilites.Messages;
+import com.sesamepvp.utilites.Methods;
 
 public class SB implements Listener {
 	KitpvpFile manager = KitpvpFile.getInstance();
+	MessageFile messageconfig = MessageFile.getInstance();
+	StaffmodeFile staffmodeconfig = StaffmodeFile.getInstance();
+	ReportsFile reportsfile = ReportsFile.getInstance();
+	
+	
+	
 	SesameCore plugin;
 
 	public SB(SesameCore instance) {
 		plugin = instance;
 	}
+	
+	
 
 	public void updateScoreboard(Player player) {
 		if (KitListener.kitselected.contains(player)) {
@@ -35,15 +47,15 @@ public class SB implements Listener {
 			final Objective objective = board.registerNewObjective("test", "dummy");
 
 			objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-			objective.setDisplayName(Messages.prefix(""));
+			objective.setDisplayName(Methods.format(Messages.prefix("")));
 
-			Score score = objective.getScore(StaffmodeManager.format("&8&l&m------------------"));
+			Score score = objective.getScore(StaffmodeManager.format("&8&l&m-----------------"));
 			score.setScore(10);
 
 			Score score9 = objective.getScore(StaffmodeManager.format("&4&lKit:"));
 			score9.setScore(9);
 
-			StaffmodeManager.testkits(player, objective);
+			StaffmodeManager.testkits(8,player, objective);
 
 			Score score7 = objective.getScore(" ");
 			score7.setScore(7);
@@ -165,6 +177,18 @@ public class SB implements Listener {
 			@Override
 			public void run() {
 				updateScoreboard(player);
+				
+				manager.reloadData();
+				manager.saveData();
+				
+				messageconfig.reloadData();
+				messageconfig.saveData();
+			
+				reportsfile.reloadData();
+				reportsfile.saveData();
+				
+				staffmodeconfig.reloadData();
+				staffmodeconfig.saveData();
 			}
 		}, 0, 5);
 	}

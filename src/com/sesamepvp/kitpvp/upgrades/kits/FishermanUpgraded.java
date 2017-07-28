@@ -38,7 +38,7 @@ public class FishermanUpgraded implements Listener {
 						p.playSound(p.getLocation(), Sound.ANVIL_USE, 2F, 1F);
 						p.sendMessage(Messages.upgraded());
 						this.manager.getData().set(
-								p.getName() + ".Kits.Fisherman.Upgraded", true);
+								p.getUniqueId() + ".Kits.Fisherman.Upgraded", true);
 						this.manager.saveData();
 					} else {
 						p.sendMessage(Messages.insufficientFunds());

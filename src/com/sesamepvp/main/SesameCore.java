@@ -8,7 +8,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.sesamepvp.Scoreboard.SB;
 import com.sesamepvp.chatmanagement.commands.ChatMute;
 import com.sesamepvp.chatmanagement.commands.ClearChat;
 import com.sesamepvp.chatmanagement.events.ChatMuteListener;
@@ -31,6 +30,8 @@ import com.sesamepvp.essentials.commands.Locations.spawn.Spawn;
 import com.sesamepvp.essentials.events.ListListener;
 import com.sesamepvp.files.KitpvpFile;
 import com.sesamepvp.files.MessageFile;
+import com.sesamepvp.files.PunishmentGUIFile;
+import com.sesamepvp.files.PunishmentsFile;
 import com.sesamepvp.files.ReportsFile;
 import com.sesamepvp.files.StaffmodeFile;
 import com.sesamepvp.kitpvp.abilities.InsaneAbility;
@@ -65,9 +66,9 @@ import com.sesamepvp.kitpvp.managers.RankupSystem;
 import com.sesamepvp.kitpvp.managers.StatsManager;
 import com.sesamepvp.kitpvp.quests.Quest;
 import com.sesamepvp.kitpvp.quests.events.InventoryClickEvents;
-import com.sesamepvp.kitpvp.quests.events.TestKillEvents;
 import com.sesamepvp.kitpvp.quests.managers.QuestManager;
 import com.sesamepvp.kitpvp.quests.quests.Hunter;
+import com.sesamepvp.kitpvp.signs.SignsManager;
 import com.sesamepvp.kitpvp.upgrades.UpgradeClickEvent;
 import com.sesamepvp.kitpvp.upgrades.kits.AlchemistUpgraded;
 import com.sesamepvp.kitpvp.upgrades.kits.ArcherUpgraded;
@@ -76,6 +77,17 @@ import com.sesamepvp.kitpvp.upgrades.kits.FishermanUpgraded;
 import com.sesamepvp.kitpvp.upgrades.kits.GoldenUpgraded;
 import com.sesamepvp.kitpvp.upgrades.kits.PyroUpgraded;
 import com.sesamepvp.kitpvp.upgrades.kits.TankUpgraded;
+import com.sesamepvp.punishments.Ban;
+import com.sesamepvp.punishments.Kick;
+import com.sesamepvp.punishments.Mute;
+import com.sesamepvp.punishments.Punish;
+import com.sesamepvp.punishments.Tempban;
+import com.sesamepvp.punishments.Unban;
+import com.sesamepvp.punishments.Unmute;
+import com.sesamepvp.punishments.GUI.PunishGUI;
+import com.sesamepvp.punishments.events.ClickEventHandler;
+import com.sesamepvp.punishments.manager.BanManager;
+import com.sesamepvp.punishments.manager.MuteManager;
 import com.sesamepvp.staffmode.StaffmodeManager;
 import com.sesamepvp.staffmode.commands.Freeze;
 import com.sesamepvp.staffmode.commands.StaffMode;
@@ -101,6 +113,8 @@ public class SesameCore extends JavaPlugin implements Listener {
 	MessageFile messageconfig = MessageFile.getInstance();
 	StaffmodeFile staffmodeconfig = StaffmodeFile.getInstance();
 	ReportsFile reportsfile = ReportsFile.getInstance();
+	PunishmentsFile punishmentsfile = PunishmentsFile.getInstance();
+	PunishmentGUIFile pfg = PunishmentGUIFile.getInstance();
 	private PluginManager pm;
 
 	public static Economy econ = null;
@@ -117,13 +131,15 @@ public class SesameCore extends JavaPlugin implements Listener {
 			return;
 		}
 		pm = Bukkit.getServer().getPluginManager();
-	
+
 		registerEvents();
 		registerCommands();
 		reportsfile.setup(this);
 		manager.setup(this);
 		messageconfig.setup(this);
 		staffmodeconfig.setup(this);
+		punishmentsfile.setup(this);
+		pfg.setup(this);
 		registerEconomy();
 		setupEconomy();
 		setupMessages();
@@ -171,7 +187,7 @@ public class SesameCore extends JavaPlugin implements Listener {
 		getCommand("list").setExecutor(new List());
 		getCommand("kits").setExecutor(new Kits());
 		getCommand("kitshop").setExecutor(new KitShop());
-		getCommand("sesame") .setExecutor(new Sesame());
+		getCommand("sesame").setExecutor(new Sesame());
 		getCommand("fly").setExecutor(new Fly());
 		getCommand("vanish").setExecutor(new Vanish());
 		getCommand("v").setExecutor(new Vanish());
@@ -198,9 +214,20 @@ public class SesameCore extends JavaPlugin implements Listener {
 		getCommand("website").setExecutor(new Website());
 		getCommand("craft").setExecutor(new Workbench());
 		getCommand("quests").setExecutor(new Quest());
+
+		getCommand("mute").setExecutor(new Mute());
+		getCommand("unmute").setExecutor(new Unmute());
+
+		getCommand("ban").setExecutor(new Ban());
+		getCommand("unban").setExecutor(new Unban());
+		getCommand("tempban").setExecutor(new Tempban(this));
+
+		getCommand("kick").setExecutor(new Kick());
+		getCommand("punish").setExecutor(new Punish());
 	}
 
 	private void registerEvents() {
+		pm.registerEvents(new PunishGUI(), this);
 		pm.registerEvents(new ClickEventManager(), this);
 		pm.registerEvents(this, this);
 		pm.registerEvents(new StatsManager(), this);
@@ -225,7 +252,7 @@ public class SesameCore extends JavaPlugin implements Listener {
 		pm.registerEvents(new KitShopManager(), this);
 		pm.registerEvents(new General(), this);
 		pm.registerEvents(new RankupSystem(), this);
-		pm.registerEvents(new SB(this), this);
+		pm.registerEvents(new com.sesamepvp.Scoreboard.SB(this), this);
 		// Kits
 		pm.registerEvents(new Alchemist(), this);
 		pm.registerEvents(new Archer(), this);
@@ -235,8 +262,13 @@ public class SesameCore extends JavaPlugin implements Listener {
 		pm.registerEvents(new Pyro(), this);
 		pm.registerEvents(new Tank(), this);
 
-		pm.registerEvents(new TestKillEvents(), this);
 		pm.registerEvents(new InventoryClickEvents(), this);
+
+		pm.registerEvents(new MuteManager(), this);
+		pm.registerEvents(new BanManager(), this);
+
+		pm.registerEvents(new Tempban(this), this);
+		pm.registerEvents(new ClickEventHandler(), this);
 
 		pm.registerEvents(new AlchemistUpgraded(), this);
 		pm.registerEvents(new ArcherUpgraded(), this);
@@ -257,6 +289,7 @@ public class SesameCore extends JavaPlugin implements Listener {
 		pm.registerEvents(new Insane(), this);
 		pm.registerEvents(new Speed(), this);
 		pm.registerEvents(new Kits(), this);
+		pm.registerEvents(new SignsManager(), this);
 		pm.registerEvents(new KitShop(), this);
 	}
 
@@ -264,66 +297,97 @@ public class SesameCore extends JavaPlugin implements Listener {
 	}
 
 	public void setupMessages() {
-		if(messageconfig.getData().getString("prefix") == null || messageconfig.getData().getString("prefix") == ""){
-		messageconfig.getData().set("prefix", StaffmodeManager.config("§c§lSesame§f§lPvP §8>> "));
-		messageconfig.getData().set("nopermission", StaffmodeManager.config("§cNo permission to execcute this command!"));
-		messageconfig.getData().set("notplayer", StaffmodeManager.config("§cYou must be a player to execute this command!"));
-		messageconfig.getData().set("staffmode.disabled", StaffmodeManager.config("§cYou have §4left §cmod mode."));
-		messageconfig.getData().set("staffmode.enabled", StaffmodeManager.config("§aYou have §2entered §amod mode."));
-		messageconfig.getData().set("staffmode.mustleavemod", StaffmodeManager.config("§cYou must leave §4Staff §cmode to do this."));
-		messageconfig.getData().set("staffmode.noitemdrop", StaffmodeManager.config("§cYou must leave §4Staff §cmode drop items."));
-		messageconfig.getData().set("staffmode.noblockplace", StaffmodeManager.config("§cYou must leave §4Staff §cmode to place blocks."));
-		messageconfig.getData().set("staffmode.nodamage", StaffmodeManager.config("§cYou must leave &4Staff &cmode to attack players."));
-		messageconfig.getData().set("playernull", StaffmodeManager.config("&cThat player does not exist, or is not online."));
-		messageconfig.getData().set("staffmode.frozen", StaffmodeManager.config("&cYou have been &4frozen, please coordinate with a staff member."));
-		messageconfig.getData().set("chat.talkdenied", StaffmodeManager.config("&cYou can't talk, chat is currently muted!"));
-		messageconfig.getData().set("chat.muted", StaffmodeManager.config("&cChat has been &4muted!"));
-		messageconfig.getData().set("chat.unmuted", StaffmodeManager.config("&aChat has been &2unmuted!"));
-		messageconfig.getData().set("chat.clear", StaffmodeManager.config("§aThe chat has been &2cleared."));
-		messageconfig.getData().set("staffmode.notenoughplayers", StaffmodeManager.config("&cThere are not enough players online!"));
-		messageconfig.getData().set("staffmode.flight.enabled", StaffmodeManager.config("&aFlight has been &2Enabled."));
-		messageconfig.getData().set("staffmode.flight.disabled", StaffmodeManager.config("&cFlight has been &4Disabled."));
-		messageconfig.getData().set("staffmode.vanish.enabled", StaffmodeManager.config("&aVanish has been &2Enabled"));
-		messageconfig.getData().set("staffmode.vanish.disabled", StaffmodeManager.config("&cVanish has been &4Disabled."));
-		
-		messageconfig.getData().set("kitpvp.purchasedkit.speedy", StaffmodeManager.config("&aYou have purchased the &2Speedy&a kit."));
-		messageconfig.getData().set("kitpvp.purchasedkit.insane", StaffmodeManager.config("&aYou have purchased the &2Insane&a kit."));
-		messageconfig.getData().set("kitpvp.purchasedkit.assassin", StaffmodeManager.config("&aYou have purchased the &2Assassin&a kit."));
-		messageconfig.getData().set("kitpvp.purchasedkit.godarcher", StaffmodeManager.config("&aYou have purchased the &2Godarcher&a kit."));
-		messageconfig.getData().set("kitpvp.purchasedkit.burner", StaffmodeManager.config("&aYou have purchased the &2Burner&a kit."));
-		messageconfig.getData().set("kitpvp.kits.alreadyowned", StaffmodeManager.config("&cYou already own that kit."));
-		messageconfig.getData().set("kitpvp.kits.upgraded", StaffmodeManager.config("&aYou have successfully upgraded a kit."));
-		messageconfig.getData().set("kitpvp.kits.alreadyselected", StaffmodeManager.config("&cYou already have a kit selected."));
-		messageconfig.getData().set("kitpvp.kits.notowned", StaffmodeManager.config("&cYou do not own this kit."));
-		messageconfig.getData().set("kitpvp.gui.openingkitshop", StaffmodeManager.config("&aOpening the Kit shop."));
-		messageconfig.getData().set("kitpvp.gui.closedinventory", StaffmodeManager.config("&cClosed inventory."));
-		messageconfig.getData().set("eco.insufficientfunds", StaffmodeManager.config("&cYou have insufficient funds."));
-		messageconfig.getData().set("kitpvp.ranks.rank", StaffmodeManager.config("&aRanks:"));
-		messageconfig.getData().set("kitpvp.ranks.warrior", StaffmodeManager.config("&aWarrior: 150 kills."));
-		messageconfig.getData().set("kitpvp.ranks.gladiator", StaffmodeManager.config("&aGladiator: 350 kills."));
-		messageconfig.getData().set("kitpvp.ranks.guardian", StaffmodeManager.config("&aGuardian: 750 kills."));
-		messageconfig.getData().set("kitpvp.ranks.berserk", StaffmodeManager.config("&aBerserk: 1250 kills."));
-		messageconfig.getData().set("kitpvp.ranks.legend", StaffmodeManager.config("&aLegend: 1750 kills."));
-		messageconfig.getData().set("kitpvp.ranks.demigod", StaffmodeManager.config("&aDemi God: 2250 kills."));
-		messageconfig.getData().set("kitpvp.ranks.god", StaffmodeManager.config("&aGod: 3500 kills."));
-		
-		messageconfig.getData().set("spawn.set", StaffmodeManager.config("&aSpawn has been set."));
-		messageconfig.getData().set("spawn.teleportedto", StaffmodeManager.config("&aYou have been teleported to spawn."));
-		
-		messageconfig.getData().set("gamemode.creative", StaffmodeManager.config("&aGamemode has been set to &2Creative"));
-		messageconfig.getData().set("gamemode.survival", StaffmodeManager.config("&aGamemode has been set to &2Survival"));
-		messageconfig.getData().set("gamemode.adventure", StaffmodeManager.config("&aGamemode has been set to &2Adventure"));
-		messageconfig.getData().set("gamemode.spectator", StaffmodeManager.config("&aGamemode has been set to &2Spectator"));
-		
-		messageconfig.getData().set("health.feed", StaffmodeManager.config("&aYou have been fed."));
-		messageconfig.getData().set("health.healed", StaffmodeManager.config("&aYou have been healed."));
-		
-		messageconfig.getData().set("inventory.clear", StaffmodeManager.config("&aYou have cleared you're inventory."));
-		
-		
-		messageconfig.saveData();
-		}else{
+		if (messageconfig.getData().getString("prefix") == null || messageconfig.getData().getString("prefix") == "") {
+			messageconfig.getData().set("prefix", StaffmodeManager.config("§c§lSesame§f§lPvP §8>> "));
+			messageconfig.getData().set("nopermission",
+					StaffmodeManager.config("§cNo permission to execcute this command!"));
+			messageconfig.getData().set("notplayer",
+					StaffmodeManager.config("§cYou must be a player to execute this command!"));
+			messageconfig.getData().set("staffmode.disabled", StaffmodeManager.config("§cYou have §4left §cmod mode."));
+			messageconfig.getData().set("staffmode.enabled",
+					StaffmodeManager.config("§aYou have §2entered §amod mode."));
+			messageconfig.getData().set("staffmode.mustleavemod",
+					StaffmodeManager.config("§cYou must leave §4Staff §cmode to do this."));
+			messageconfig.getData().set("staffmode.noitemdrop",
+					StaffmodeManager.config("§cYou must leave §4Staff §cmode drop items."));
+			messageconfig.getData().set("staffmode.noblockplace",
+					StaffmodeManager.config("§cYou must leave §4Staff §cmode to place blocks."));
+			messageconfig.getData().set("staffmode.nodamage",
+					StaffmodeManager.config("§cYou must leave &4Staff &cmode to attack players."));
+			messageconfig.getData().set("playernull",
+					StaffmodeManager.config("&cThat player does not exist, or is not online."));
+			messageconfig.getData().set("staffmode.frozen",
+					StaffmodeManager.config("&cYou have been &4frozen, please coordinate with a staff member."));
+			messageconfig.getData().set("chat.talkdenied",
+					StaffmodeManager.config("&cYou can't talk, chat is currently muted!"));
+			messageconfig.getData().set("chat.muted", StaffmodeManager.config("&cChat has been &4muted!"));
+			messageconfig.getData().set("chat.unmuted", StaffmodeManager.config("&aChat has been &2unmuted!"));
+			messageconfig.getData().set("chat.clear", StaffmodeManager.config("§aThe chat has been &2cleared."));
+			messageconfig.getData().set("staffmode.notenoughplayers",
+					StaffmodeManager.config("&cThere are not enough players online!"));
+			messageconfig.getData().set("staffmode.flight.enabled",
+					StaffmodeManager.config("&aFlight has been &2Enabled."));
+			messageconfig.getData().set("staffmode.flight.disabled",
+					StaffmodeManager.config("&cFlight has been &4Disabled."));
+			messageconfig.getData().set("staffmode.vanish.enabled",
+					StaffmodeManager.config("&aVanish has been &2Enabled"));
+			messageconfig.getData().set("staffmode.vanish.disabled",
+					StaffmodeManager.config("&cVanish has been &4Disabled."));
+
+			messageconfig.getData().set("kitpvp.purchasedkit.speedy",
+					StaffmodeManager.config("&aYou have purchased the &2Speedy&a kit."));
+			messageconfig.getData().set("kitpvp.purchasedkit.insane",
+					StaffmodeManager.config("&aYou have purchased the &2Insane&a kit."));
+			messageconfig.getData().set("kitpvp.purchasedkit.assassin",
+					StaffmodeManager.config("&aYou have purchased the &2Assassin&a kit."));
+			messageconfig.getData().set("kitpvp.purchasedkit.godarcher",
+					StaffmodeManager.config("&aYou have purchased the &2Godarcher&a kit."));
+			messageconfig.getData().set("kitpvp.purchasedkit.burner",
+					StaffmodeManager.config("&aYou have purchased the &2Burner&a kit."));
+			messageconfig.getData().set("kitpvp.kits.alreadyowned",
+					StaffmodeManager.config("&cYou already own that kit."));
+			messageconfig.getData().set("kitpvp.kits.upgraded",
+					StaffmodeManager.config("&aYou have successfully upgraded a kit."));
+			messageconfig.getData().set("kitpvp.kits.alreadyselected",
+					StaffmodeManager.config("&cYou already have a kit selected."));
+			messageconfig.getData().set("kitpvp.kits.notowned", StaffmodeManager.config("&cYou do not own this kit."));
+			messageconfig.getData().set("kitpvp.gui.openingkitshop",
+					StaffmodeManager.config("&aOpening the Kit shop."));
+			messageconfig.getData().set("kitpvp.gui.closedinventory", StaffmodeManager.config("&cClosed inventory."));
+			messageconfig.getData().set("eco.insufficientfunds",
+					StaffmodeManager.config("&cYou have insufficient funds."));
+			messageconfig.getData().set("kitpvp.ranks.rank", StaffmodeManager.config("&aRanks:"));
+			messageconfig.getData().set("kitpvp.ranks.warrior", StaffmodeManager.config("&aWarrior: 150 kills."));
+			messageconfig.getData().set("kitpvp.ranks.gladiator", StaffmodeManager.config("&aGladiator: 350 kills."));
+			messageconfig.getData().set("kitpvp.ranks.guardian", StaffmodeManager.config("&aGuardian: 750 kills."));
+			messageconfig.getData().set("kitpvp.ranks.berserk", StaffmodeManager.config("&aBerserk: 1250 kills."));
+			messageconfig.getData().set("kitpvp.ranks.legend", StaffmodeManager.config("&aLegend: 1750 kills."));
+			messageconfig.getData().set("kitpvp.ranks.demigod", StaffmodeManager.config("&aDemi God: 2250 kills."));
+			messageconfig.getData().set("kitpvp.ranks.god", StaffmodeManager.config("&aGod: 3500 kills."));
+
+			messageconfig.getData().set("spawn.set", StaffmodeManager.config("&aSpawn has been set."));
+			messageconfig.getData().set("spawn.teleportedto",
+					StaffmodeManager.config("&aYou have been teleported to spawn."));
+
+			messageconfig.getData().set("gamemode.creative",
+					StaffmodeManager.config("&aGamemode has been set to &2Creative"));
+			messageconfig.getData().set("gamemode.survival",
+					StaffmodeManager.config("&aGamemode has been set to &2Survival"));
+			messageconfig.getData().set("gamemode.adventure",
+					StaffmodeManager.config("&aGamemode has been set to &2Adventure"));
+			messageconfig.getData().set("gamemode.spectator",
+					StaffmodeManager.config("&aGamemode has been set to &2Spectator"));
+
+			messageconfig.getData().set("health.feed", StaffmodeManager.config("&aYou have been fed."));
+			messageconfig.getData().set("health.healed", StaffmodeManager.config("&aYou have been healed."));
+
+			messageconfig.getData().set("inventory.clear",
+					StaffmodeManager.config("&aYou have cleared you're inventory."));
+
+			messageconfig.saveData();
+		} else {
 			return;
 		}
 	}
+
 }

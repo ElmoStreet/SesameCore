@@ -1,5 +1,6 @@
 package com.sesamepvp.essentials.commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -7,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.sesamepvp.utilites.Messages;
+import com.sesamepvp.utilites.Methods;
 
 public class Gamemode implements CommandExecutor {
 
@@ -21,6 +23,7 @@ public class Gamemode implements CommandExecutor {
 					if (args.length == 0) {
 						p.sendMessage(Messages.gamemodeUsage());
 					} else {
+						// /gamemode 1 [player]
 						if (args.length == 1) {
 							if (args[0].equalsIgnoreCase("creative")
 									|| args[0].equalsIgnoreCase("1")) {
@@ -43,7 +46,39 @@ public class Gamemode implements CommandExecutor {
 								p.sendMessage(Messages.gamemodeSpectator());
 							}
 						} else {
-							p.sendMessage(Messages.gamemodeUsage());
+							if(args.length == 2){
+								Player t = Bukkit.getServer().getPlayer(args[1]);
+								if(!(t == null)){
+									if (args[0].equalsIgnoreCase("creative")
+											|| args[0].equalsIgnoreCase("1")) {
+										t.setGameMode(GameMode.CREATIVE);
+										p.sendMessage(Messages.prefix(Methods.format("&aChanged &2"+t.getName()+"'s &aGamemode to &2Creative." )));
+										t.sendMessage(Messages.gamemodeCreative());
+									}
+									if (args[0].equalsIgnoreCase("survival")
+											|| args[0].equalsIgnoreCase("0")) {
+										t.setGameMode(GameMode.SURVIVAL);
+										p.sendMessage(Messages.prefix(Methods.format("&aChanged &2"+t.getName()+"'s &aGamemode to &2Survival." )));
+										t.sendMessage(Messages.gamemodeSurvival());
+									}
+									if (args[0].equalsIgnoreCase("creative")
+											|| args[0].equalsIgnoreCase("2")) {
+										t.setGameMode(GameMode.ADVENTURE);
+										p.sendMessage(Messages.prefix(Methods.format("&aChanged &2"+t.getName()+"'s &aGamemode to &2Adventure." )));
+										t.sendMessage(Messages.gamemodeAdventure());
+									}
+									if (args[0].equalsIgnoreCase("spectator")
+											|| args[0].equalsIgnoreCase("3")) {
+										t.setGameMode(GameMode.SPECTATOR);
+										p.sendMessage(Messages.prefix(Methods.format("&aChanged &2"+t.getName()+"'s &aGamemode to &2Spectator." )));
+										t.sendMessage(Messages.gamemodeSpectator());
+									}
+								}else{
+									p.sendMessage(Messages.playerNull());
+								}
+							}else{
+								p.sendMessage(Messages.gamemodeUsage());
+							}
 						}
 					}
 				} else {

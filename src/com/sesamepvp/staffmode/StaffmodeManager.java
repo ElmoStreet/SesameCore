@@ -63,16 +63,16 @@ public class StaffmodeManager {
 		clearArmor(p);
 
 		// Freeze Block
-		ItemStack iceblock = new ItemStack(Material.getMaterial(smf.getData().getString("Freeze.material")), 1,
-				(short) smf.getData().getInt("Freeze.data"));
-		ItemMeta iceblockim = iceblock.getItemMeta();
-		ArrayList<String> icelore = new ArrayList<String>();
-		for(String output : smf.getData().getStringList("Freeze.lore")){
-			icelore.add(format(output));
+		ItemStack reportsgui = new ItemStack(Material.getMaterial(smf.getData().getString("Reports.material")), 1,
+				(short) smf.getData().getInt("Reports.data"));
+		ItemMeta reportsguiim = reportsgui.getItemMeta();
+		ArrayList<String> reportlore = new ArrayList<String>();
+		for(String output : smf.getData().getStringList("Reports.lore")){
+			reportlore.add(format(output));
 		}
-		iceblockim.setLore(icelore);
-		iceblockim.setDisplayName(format(smf.getData().getString("Freeze.displayname")));
-		iceblock.setItemMeta(iceblockim);
+		reportsguiim.setLore(reportlore);
+		reportsguiim.setDisplayName(format(smf.getData().getString("Reports.displayname")));
+		reportsgui.setItemMeta(reportsguiim);
 
 		// Inspection
 
@@ -119,7 +119,7 @@ public class StaffmodeManager {
 		for(String output : smf.getData().getStringList("Vanish.lore")){
 			vanishlore.add(format(output));
 		}
-		vanishim.setLore(rtplore);
+		vanishim.setLore(vanishlore);
 		vanishim.setDisplayName(format(smf.getData().getString("Vanish.displayname")));
 		vanish.setItemMeta(vanishim);
 
@@ -131,7 +131,7 @@ public class StaffmodeManager {
 		for(String output : smf.getData().getStringList("Flight.lore")){
 			flightlore.add(format(output));
 		}
-		flightim.setLore(rtplore);
+		flightim.setLore(flightlore);
 		flightim.setDisplayName(format(smf.getData().getString("Flight.displayname")));
 		flight.setItemMeta(flightim);
 
@@ -150,10 +150,11 @@ public class StaffmodeManager {
 		p.getInventory().setItem(smf.getData().getInt("Compass.slot"), compass);
 		p.getInventory().setItem(smf.getData().getInt("WorldEdit.slot"), worldedit);
 		p.getInventory().setItem(smf.getData().getInt("Inspect.slot"), inspect);
-		p.getInventory().setItem(smf.getData().getInt("Freeze.slot"), iceblock);
+		p.getInventory().setItem(smf.getData().getInt("Reports.slot"), reportsgui);
 		p.getInventory().setItem(smf.getData().getInt("RandomTP.slot"), rtp);
 		p.getInventory().setItem(smf.getData().getInt("Flight.slot"), flight);
 		p.getInventory().setItem(smf.getData().getInt("Vanish.slot"), vanish);
+		
 	}
 
 	public static ArrayList<Player> pvp = new ArrayList<Player>();
@@ -217,78 +218,104 @@ public class StaffmodeManager {
 	public static boolean cmd(String format) {
 		return Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), format);
 	}
+	
+	static Score score;
 
-	public static void testkits(Player player, Objective objective) {
+	public static Score testkits(int slot, Player player, Objective objective) {
 		if (StaffmodeManager.pvp.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Default");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Default");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.archer.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Archer");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Archer");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.tank.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Tank");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Tank");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.pyro.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Pyro");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Pyro");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.golden.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Golden");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Golden");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.alchemist.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Alchemist");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Alchemist");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.fisherman.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Fisherman");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Fisherman");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.warrior.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Warrior");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Warrior");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.gladiator.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Gladiator");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Gladiator");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.guardian.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Guardian");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Guardian");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.berserk.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Berserk");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Berserk");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.legend.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Legend");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Legend");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.demigod.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Demi God");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Demi God");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.god.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "God");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "God");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.burner.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Burner");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Burner");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.speedy.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Speedy");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Speedy");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.godarcher.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "God Archer");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "God Archer");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.assassin.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Assassin");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Assassin");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.insane.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Insane");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Insane");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.slug.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Slug");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Slug");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.thor.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Thor");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Thor");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.viper.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Viper");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Viper");
+			score.setScore(slot);
+			return score;
 		} else if (StaffmodeManager.vampire.contains(player)) {
-			Score score8 = objective.getScore(" §c" + "Vampire");
-			score8.setScore(8);
+			Score score = objective.getScore(" §c" + "Vampire");
+			score.setScore(slot);
+			return score;
 		}
+		return score;
 	}
 
 	public static void testKits(Player p) {

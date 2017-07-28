@@ -49,8 +49,14 @@ public class GiveRespawnItems implements Listener {
 	public void onDeath(PlayerDeathEvent e) {
 		Player p = e.getEntity();
 		Player k = e.getEntity().getKiller();
+		if(k instanceof Player){
+			
+		
 		e.setDeathMessage(Messages.deathMessage(p, k));
 		e.getDrops().clear();
+		}else{
+			return;
+		}
 		if (p instanceof Player) {
 			p.getActivePotionEffects().clear();
 
