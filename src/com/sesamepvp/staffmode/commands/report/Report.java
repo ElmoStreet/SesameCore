@@ -36,7 +36,7 @@ public class Report implements CommandExecutor {
 			if (sender instanceof Player) {
 				if (cooldownTime.containsKey(p)) {
 					p.sendMessage(Messages
-							.prefix("§cYou are on cooldown for §4" + cooldownTime.values() + " §c more seconds"));
+							.prefix("§cYou are on cooldown for §4" + cooldownTime.get(p) + " §c more seconds"));
 				} else {
 					if (args.length == 0) {
 						p.sendMessage(Messages.reportUsage());

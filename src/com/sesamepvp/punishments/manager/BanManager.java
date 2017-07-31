@@ -31,7 +31,7 @@ public class BanManager implements Listener {
 		return isBanned;
 	}
 
-	public static void banPlayer(OfflinePlayer t, CommandSender p, StringBuilder sb) {
+	public static void banPlayer2(OfflinePlayer t, CommandSender p, StringBuilder sb) {
 		if (isBanned(t) == true) {
 			p.sendMessage(Messages.prefix(Methods.format("&aThat player is already banned!")));
 		} else {
@@ -48,7 +48,7 @@ public class BanManager implements Listener {
 				((Player) t)
 						.kickPlayer(Messages.prefix(Methods.format("&cYou have been banned from the server.\n&4By: &c"
 								+ pf.getData().getString("Bans." + t.getName() + ".banner") + "\n&4Reason:&c "
-								+ sb.toString())));
+								+ sb)));
 				p.sendMessage(Messages.prefix(Methods.format("&aYou have banned &a" + t.getName())));
 				pf.saveData();
 			} else {
@@ -60,6 +60,28 @@ public class BanManager implements Listener {
 				pf.saveData();
 			}
 
+		}
+	}
+	
+	public static void banPlayer(Player t, CommandSender p, StringBuilder sb) {
+		if (isBanned(t) == true) {
+			p.sendMessage(Messages.prefix(Methods.format("&aThat player is already banned!")));
+		} else {
+			pf.getData().set("Bans." + t.getName() + ".banned", true);
+			pf.getData().set("Bans." + t.getName() + ".banner", p.getName());
+			pf.getData().set("Bans." + t.getName() + ".reason", sb.toString());
+			pf.getData().set("Bans." + t.getName() + ".time", null);
+				pf.getData().set("Bans." + t.getName() + ".banned", true);
+				pf.getData().set("Bans." + t.getName() + ".banner", p.getName());
+				pf.getData().set("Bans." + t.getName() + ".reason", sb.toString());
+				pf.getData().set("Bans." + t.getName() + ".time", null);
+
+		
+						t.kickPlayer(Messages.prefix(Methods.format("&cYou have been banned from the server.\n&4By: &c"
+								+ pf.getData().getString("Bans." + t.getName() + ".banner") + "\n&4Reason:&c "
+								+ sb.toString())));
+				p.sendMessage(Messages.prefix(Methods.format("&aYou have banned &a" + t.getName())));
+				pf.saveData();
 		}
 	}
 

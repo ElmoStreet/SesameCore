@@ -42,7 +42,7 @@ public class StaffmodeManager {
 				}
 			}
 		} else {
-
+			
 			for (Player online : Bukkit.getOnlinePlayers()) {
 				online.showPlayer(p);
 			}

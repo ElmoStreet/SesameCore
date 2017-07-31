@@ -165,8 +165,6 @@ public class PunishGUI implements Listener {
 		punish.setItem(28, tempban3week);
 		punish.setItem(37, tempban8week);
 
-		punish.setItem(53, close);
-
 		p.openInventory(punish);
 	}
 
@@ -186,9 +184,9 @@ public class PunishGUI implements Listener {
 				pf.getData().set("Punishments." + t.getName() + ".punished", true);
 				pf.getData().set("Punishments." + t.getName() + ".punishment", "Tempban: 1 days");
 				pf.saveData();
-				//if (PunishManager.getPunishment(t) == true) {
-				//	PunishManager.setNewPunishment(sb, t, punish);
-				//}
+				// if (PunishManager.getPunishment(t) == true) {
+				// PunishManager.setNewPunishment(sb, t, punish);
+				// }
 			}
 			if (e.getCurrentItem().getType() == Material.WOOL && e.getCurrentItem().getDurability() == 4) {
 				Player t = Bukkit.getPlayer(e.getInventory().getItem(4).getItemMeta().getDisplayName());
@@ -199,22 +197,99 @@ public class PunishGUI implements Listener {
 				pf.getData().set("Punishments." + t.getName() + ".punished", true);
 				pf.getData().set("Punishments." + t.getName() + ".punishment", "Tempban: 7 days");
 				pf.saveData();
-				//if (PunishManager.getPunishment(t) == true) {
-				//	PunishManager.setNewPunishment( sb, t, punish);
-				//}
-			}if(e.getCurrentItem().getType() == Material.STAINED_GLASS_PANE){
-				//Player t = Bukkit.getPlayer(e.getInventory().getItem(4).getItemMeta().getDisplayName());
-					///pf.getData().set("Punishments." + t.getName() + ".punishment",null);
-					///pf.getData().set("Punishments." + t.getName() + ".punished",false);
-					///PunishManager.removePunishment(8, PunishGUI.punish);
-					///PunishManager.removePunishment(8+9, PunishGUI.punish);
-					///PunishManager.removePunishment(8+18, PunishGUI.punish);
-					///PunishManager.removePunishment(8+27, PunishGUI.punish);
-					//PunishManager.removePunishment(8+36, PunishGUI.punish);
-				
+				// if (PunishManager.getPunishment(t) == true) {
+				// PunishManager.setNewPunishment( sb, t, punish);
+				// }
 			}
-		} else {
-			return;
+		}
+		if (e.getCurrentItem().getType() == Material.WOOL && e.getCurrentItem().getDurability() == 1) {
+			Player t = Bukkit.getPlayer(e.getInventory().getItem(4).getItemMeta().getDisplayName());
+			String sb = e.getInventory().getItem(4).getItemMeta().getLore().get(1);
+			Bukkit.dispatchCommand(e.getWhoClicked(),
+					"tempban " + t.getName() + " 1209600 " + ChatColor.stripColor(sb));
+			e.getWhoClicked().closeInventory();
+			pf.getData().set("Punishments." + t.getName() + ".punished", true);
+			pf.getData().set("Punishments." + t.getName() + ".punishment", "Tempban: 14 days");
+			pf.saveData();
+			// if (PunishManager.getPunishment(t) == true) {
+			// PunishManager.setNewPunishment( sb, t, punish);
+			// }
+		}
+		if (e.getCurrentItem().getType() == Material.WOOL && e.getCurrentItem().getDurability() == 14) {
+			Player t = Bukkit.getPlayer(e.getInventory().getItem(4).getItemMeta().getDisplayName());
+			String sb = e.getInventory().getItem(4).getItemMeta().getLore().get(1);
+			Bukkit.dispatchCommand(e.getWhoClicked(),
+					"tempban " + t.getName() + " 5259492 " + ChatColor.stripColor(sb));
+			e.getWhoClicked().closeInventory();
+			pf.getData().set("Punishments." + t.getName() + ".punished", true);
+			pf.getData().set("Punishments." + t.getName() + ".punishment", "Tempban: 2 months");
+			pf.saveData();
+			// if (PunishManager.getPunishment(t) == true) {
+			// PunishManager.setNewPunishment( sb, t, punish);
+			// }
+		}
+		if (e.getCurrentItem().getType() == Material.REDSTONE_BLOCK) {
+			Player t = Bukkit.getPlayer(e.getInventory().getItem(4).getItemMeta().getDisplayName());
+			String sb = e.getInventory().getItem(4).getItemMeta().getLore().get(1);
+			Bukkit.dispatchCommand(e.getWhoClicked(),
+					"ban " + t.getName() + " " + sb.toString());
+			e.getWhoClicked().closeInventory();
+			pf.getData().set("Punishments." + t.getName() + ".punished", true);
+			pf.getData().set("Punishments." + t.getName() + ".punishment", "Ban: Permanent");
+			pf.saveData();
+			// if (PunishManager.getPunishment(t) == true) {
+			// PunishManager.setNewPunishment( sb, t, punish);
+			// }
+		}
+		
+		if (e.getCurrentItem().getType() == Material.HOPPER) {
+			Player t = Bukkit.getPlayer(e.getInventory().getItem(4).getItemMeta().getDisplayName());
+			String sb = e.getInventory().getItem(4).getItemMeta().getLore().get(1);
+			Bukkit.dispatchCommand(e.getWhoClicked(),
+					"tempmute " + t.getName() + " 14400 " + sb.toString());
+			e.getWhoClicked().closeInventory();
+			pf.getData().set("Punishments." + t.getName() + ".punished", true);
+			pf.getData().set("Punishments." + t.getName() + ".punishment", "Mute: 4 hours");
+			pf.saveData();
+			// if (PunishManager.getPunishment(t) == true) {
+			// PunishManager.setNewPunishment( sb, t, punish);
+			// }
+		}
+		
+		if (e.getCurrentItem().getType() == Material.WOOL && e.getCurrentItem().getDurability() == 5) {
+			Player t = Bukkit.getPlayer(e.getInventory().getItem(4).getItemMeta().getDisplayName());
+			String sb = e.getInventory().getItem(4).getItemMeta().getLore().get(1);
+			Bukkit.dispatchCommand(e.getWhoClicked(),
+					"tempmute " + t.getName() + " 604800 " + sb.toString());
+			e.getWhoClicked().closeInventory();
+			pf.getData().set("Punishments." + t.getName() + ".punished", true);
+			pf.getData().set("Punishments." + t.getName() + ".punishment", "Mute: 1 week");
+			pf.saveData();
+			// if (PunishManager.getPunishment(t) == true) {
+			// PunishManager.setNewPunishment( sb, t, punish);
+			// }
+		}
+		
+		if (e.getCurrentItem().getType() == Material.BOOK_AND_QUILL) {
+			Player t = Bukkit.getPlayer(e.getInventory().getItem(4).getItemMeta().getDisplayName());
+			Bukkit.dispatchCommand(e.getWhoClicked(),
+					"mute " + t.getName());
+			e.getWhoClicked().closeInventory();
+			pf.getData().set("Punishments." + t.getName() + ".punished", true);
+			pf.getData().set("Punishments." + t.getName() + ".punishment", "Mute: Permanent");
+			pf.saveData();
+			// if (PunishManager.getPunishment(t) == true) {
+			// PunishManager.setNewPunishment( sb, t, punish);
+			// }
+		}
+		
+		if (e.getCurrentItem().getType() == Material.PAPER) {
+			Player t = Bukkit.getPlayer(e.getInventory().getItem(4).getItemMeta().getDisplayName());
+			String reason = e.getInventory().getItem(4).getItemMeta().getLore().get(1);
+			Bukkit.dispatchCommand(e.getWhoClicked(),
+					"warn " + t.getName() + " " + reason);
+			e.getWhoClicked().closeInventory();
+	
 		}
 	}
 }

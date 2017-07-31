@@ -10,22 +10,24 @@ import com.sesamepvp.punishments.manager.MuteManager;
 import com.sesamepvp.utilites.Messages;
 import com.sesamepvp.utilites.Methods;
 
-public class Unmute implements CommandExecutor{
+public class Unmute implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if(cmd.getName().equalsIgnoreCase("unmute")){
-			if(args.length == 0){
-				sender.sendMessage(Messages.prefix(Methods.format("&cUsage: /unmute <player>")));
-			}else{
-				if(args.length == 1){
-					Player t = Bukkit.getServer().getPlayer(args[0]);
-					if(t == null){
-						sender.sendMessage(Messages.playerNull());
-					}else{
-						if(MuteManager.isMuted(t) == true){
-							MuteManager.unmutePlayer(sender, t);
-						}else{
-							sender.sendMessage(Messages.prefix(Methods.format("&cThat player is not muted!")));
+		if (cmd.getName().equalsIgnoreCase("unmute")) {
+			if (sender.hasPermission("core.unmute")) {
+				if (args.length == 0) {
+					sender.sendMessage(Messages.prefix(Methods.format("&cUsage: /unmute <player>")));
+				} else {
+					if (args.length == 1) {
+						Player t = Bukkit.getServer().getPlayer(args[0]);
+						if (t == null) {
+							sender.sendMessage(Messages.playerNull());
+						} else {
+							if (MuteManager.isMuted(t) == true) {
+								MuteManager.unmutePlayer(sender, t);
+							} else {
+								sender.sendMessage(Messages.prefix(Methods.format("&cThat player is not muted!")));
+							}
 						}
 					}
 				}

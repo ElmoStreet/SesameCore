@@ -82,8 +82,10 @@ import com.sesamepvp.punishments.Kick;
 import com.sesamepvp.punishments.Mute;
 import com.sesamepvp.punishments.Punish;
 import com.sesamepvp.punishments.Tempban;
+import com.sesamepvp.punishments.Tempmute;
 import com.sesamepvp.punishments.Unban;
 import com.sesamepvp.punishments.Unmute;
+import com.sesamepvp.punishments.Warn;
 import com.sesamepvp.punishments.GUI.PunishGUI;
 import com.sesamepvp.punishments.events.ClickEventHandler;
 import com.sesamepvp.punishments.manager.BanManager;
@@ -216,18 +218,23 @@ public class SesameCore extends JavaPlugin implements Listener {
 		getCommand("quests").setExecutor(new Quest());
 
 		getCommand("mute").setExecutor(new Mute());
+		getCommand("tempmute").setExecutor(new Tempmute(this));
 		getCommand("unmute").setExecutor(new Unmute());
 
 		getCommand("ban").setExecutor(new Ban());
+		getCommand("banofflineplayer").setExecutor(new Ban());
 		getCommand("unban").setExecutor(new Unban());
 		getCommand("tempban").setExecutor(new Tempban(this));
 
 		getCommand("kick").setExecutor(new Kick());
 		getCommand("punish").setExecutor(new Punish());
+		
+		getCommand("warn").setExecutor(new Warn());
 	}
 
 	private void registerEvents() {
 		pm.registerEvents(new PunishGUI(), this);
+		pm.registerEvents(new Tempmute(this), this);
 		pm.registerEvents(new ClickEventManager(), this);
 		pm.registerEvents(this, this);
 		pm.registerEvents(new StatsManager(), this);

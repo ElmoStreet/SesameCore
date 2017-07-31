@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.sesamepvp.files.PunishmentsFile;
@@ -15,25 +15,25 @@ import com.sesamepvp.main.SesameCore;
 import com.sesamepvp.utilites.Messages;
 import com.sesamepvp.utilites.Methods;
 
-public class Tempban implements CommandExecutor, Listener {
+public class Tempmute implements CommandExecutor, Listener {
 	PunishmentsFile pf = PunishmentsFile.getInstance();
 
 	SesameCore instance;
 
-	public Tempban(SesameCore instance) {
+	public Tempmute(SesameCore instance) {
 		this.instance = instance;
 	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (label.equalsIgnoreCase("tempban")) {
-			if (sender.hasPermission("core.tempban")) {
+		if (label.equalsIgnoreCase("tempmute")) {
+			if (sender.hasPermission("core.tempmute")) {
 				if (args.length == 0) {
-					sender.sendMessage(Messages.prefix(Methods.format("&cUsage: /tempban <player> <time> <reason>")));
+					sender.sendMessage(Messages.prefix(Methods.format("&cUsage: /tempmute <player> <time> <reason>")));
 				} else if (args.length == 1) {
-					sender.sendMessage(Messages.prefix(Methods.format("&cUsage: /tempban <player> <time> <reason>")));
+					sender.sendMessage(Messages.prefix(Methods.format("&cUsage: /tempmute <player> <time> <reason>")));
 				} else if (args.length == 2) {
-					sender.sendMessage(Messages.prefix(Methods.format("&cUsage: /tempban <player> <time> <reason>")));
+					sender.sendMessage(Messages.prefix(Methods.format("&cUsage: /tempmute <player> <time> <reason>")));
 				} else {
 					Player target = Bukkit.getPlayer(args[0]);
 
@@ -57,17 +57,17 @@ public class Tempban implements CommandExecutor, Listener {
 						x.append(args[i] + " ");
 					}
 
-					String banner = "Server";
+					String muter = "Server";
 
 					if (sender instanceof Player) {
-						banner = sender.getName();
+						muter = sender.getName();
 					}
-					target.kickPlayer(Messages.prefix(Methods.format(
-							"&cYou have been temporarily banned from the server!\n&4By: &c" + banner + "\n&4Reason: &c"
-									+ x.toString().trim() + "\n&4Duration: &c" + formatTime(seconds))));
-					pf.getData().set("Bans." + target.getName() + ".banner", banner);
-					pf.getData().set("Bans." + target.getName() + ".reason", x.toString().trim());
-					pf.getData().set("Bans." + target.getName() + ".time", seconds);
+					target.sendMessage(Methods.format(
+							"&aYou have been tempmuted by&2 " + sender.getName() + " for &2" + formatTime(seconds)));
+					pf.getData().set("Mutes." + target.getUniqueId() + ".muter", muter);
+					pf.getData().set("Mutes." + target.getUniqueId() + ".muted", true);
+					pf.getData().set("Mutes." + target.getUniqueId() + ".reason", x.toString().trim());
+					pf.getData().set("Mutes." + target.getUniqueId() + ".time", seconds);
 					pf.saveData();
 
 					/**
@@ -75,26 +75,26 @@ public class Tempban implements CommandExecutor, Listener {
 					 * suck at coding
 					 */
 
-					sender.sendMessage(Messages.prefix(Methods.format("&aTempbanned player &2" + target.getName())));
+					sender.sendMessage(Messages.prefix(Methods.format("&aTempmuted player &2" + target.getName())));
 
 					new BukkitRunnable() {
 						public void run() {
-							if (pf.getData().getInt("Bans." + target.getName() + ".time") < 0) {
-								pf.getData().get("Bans." + target.getName() + ".time", null);
+							if (pf.getData().getInt("Mutes." + target.getUniqueId() + ".time") < 0) {
+								pf.getData().get("Mutes." + target.getUniqueId() + ".time", null);
 								return;
 							} else {
-								pf.getData().set("Bans." + target.getName() + ".time",
-										pf.getData().getInt("Bans." + target.getName() + ".time") - 1);
+								pf.getData().set("Mutes." + target.getUniqueId() + ".time",
+										pf.getData().getInt("Mutes." + target.getUniqueId() + ".time") - 1);
 								pf.saveData();
 							}
-							if (pf.getData().getInt("Bans." + target.getName() + ".time") == 0) {
-								pf.getData().set("Bans." + target.getName(), null);
-								pf.getData().set("Bans." + target.getName() + ".time", null);
+							if (pf.getData().getInt("Mutes." + target.getUniqueId() + ".time") == 0) {
+								pf.getData().set("Mutes." + target.getUniqueId(), null);
+								pf.getData().set("Mutes." + target.getUniqueId() + ".time", null);
 								pf.saveData();
 							}
 
 						}
-					}.runTaskTimerAsynchronously(instance, 0, 20 * 1);
+					}.runTaskTimerAsynchronously(instance, 0, 20);
 				}
 			}
 		}
@@ -155,24 +155,18 @@ public class Tempban implements CommandExecutor, Listener {
 	}
 
 	@EventHandler
-	public void onJoin(PlayerJoinEvent e) {
+	public void onChat(AsyncPlayerChatEvent e) {
 		Player player = e.getPlayer();
 
-		if (pf.getData().getConfigurationSection("Bans") != null) {
-			for (String section : pf.getData().getConfigurationSection("Bans").getKeys(false)) {
-				if (section.equals(player.getName())) {
-					if (pf.getData().get("Bans." + player.getName() + ".time") != null) {
-						String banner = pf.getData().getString("Bans." + player.getName() + ".banner");
-						int seconds = pf.getData().getInt("Bans." + player.getName() + ".time");
-						String reason = pf.getData().getString("Bans." + player.getName() + ".reason");
-						if (pf.getData().getInt("Bans." + player.getName() + ".time") < 0) {
-							return;
-						} else {
-							player.kickPlayer(Messages.prefix(
-									Methods.format("&cYou have been temporarily banned from the server!\n&4By: &c"
-											+ banner + "\n&4Reason: &c" + reason.toString() + "\n&4Duration: &c"
-											+ formatTime(seconds))));
-						}
+		if (pf.getData().getConfigurationSection("Mutes") != null) {
+			for (String section : pf.getData().getConfigurationSection("Mutes").getKeys(false)) {
+				if (section.equals(player.getUniqueId())) {
+					if (pf.getData().get("Mutes." + player.getUniqueId() + ".time") != null) {
+						int seconds = pf.getData().getInt("Mutes." + player.getName() + ".time");
+						player.sendMessage(
+								Messages.prefix(Methods.format("&aYou are still muted for " + formatTime(seconds))));
+						e.setCancelled(true);
+
 					}
 				}
 			}

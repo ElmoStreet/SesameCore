@@ -4,6 +4,8 @@ main: com.sesamepvp.main.SesameCore
 version: 1.0
 description: SesameCore
 commands:
+  tempmute:
+   description: temp mute players.
   reports:
    description: report gui
   stats:
@@ -102,3 +104,7 @@ commands:
    description: kick players
   punish:
    description: punish gui
+  banofflineplayer:
+   description: ban offline players.
+  warn:
+   description: warn players
