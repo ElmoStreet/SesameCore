@@ -1,6 +1,8 @@
 import bukkit.org.*
 import java.util
 
+public class Mercy implements Listener {
+
 public static String getHero(Player p){
 if(HeroManager.hero.get(p) == null){
  return null;
@@ -16,4 +18,5 @@ public static void equip(Player p){
   PlayerInventory pi = p.getInventory();
   
   }
+}
 }
