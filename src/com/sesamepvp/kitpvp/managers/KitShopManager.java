@@ -30,7 +30,18 @@ public class KitShopManager implements Listener {
 				return;
 			}
 		}
-
+		
+		if(event.getInventory().getTitle.equalsIgnoreCase("playerInfo"){
+			
+			switch(event.getCurrentItem().getType(){
+				case DIAMOND_SWORD:
+				break;
+			}
+			       
+			       
+		
+		}
+		
 		if (event.getInventory().getTitle().equalsIgnoreCase("KitShop")) {
 			if (event.getCurrentItem().getType() == Material.WOOL
 					&& event.getCurrentItem().getItemMeta().getDisplayName()
