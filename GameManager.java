@@ -1,5 +1,5 @@
 import bukkit.*;
-
+import java.util.arraylist;
 public class GameManager implements Listener{
   public static ArrayList<Integer> inGame = new ArrayList<Integer>();
   public static boolean gameEnabled = false;
@@ -34,7 +34,7 @@ public class GameManager implements Listener{
 	players.teleport(this.getSpawnPoints().next());	 
 	Bukkit.getServer().broadcastMessage(ChatColor.GREEN+"Kit " + KitManager.getSelectedKit(players.getNextPlayer() + "Selected!");
 	KitManager.giveKit(players.getNextPlayer(), KitManager.getSelectedKit(players.getNextPlayer());
-}
+	}
 	
   public static void startGame(){
 	PlayerList pl = inGame.getAll(inGame.percieve(i));
